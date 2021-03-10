@@ -23,10 +23,7 @@ class GitJSONDSL {
       _$GitJSONDSLFromJson(json);
 
   GitJSONDSL(
-      {required this.modifiedFiles,
-      required this.createdFiles,
-      required this.deletedFiles,
-      required this.commits});
+      {this.modifiedFiles, this.createdFiles, this.deletedFiles, this.commits});
 
   Map<String, dynamic> toJson() => _$GitJSONDSLToJson(this);
 }
@@ -49,7 +46,7 @@ class GitCommit {
   final dynamic tree;
 
   /// SHAs for the commit's parents
-  final List<String>? parents;
+  final List<String> parents;
 
   /// Link to the commit
   final String url;
@@ -58,13 +55,13 @@ class GitCommit {
       _$GitCommitFromJson(json);
 
   GitCommit(
-      {required this.sha,
-      required this.author,
-      required this.committer,
-      required this.message,
+      {this.sha,
+      this.author,
+      this.committer,
+      this.message,
       this.tree,
       this.parents,
-      required this.url});
+      this.url});
   Map<String, dynamic> toJson() => _$GitCommitToJson(this);
 }
 
@@ -82,7 +79,6 @@ class GitCommitAuthor {
   factory GitCommitAuthor.fromJson(Map<String, dynamic> json) =>
       _$GitCommitAuthorFromJson(json);
 
-  GitCommitAuthor(
-      {required this.name, required this.email, required this.date});
+  GitCommitAuthor({this.name, this.email, this.date});
   Map<String, dynamic> toJson() => _$GitCommitAuthorToJson(this);
 }

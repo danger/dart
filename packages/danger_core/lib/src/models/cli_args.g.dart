@@ -14,7 +14,7 @@ CliArgs _$CliArgsFromJson(Map<String, dynamic> json) {
     textOnly: json['textOnly'] as String,
     dangerfile: json['dangerfile'] as String,
     id: json['id'] as String,
-    staging: json['staging'] as bool?,
+    staging: json['staging'] as bool,
   );
 }
 

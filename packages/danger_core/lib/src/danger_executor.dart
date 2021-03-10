@@ -23,26 +23,26 @@ class DangerExecutor {
   }
 }
 
-late DangerExecutor _dangerStatic;
+DangerExecutor _dangerStatic;
 
-late DangerJSONDSL danger;
+DangerJSONDSL danger;
 
-void message(String message, {String? file, int? line, String? icon}) {
+void message(String message, {String file, int line, String icon}) {
   _dangerStatic.messages
       .add(Violation(message: message, file: file, line: line, icon: icon));
 }
 
-void warn(String message, {String? file, int? line, String? icon}) {
+void warn(String message, {String file, int line, String icon}) {
   _dangerStatic.warnings
       .add(Violation(message: message, file: file, line: line, icon: icon));
 }
 
-void fail(String message, {String? file, int? line, String? icon}) {
+void fail(String message, {String file, int line, String icon}) {
   _dangerStatic.fails
       .add(Violation(message: message, file: file, line: line, icon: icon));
 }
 
-void markdown(String message, {String? file, int? line, String? icon}) {
+void markdown(String message, {String file, int line, String icon}) {
   _dangerStatic.markdowns
       .add(Violation(message: message, file: file, line: line, icon: icon));
 }

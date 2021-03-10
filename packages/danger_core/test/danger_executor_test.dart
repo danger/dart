@@ -9,8 +9,8 @@ class _MockDangerJSONDSL extends Mock implements DangerJSONDSL {}
 
 void main() {
   group('danger_executor_static', () {
-    late danger.DangerExecutor executor;
-    late _MockDangerJSONDSL mockDSL;
+    danger.DangerExecutor executor;
+    _MockDangerJSONDSL mockDSL;
     setUp(() {
       mockDSL = _MockDangerJSONDSL();
       executor = danger.DangerExecutor.setupDangerStatic(mockDSL);
@@ -60,10 +60,10 @@ void main() {
       danger.fail('Hello World fail', file: 'helloworld.dart');
 
       final result = executor.toResult();
-      expect(result['fails']!.length, equals(1));
-      expect(result['markdowns']!.length, equals(1));
-      expect(result['messages']!.length, equals(1));
-      expect(result['warnings']!.length, equals(1));
+      expect(result['fails'].length, equals(1));
+      expect(result['markdowns'].length, equals(1));
+      expect(result['messages'].length, equals(1));
+      expect(result['warnings'].length, equals(1));
     });
 
     test('snapshot result', () {
@@ -73,7 +73,7 @@ void main() {
 
       final result = executor.toResult();
       final expected =
-          r'{"fails":[{"message":"Hello World fail","file":"helloworld.dart","line":null,"icon":null}],"markdowns":[],"messages":[{"message":"Hello World message","file":null,"line":null,"icon":null}],"warnings":[{"message":"Hello World warn","file":null,"line":10,"icon":null}]}';
+          r'{"fails":[{"message":"Hello World fail","file":"helloworld.dart"}],"markdowns":[],"messages":[{"message":"Hello World message"}],"warnings":[{"message":"Hello World warn","line":10}]}';
       final json = jsonEncode(result);
       expect(json, equals(expected));
     });

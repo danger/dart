@@ -30,14 +30,14 @@ class ProcessCommand extends Command {
 
   @override
   Future<void> run() async {
-    final args = argResults!;
+    final args = argResults;
     final str = (await stdin.transform(utf8.decoder).toList()).join('');
 
     if (str.isEmpty) {
       throw 'Data not found';
     }
 
-    final dangerFile = args['dangerfile'] as String?;
+    final dangerFile = args['dangerfile'] as String;
     if (dangerFile == null) {
       throw 'Dangerfile not found';
     }

@@ -23,18 +23,18 @@ class CliArgs {
   final String id;
 
   /// Use staged changes
-  final bool? staging;
+  final bool staging;
 
   factory CliArgs.fromJson(Map<String, dynamic> json) =>
       _$CliArgsFromJson(json);
 
   CliArgs(
-      {required this.base,
-      required this.verbose,
-      required this.externalCiProvider,
-      required this.textOnly,
-      required this.dangerfile,
-      required this.id,
+      {this.base,
+      this.verbose,
+      this.externalCiProvider,
+      this.textOnly,
+      this.dangerfile,
+      this.id,
       this.staging});
 
   Map<String, dynamic> toJson() => _$CliArgsToJson(this);
