@@ -19,7 +19,7 @@ abstract class DangerWrapperCommand extends Command {
 
   @override
   Future<void> run() async {
-    final args = argResults!;
+    final args = argResults;
     var url = '';
 
     if (name == 'ci' || name == 'pr') {
@@ -39,7 +39,7 @@ abstract class DangerWrapperCommand extends Command {
           DebugTree(useColors: useColors, logLevels: ['I', 'W', 'E']));
     }
 
-    late String dangerFilePath;
+    String dangerFilePath;
     if (File(args['dangerfile']).existsSync()) {
       dangerFilePath = args['dangerfile'];
     } else if (File(join(current, args['dangerfile'])).existsSync()) {

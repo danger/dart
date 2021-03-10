@@ -1,3 +1,4 @@
+import 'package:meta/meta.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'cli_args.g.dart';
@@ -23,18 +24,18 @@ class CliArgs {
   final String id;
 
   /// Use staged changes
-  final bool? staging;
+  final bool staging;
 
   factory CliArgs.fromJson(Map<String, dynamic> json) =>
       _$CliArgsFromJson(json);
 
   CliArgs(
-      {required this.base,
-      required this.verbose,
-      required this.externalCiProvider,
-      required this.textOnly,
-      required this.dangerfile,
-      required this.id,
+      {@required this.base,
+      @required this.verbose,
+      @required this.externalCiProvider,
+      @required this.textOnly,
+      @required this.dangerfile,
+      @required this.id,
       this.staging});
 
   Map<String, dynamic> toJson() => _$CliArgsToJson(this);

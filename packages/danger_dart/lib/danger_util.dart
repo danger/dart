@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:meta/meta.dart';
 import 'package:args/args.dart';
 import 'package:fimber/fimber.dart';
 import 'package:process_run/shell_run.dart';
@@ -15,10 +15,10 @@ class DangerJSMetadata {
   final int patchVersion;
 
   DangerJSMetadata(
-      {required this.executable,
-      required this.majorVersion,
-      required this.minorVersion,
-      required this.patchVersion});
+      {@required this.executable,
+      @required this.majorVersion,
+      @required this.minorVersion,
+      @required this.patchVersion});
 }
 
 class DangerUtil {

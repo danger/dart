@@ -9,9 +9,9 @@ part of 'violation.dart';
 Violation _$ViolationFromJson(Map<String, dynamic> json) {
   return Violation(
     message: json['message'] as String,
-    file: json['file'] as String?,
-    line: json['line'] as int?,
-    icon: json['icon'] as String?,
+    file: json['file'] as String,
+    line: json['line'] as int,
+    icon: json['icon'] as String,
   );
 }
 

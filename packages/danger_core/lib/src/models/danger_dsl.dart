@@ -1,3 +1,4 @@
+import 'package:meta/meta.dart';
 import 'package:danger_core/src/models/bitbucket_cloud.dart';
 import 'package:danger_core/src/models/git_dsl.dart';
 import 'package:danger_core/src/models/cli_args.dart';
@@ -13,7 +14,7 @@ class DangerJSON {
   factory DangerJSON.fromJson(Map<String, dynamic> json) =>
       _$DangerJSONFromJson(json);
 
-  DangerJSON({required this.danger});
+  DangerJSON({@required this.danger});
 
   Map<String, dynamic> toJson() => _$DangerJSONToJson(this);
 }
@@ -25,12 +26,12 @@ class DangerJSONDSL {
 
   /// The data only version of BitBucket Cloud DSL
   @JsonKey(name: 'bitbucket_cloud')
-  final BitBucketCloudJSONDSL? bitbucketCloud;
+  final BitBucketCloudJSONDSL bitbucketCloud;
 
   factory DangerJSONDSL.fromJson(Map<String, dynamic> json) =>
       _$DangerJSONDSLFromJson(json);
 
-  DangerJSONDSL({this.bitbucketCloud, required this.git});
+  DangerJSONDSL({this.bitbucketCloud, @required this.git});
   Map<String, dynamic> toJson() => _$DangerJSONDSLToJson(this);
 }
 
@@ -41,6 +42,6 @@ class DangerJSONSettings {
   factory DangerJSONSettings.fromJson(Map<String, dynamic> json) =>
       _$DangerJSONSettingsFromJson(json);
 
-  DangerJSONSettings({required this.cliArgs});
+  DangerJSONSettings({@required this.cliArgs});
   Map<String, dynamic> toJson() => _$DangerJSONSettingsToJson(this);
 }
