@@ -8,12 +8,15 @@ class Violation {
   final String message;
 
   /// Optional path to the file
+  @JsonKey(includeIfNull: false)
   final String? file;
 
   /// Optional line in the file
+  @JsonKey(includeIfNull: false)
   final int? line;
 
   /// Optional icon for table (Only valid for messages)
+  @JsonKey(includeIfNull: false)
   final String? icon;
 
   factory Violation.fromJson(Map<String, dynamic> json) =>

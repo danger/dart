@@ -31,10 +31,12 @@ abstract class DangerWrapperCommand extends Command {
     }
 
     final isVerbose = args.wasParsed('verbose');
+    final useColors = (Platform.environment['TERM'] ?? '').contains('xterm');
     if (isVerbose) {
-      Fimber.plantTree(DebugTree(useColors: true));
+      Fimber.plantTree(DebugTree(useColors: useColors));
     } else {
-      Fimber.plantTree(DebugTree(useColors: true, logLevels: ['I', 'W', 'E']));
+      Fimber.plantTree(
+          DebugTree(useColors: useColors, logLevels: ['I', 'W', 'E']));
     }
 
     late String dangerFilePath;
@@ -75,7 +77,7 @@ abstract class DangerWrapperCommand extends Command {
       _logger.d('Run Completed');
       exitCode = result.last.exitCode;
     } catch (e) {
-      _logger.e(e.toString(), ex: e);
+      _logger.e(e.toString());
       exitCode = 1;
     }
   }

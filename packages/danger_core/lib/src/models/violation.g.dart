@@ -15,9 +15,19 @@ Violation _$ViolationFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$ViolationToJson(Violation instance) => <String, dynamic>{
-      'message': instance.message,
-      'file': instance.file,
-      'line': instance.line,
-      'icon': instance.icon,
-    };
+Map<String, dynamic> _$ViolationToJson(Violation instance) {
+  final val = <String, dynamic>{
+    'message': instance.message,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('file', instance.file);
+  writeNotNull('line', instance.line);
+  writeNotNull('icon', instance.icon);
+  return val;
+}
