@@ -1,4 +1,4 @@
-import 'package:danger_runner/commands/base/danger_wrapper_command.dart';
+import 'package:danger_dart/commands/base/danger_wrapper_command.dart';
 
 class CICommand extends DangerWrapperCommand {
   @override

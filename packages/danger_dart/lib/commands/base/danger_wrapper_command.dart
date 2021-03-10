@@ -4,7 +4,7 @@ import 'package:args/command_runner.dart';
 import 'package:fimber/fimber.dart';
 import 'package:path/path.dart' show current, join;
 import 'package:process_run/shell.dart';
-import 'package:danger_runner/danger_util.dart';
+import 'package:danger_dart/danger_util.dart';
 
 abstract class DangerWrapperCommand extends Command {
   DangerWrapperCommand() {

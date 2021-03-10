@@ -1,7 +1,9 @@
-name: danger_runner
+name: danger_dart
 description: A simple command-line application.
 # version: 1.0.0
 # homepage: https://www.example.com
+executables:
+  danger_dart:
 
 environment:
   sdk: ">=2.12.0 <3.0.0"

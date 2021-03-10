@@ -1,10 +1,10 @@
 import 'package:args/command_runner.dart';
 
 import 'package:fimber/fimber.dart';
-import 'package:danger_runner/commands/pr_command.dart';
-import 'package:danger_runner/commands/ci_command.dart';
-import 'package:danger_runner/commands/local_command.dart';
-import 'package:danger_runner/commands/process_command.dart';
+import 'package:danger_dart/commands/pr_command.dart';
+import 'package:danger_dart/commands/ci_command.dart';
+import 'package:danger_dart/commands/local_command.dart';
+import 'package:danger_dart/commands/process_command.dart';
 
 final logger = FimberLog('Danger.Dart');
 
