@@ -1,4 +1,4 @@
-**Under Active Development**
+## Under Active Development
 
 Hello World!
 Currently, we only supported bitbucket cloud.
@@ -34,7 +34,7 @@ Installing by
 $ pub global activate --source path packages/danger_dart/
 ```
 
-Or use `dart packages/danger_runner/bin/danger.dart`
+Or use `dart packages/danger_runner/bin/danger_dart.dart`
 
 **Before Publish**
 We need to call `dart scripts/pre_publish.dart` to remove dependency before publish, otherwise there will be version conflict on user side.
