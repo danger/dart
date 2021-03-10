@@ -22,10 +22,12 @@ abstract class DangerWrapperCommand extends Command {
     final args = argResults;
     var url = '';
 
-    if (args.rest.isEmpty) {
-      throw 'Please provide pull request url';
-    } else {
-      url = args.rest[0];
+    if (name == 'pr') {
+      if (args.rest.isEmpty) {
+        throw 'Please provide pull request url';
+      } else {
+        url = args.rest[0];
+      }
     }
 
     final isVerbose = args.wasParsed('verbose');
@@ -53,7 +55,7 @@ abstract class DangerWrapperCommand extends Command {
     final dangerJSCommand = <String>[
       metaData.executable,
       name,
-      url,
+      ...(url.isNotEmpty ? [url] : []),
       '--dangerfile',
       args['dangerfile'],
       '--process',
