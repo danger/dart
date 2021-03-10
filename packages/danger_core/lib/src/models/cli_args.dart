@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'cli_args.g.dart';
@@ -30,12 +29,12 @@ class CliArgs {
       _$CliArgsFromJson(json);
 
   CliArgs(
-      {@required this.base,
-      @required this.verbose,
-      @required this.externalCiProvider,
-      @required this.textOnly,
-      @required this.dangerfile,
-      @required this.id,
+      {this.base,
+      this.verbose,
+      this.externalCiProvider,
+      this.textOnly,
+      this.dangerfile,
+      this.id,
       this.staging});
 
   Map<String, dynamic> toJson() => _$CliArgsToJson(this);

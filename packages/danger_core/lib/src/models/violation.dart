@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'violation.g.dart';
@@ -23,6 +22,6 @@ class Violation {
   factory Violation.fromJson(Map<String, dynamic> json) =>
       _$ViolationFromJson(json);
 
-  Violation({@required this.message, this.file, this.line, this.icon});
+  Violation({this.message, this.file, this.line, this.icon});
   Map<String, dynamic> toJson() => _$ViolationToJson(this);
 }
