@@ -15,6 +15,7 @@ class ProcessCommand extends Command {
       'dangerfile',
       help: 'Location of dangerfile',
     );
+    argParser.addFlag('verbose', defaultsTo: false, negatable: false);
   }
 
   @override
@@ -33,6 +34,15 @@ class ProcessCommand extends Command {
     final args = argResults;
     final str = (await stdin.transform(utf8.decoder).toList()).join('');
 
+    final isVerbose = args.wasParsed('verbose');
+    final useColors = (Platform.environment['TERM'] ?? '').contains('xterm');
+    if (isVerbose) {
+      Fimber.plantTree(DebugTree(useColors: useColors));
+    } else {
+      Fimber.plantTree(
+          DebugTree(useColors: useColors, logLevels: ['I', 'W', 'E']));
+    }
+
     if (str.isEmpty) {
       throw 'Data not found';
     }
@@ -43,13 +53,6 @@ class ProcessCommand extends Command {
     }
 
     try {
-      final tempFile = File('/tmp/last-dsl.json');
-      if (tempFile.existsSync()) {
-        tempFile.deleteSync();
-      }
-      tempFile.createSync();
-      tempFile.writeAsStringSync(str);
-
       final json = jsonDecode(str);
       final danger = DangerJSON.fromJson(json);
 
@@ -70,7 +73,11 @@ class ProcessCommand extends Command {
 
       exitCode = 0;
     } catch (e) {
-      _logger.e(e.toString(), ex: e);
+      if (e is Error) {
+        _logger.e(e.toString(), ex: e, stacktrace: e.stackTrace);
+      } else {
+        _logger.e(e.toString(), ex: e);
+      }
       exitCode = 1;
     }
   }

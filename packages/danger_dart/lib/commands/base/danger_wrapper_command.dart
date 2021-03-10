@@ -22,12 +22,10 @@ abstract class DangerWrapperCommand extends Command {
     final args = argResults;
     var url = '';
 
-    if (name == 'ci' || name == 'pr') {
-      if (args.rest.isEmpty) {
-        throw 'Please provide pull request url';
-      } else {
-        url = args.rest[0];
-      }
+    if (args.rest.isEmpty) {
+      throw 'Please provide pull request url';
+    } else {
+      url = args.rest[0];
     }
 
     final isVerbose = args.wasParsed('verbose');
@@ -77,7 +75,11 @@ abstract class DangerWrapperCommand extends Command {
       _logger.d('Run Completed');
       exitCode = result.last.exitCode;
     } catch (e) {
-      _logger.e(e.toString());
+      if (e is Error) {
+        _logger.e(e.toString(), ex: e, stacktrace: e.stackTrace);
+      } else {
+        _logger.e(e.toString(), ex: e);
+      }
       exitCode = 1;
     }
   }
