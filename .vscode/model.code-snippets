@@ -1,0 +1,15 @@
+{
+  "model": {
+    "scope": "dart",
+    "prefix": "model",
+    "body": [
+      "@JsonSerializable()",
+      "class $1 {",
+      "  final String id;",
+      "",
+      "  factory $1.fromJson(Map<String, dynamic> json) => _$$1FromJson(json);",
+      "  Map<String, dynamic> toJson() => _$$1ToJson(this);",
+      "}"
+    ]
+  }
+}

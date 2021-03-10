@@ -1,0 +1,3374 @@
+{
+  "danger": {
+    "git": {
+      "modified_files": [
+        "jgit-flow-core/pom.xml",
+        "jgit-flow-core/src/main/java/com/atlassian/jgitflow/core/command/AbstractBranchMergingCommand.java",
+        "jgit-flow-core/src/main/java/com/atlassian/jgitflow/core/command/HotfixFinishCommand.java",
+        "jgit-flow-core/src/main/java/com/atlassian/jgitflow/core/command/ReleaseFinishCommand.java",
+        "jgitflow-it-support/pom.xml",
+        "jgitflow-maven-api/pom.xml",
+        "jgitflow-maven-plugin/pom.xml",
+        "jgitflow-maven-plugin/src/main/java/com/atlassian/maven/plugins/jgitflow/ReleaseContext.java",
+        "jgitflow-maven-plugin/src/main/java/com/atlassian/maven/plugins/jgitflow/extension/command/UpdatePomsWithNonSnapshotCommand.java",
+        "jgitflow-maven-plugin/src/main/java/com/atlassian/maven/plugins/jgitflow/helper/DefaultPomUpdater.java",
+        "jgitflow-maven-plugin/src/main/java/com/atlassian/maven/plugins/jgitflow/manager/DefaultFlowReleaseManager.java",
+        "jgitflow-maven-plugin/src/test/java/ut/com/atlassian/maven/plugins/jgitflow/manager/ReleaseManagerFinishReleaseTest.java",
+        "pom.xml"
+      ],
+      "created_files": [],
+      "deleted_files": [],
+      "commits": [
+        {
+          "sha": "5015bdb19c633242078bf50381efed29ca8038ba",
+          "author": {
+            "name": "Paolo Piccinini",
+            "email": "paolo.piccinini@gft.com",
+            "date": "2018-05-15T15:28:08+00:00"
+          },
+          "committer": {
+            "name": "Paolo Piccinini",
+            "email": "paolo.piccinini@gft.com",
+            "date": "2018-05-15T15:28:08+00:00"
+          },
+          "message": "removed useless tag from context\n\n",
+          "tree": null,
+          "parents": ["903c0b0ebeb518033f0eb8273a7260178c3fbe1e"],
+          "url": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/5015bdb19c633242078bf50381efed29ca8038ba"
+        },
+        {
+          "sha": "903c0b0ebeb518033f0eb8273a7260178c3fbe1e",
+          "author": {
+            "name": "Paolo Piccinini",
+            "email": "paolo.piccinini@gft.com",
+            "date": "2018-05-15T15:24:57+00:00"
+          },
+          "committer": {
+            "name": "Paolo Piccinini",
+            "email": "paolo.piccinini@gft.com",
+            "date": "2018-05-15T15:24:57+00:00"
+          },
+          "message": "reverted changes and used DefaultPomUpdater.removeSnapshotFromPomVersionsKeepSuffix\n\n",
+          "tree": null,
+          "parents": ["b7ca42d1a4852d1ad45fcd91653ebba2201d5023"],
+          "url": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/903c0b0ebeb518033f0eb8273a7260178c3fbe1e"
+        },
+        {
+          "sha": "b7ca42d1a4852d1ad45fcd91653ebba2201d5023",
+          "author": {
+            "name": "Paolo Piccinini",
+            "email": "paolo.piccinini@gft.com",
+            "date": "2018-05-11T09:24:33+00:00"
+          },
+          "committer": {
+            "name": "Paolo Piccinini",
+            "email": "paolo.piccinini@gft.com",
+            "date": "2018-05-11T09:24:33+00:00"
+          },
+          "message": "merged develop into feature\n\n",
+          "tree": null,
+          "parents": [
+            "5e9d6baa7d0f5c250e63d3b3c20f7c8948608313",
+            "831bc353594a3633ca5c7144858a25b03fa26ba2"
+          ],
+          "url": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/b7ca42d1a4852d1ad45fcd91653ebba2201d5023"
+        },
+        {
+          "sha": "5e9d6baa7d0f5c250e63d3b3c20f7c8948608313",
+          "author": {
+            "name": "Paolo Piccinini",
+            "email": "paolo.piccinini@gft.com",
+            "date": "2018-05-11T08:58:33+00:00"
+          },
+          "committer": {
+            "name": "Paolo Piccinini",
+            "email": "paolo.piccinini@gft.com",
+            "date": "2018-05-11T08:58:33+00:00"
+          },
+          "message": "Merge remote-tracking branch 'origin/feature/Custom-Suffix-for-Tags-and-Pom-Version' into feature/Custom-Suffix-for-Tags-and-Pom-Version\n\n",
+          "tree": null,
+          "parents": [
+            "55ba2ce73cde4d4afab08add4b6a4f41a2bba0af",
+            "38a4013a297a67e0ac693a650ceb9267fc7fd0dd"
+          ],
+          "url": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/5e9d6baa7d0f5c250e63d3b3c20f7c8948608313"
+        },
+        {
+          "sha": "55ba2ce73cde4d4afab08add4b6a4f41a2bba0af",
+          "author": {
+            "name": "Paolo Piccinini",
+            "email": "paolo.piccinini@gft.com",
+            "date": "2018-05-11T08:58:10+00:00"
+          },
+          "committer": {
+            "name": "Paolo Piccinini",
+            "email": "paolo.piccinini@gft.com",
+            "date": "2018-05-11T08:58:10+00:00"
+          },
+          "message": "We need to release via jenkins, with customm suffix for tag and pom version\n\nWe need to relese via jenkins, with customm suffix for tags and pom's version. Not sure releaseBranchVersionSuffix behaviour. It is only suffix the release branch name. I've added another propery releaseVersionTagSuffix for this.",
+          "tree": null,
+          "parents": ["3695cbf0e073a66264e5641bd5dd7da4b246ae3c"],
+          "url": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/55ba2ce73cde4d4afab08add4b6a4f41a2bba0af"
+        },
+        {
+          "sha": "38a4013a297a67e0ac693a650ceb9267fc7fd0dd",
+          "author": {
+            "name": "Paolo Piccinini",
+            "email": "paolo.piccinini@gft.com",
+            "date": "2018-05-11T08:57:40+00:00"
+          },
+          "committer": {
+            "name": "Paolo Piccinini",
+            "email": "paolo.piccinini@gft.com",
+            "date": "2018-05-11T08:57:40+00:00"
+          },
+          "message": "We need to relese via jenkins, with customm suffix for tag and pom version\n\nWe need to relese via jenkins, with customm suffix for tags and pom's version. Not sure releaseBranchVersionSuffix behaviour. It is only suffix the release branch name. I've added another propery releaseVersionTagSuffix for this.",
+          "tree": null,
+          "parents": ["3695cbf0e073a66264e5641bd5dd7da4b246ae3c"],
+          "url": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/38a4013a297a67e0ac693a650ceb9267fc7fd0dd"
+        },
+        {
+          "sha": "3695cbf0e073a66264e5641bd5dd7da4b246ae3c",
+          "author": {
+            "name": "Jonathan Doklovic",
+            "email": "doklovic@atlassian.com",
+            "date": "2015-05-18T19:26:36+00:00"
+          },
+          "committer": {
+            "name": "Jonathan Doklovic",
+            "email": "doklovic@atlassian.com",
+            "date": "2015-05-18T19:26:36+00:00"
+          },
+          "message": "bump plugin version\n",
+          "tree": null,
+          "parents": ["656b18e02213f2c9181466ea14819290b79190ca"],
+          "url": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/3695cbf0e073a66264e5641bd5dd7da4b246ae3c"
+        }
+      ]
+    },
+    "bitbucket_cloud": {
+      "metadata": {
+        "pullRequestID": "80",
+        "repoSlug": "atlassian/jgit-flow"
+      },
+      "pr": {
+        "rendered": {
+          "description": {
+            "raw": "Hi, we need to release via jenkins in one step automatic command. Not sure for the behaviour of releaseBranchVersionSuffix. I think it is only suffix the releases branch name. i've added another property to suffix the Tags and Pom's versions releaseVersionTagSuffix. Maybe we can use releaseBranchVersionSuffix to achieve this?",
+            "markup": "markdown",
+            "html": "<p>Hi, we need to release via jenkins in one step automatic command. Not sure for the behaviour of releaseBranchVersionSuffix. I think it is only suffix the releases branch name. i've added another property to suffix the Tags and Pom's versions releaseVersionTagSuffix. Maybe we can use releaseBranchVersionSuffix to achieve this?</p>",
+            "type": "rendered"
+          },
+          "title": {
+            "raw": "Custom suffix for tags and POM's version",
+            "markup": "markdown",
+            "html": "<p>Custom suffix for tags and POM's version</p>",
+            "type": "rendered"
+          }
+        },
+        "type": "pullrequest",
+        "description": "Hi, we need to release via jenkins in one step automatic command. Not sure for the behaviour of releaseBranchVersionSuffix. I think it is only suffix the releases branch name. i've added another property to suffix the Tags and Pom's versions releaseVersionTagSuffix. Maybe we can use releaseBranchVersionSuffix to achieve this?",
+        "links": {
+          "decline": {
+            "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80/decline"
+          },
+          "diffstat": {
+            "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/diffstat/PaoloPiccinini/jgit-flow:5015bdb19c63%0D6a57ef1ec9c4?from_pullrequest_id=80"
+          },
+          "commits": {
+            "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80/commits"
+          },
+          "self": {
+            "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+          },
+          "comments": {
+            "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80/comments"
+          },
+          "merge": {
+            "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80/merge"
+          },
+          "html": {
+            "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+          },
+          "activity": {
+            "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80/activity"
+          },
+          "request-changes": {
+            "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80/request-changes"
+          },
+          "diff": {
+            "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/diff/PaoloPiccinini/jgit-flow:5015bdb19c63%0D6a57ef1ec9c4?from_pullrequest_id=80"
+          },
+          "approve": {
+            "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80/approve"
+          },
+          "statuses": {
+            "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80/statuses"
+          }
+        },
+        "title": "Custom suffix for tags and POM's version",
+        "close_source_branch": false,
+        "reviewers": [
+          {
+            "display_name": "Mario Papandrea",
+            "uuid": "{271d5aa4-ff3e-433e-a292-00faf12007f0}",
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/users/%7B271d5aa4-ff3e-433e-a292-00faf12007f0%7D"
+              },
+              "html": {
+                "href": "https://bitbucket.org/%7B271d5aa4-ff3e-433e-a292-00faf12007f0%7D/"
+              },
+              "avatar": {
+                "href": "https://secure.gravatar.com/avatar/6f8944648fe3c74c2193d74f5313fb77?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FMP-2.png"
+              }
+            },
+            "nickname": "Mario Papandrea",
+            "type": "user",
+            "account_id": "5a78242c4cf5e3293b23b864"
+          },
+          {
+            "display_name": "Pawel Stacherzak",
+            "uuid": "{db0907f8-6fa9-446b-8a6c-2b477110d3d3}",
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/users/%7Bdb0907f8-6fa9-446b-8a6c-2b477110d3d3%7D"
+              },
+              "html": {
+                "href": "https://bitbucket.org/%7Bdb0907f8-6fa9-446b-8a6c-2b477110d3d3%7D/"
+              },
+              "avatar": {
+                "href": "https://secure.gravatar.com/avatar/19adc753565f2d370c6f40f1edcf9ebf?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPS-3.png"
+              }
+            },
+            "nickname": "Pawel Stacherzak",
+            "type": "user",
+            "account_id": "5aa271a84712c13220b741cb"
+          }
+        ],
+        "id": 80,
+        "destination": {
+          "commit": {
+            "hash": "6a57ef1ec9c4",
+            "type": "commit",
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/commit/6a57ef1ec9c4"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/commits/6a57ef1ec9c4"
+              }
+            }
+          },
+          "repository": {
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow"
+              },
+              "avatar": {
+                "href": "https://bytebucket.org/ravatar/%7B62a7b075-0640-4af8-a55a-c45812ca75a8%7D?ts=java"
+              }
+            },
+            "type": "repository",
+            "name": "jgit-flow",
+            "full_name": "atlassian/jgit-flow",
+            "uuid": "{62a7b075-0640-4af8-a55a-c45812ca75a8}"
+          },
+          "branch": {
+            "name": "develop"
+          }
+        },
+        "created_on": "2018-05-11T09:03:25.875914+00:00",
+        "summary": {
+          "raw": "Hi, we need to release via jenkins in one step automatic command. Not sure for the behaviour of releaseBranchVersionSuffix. I think it is only suffix the releases branch name. i've added another property to suffix the Tags and Pom's versions releaseVersionTagSuffix. Maybe we can use releaseBranchVersionSuffix to achieve this?",
+          "markup": "markdown",
+          "html": "<p>Hi, we need to release via jenkins in one step automatic command. Not sure for the behaviour of releaseBranchVersionSuffix. I think it is only suffix the releases branch name. i've added another property to suffix the Tags and Pom's versions releaseVersionTagSuffix. Maybe we can use releaseBranchVersionSuffix to achieve this?</p>",
+          "type": "rendered"
+        },
+        "source": {
+          "commit": {
+            "hash": "5015bdb19c63",
+            "type": "commit",
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/5015bdb19c63"
+              },
+              "html": {
+                "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/5015bdb19c63"
+              }
+            }
+          },
+          "repository": {
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow"
+              },
+              "html": {
+                "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow"
+              },
+              "avatar": {
+                "href": "https://bytebucket.org/ravatar/%7Bb272cf25-0364-4d02-b50a-1b284de5f0b3%7D?ts=java"
+              }
+            },
+            "type": "repository",
+            "name": "jgit-flow",
+            "full_name": "PaoloPiccinini/jgit-flow",
+            "uuid": "{b272cf25-0364-4d02-b50a-1b284de5f0b3}"
+          },
+          "branch": {
+            "name": "feature/Custom-Suffix-for-Tags-and-Pom-Version"
+          }
+        },
+        "comment_count": 8,
+        "state": "OPEN",
+        "task_count": 0,
+        "participants": [
+          {
+            "participated_on": "2018-05-15T13:07:36.585128+00:00",
+            "state": null,
+            "role": "REVIEWER",
+            "user": {
+              "display_name": "Mario Papandrea",
+              "uuid": "{271d5aa4-ff3e-433e-a292-00faf12007f0}",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/%7B271d5aa4-ff3e-433e-a292-00faf12007f0%7D"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/%7B271d5aa4-ff3e-433e-a292-00faf12007f0%7D/"
+                },
+                "avatar": {
+                  "href": "https://secure.gravatar.com/avatar/6f8944648fe3c74c2193d74f5313fb77?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FMP-2.png"
+                }
+              },
+              "nickname": "Mario Papandrea",
+              "type": "user",
+              "account_id": "5a78242c4cf5e3293b23b864"
+            },
+            "type": "participant",
+            "approved": false
+          },
+          {
+            "participated_on": "2018-05-21T18:49:19.874660+00:00",
+            "state": null,
+            "role": "PARTICIPANT",
+            "user": {
+              "display_name": "Dhandapani Ponnurangam",
+              "uuid": "{9bb51d45-d34f-4953-bee4-23ef1be3537a}",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/%7B9bb51d45-d34f-4953-bee4-23ef1be3537a%7D"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/%7B9bb51d45-d34f-4953-bee4-23ef1be3537a%7D/"
+                },
+                "avatar": {
+                  "href": "https://secure.gravatar.com/avatar/de08d7caf417a237e5c612ce348de10e?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FDP-2.png"
+                }
+              },
+              "nickname": "inspiregates",
+              "type": "user",
+              "account_id": "557058:e5d42638-9ea5-4086-bdd9-455d8caae8d7"
+            },
+            "type": "participant",
+            "approved": false
+          },
+          {
+            "participated_on": "2018-05-21T16:40:01.437413+00:00",
+            "state": null,
+            "role": "PARTICIPANT",
+            "user": {
+              "display_name": "Paolo Piccinini",
+              "uuid": "{a0d264d6-8ee1-4116-b596-1e828a13e404}",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D/"
+                },
+                "avatar": {
+                  "href": "https://secure.gravatar.com/avatar/5842db8cc98f6a596a27efd0a2652d51?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPP-6.png"
+                }
+              },
+              "nickname": "PaoloPiccinini",
+              "type": "user",
+              "account_id": "5a99149615278e2a78fb6f33"
+            },
+            "type": "participant",
+            "approved": false
+          },
+          {
+            "participated_on": "2018-06-13T08:47:08.197086+00:00",
+            "state": "approved",
+            "role": "REVIEWER",
+            "user": {
+              "display_name": "Pawel Stacherzak",
+              "uuid": "{db0907f8-6fa9-446b-8a6c-2b477110d3d3}",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/%7Bdb0907f8-6fa9-446b-8a6c-2b477110d3d3%7D"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/%7Bdb0907f8-6fa9-446b-8a6c-2b477110d3d3%7D/"
+                },
+                "avatar": {
+                  "href": "https://secure.gravatar.com/avatar/19adc753565f2d370c6f40f1edcf9ebf?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPS-3.png"
+                }
+              },
+              "nickname": "Pawel Stacherzak",
+              "type": "user",
+              "account_id": "5aa271a84712c13220b741cb"
+            },
+            "type": "participant",
+            "approved": true
+          }
+        ],
+        "reason": "",
+        "updated_on": "2018-10-05T16:10:07.471938+00:00",
+        "author": {
+          "display_name": "Paolo Piccinini",
+          "uuid": "{a0d264d6-8ee1-4116-b596-1e828a13e404}",
+          "links": {
+            "self": {
+              "href": "https://api.bitbucket.org/2.0/users/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D"
+            },
+            "html": {
+              "href": "https://bitbucket.org/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D/"
+            },
+            "avatar": {
+              "href": "https://secure.gravatar.com/avatar/5842db8cc98f6a596a27efd0a2652d51?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPP-6.png"
+            }
+          },
+          "nickname": "PaoloPiccinini",
+          "type": "user",
+          "account_id": "5a99149615278e2a78fb6f33"
+        },
+        "merge_commit": null,
+        "closed_by": null
+      },
+      "commits": [
+        {
+          "hash": "5015bdb19c633242078bf50381efed29ca8038ba",
+          "repository": {
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow"
+              },
+              "html": {
+                "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow"
+              },
+              "avatar": {
+                "href": "https://bytebucket.org/ravatar/%7Bb272cf25-0364-4d02-b50a-1b284de5f0b3%7D?ts=java"
+              }
+            },
+            "type": "repository",
+            "name": "jgit-flow",
+            "full_name": "PaoloPiccinini/jgit-flow",
+            "uuid": "{b272cf25-0364-4d02-b50a-1b284de5f0b3}"
+          },
+          "links": {
+            "self": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/5015bdb19c633242078bf50381efed29ca8038ba"
+            },
+            "comments": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/5015bdb19c633242078bf50381efed29ca8038ba/comments"
+            },
+            "patch": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/patch/5015bdb19c633242078bf50381efed29ca8038ba"
+            },
+            "html": {
+              "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/5015bdb19c633242078bf50381efed29ca8038ba"
+            },
+            "diff": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/diff/5015bdb19c633242078bf50381efed29ca8038ba"
+            },
+            "approve": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/5015bdb19c633242078bf50381efed29ca8038ba/approve"
+            },
+            "statuses": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/5015bdb19c633242078bf50381efed29ca8038ba/statuses"
+            }
+          },
+          "author": {
+            "raw": "Paolo Piccinini <paolo.piccinini@gft.com>",
+            "type": "author",
+            "user": {
+              "display_name": "Paolo Piccinini",
+              "uuid": "{a0d264d6-8ee1-4116-b596-1e828a13e404}",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D/"
+                },
+                "avatar": {
+                  "href": "https://secure.gravatar.com/avatar/5842db8cc98f6a596a27efd0a2652d51?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPP-6.png"
+                }
+              },
+              "nickname": "PaoloPiccinini",
+              "type": "user",
+              "account_id": "5a99149615278e2a78fb6f33"
+            }
+          },
+          "summary": {
+            "raw": "removed useless tag from context\n\n",
+            "markup": "markdown",
+            "html": "<p>removed useless tag from context</p>",
+            "type": "rendered"
+          },
+          "parents": [
+            {
+              "hash": "903c0b0ebeb518033f0eb8273a7260178c3fbe1e",
+              "type": "commit",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/903c0b0ebeb518033f0eb8273a7260178c3fbe1e"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/903c0b0ebeb518033f0eb8273a7260178c3fbe1e"
+                }
+              }
+            }
+          ],
+          "date": "2018-05-15T15:28:08+00:00",
+          "message": "removed useless tag from context\n\n",
+          "type": "commit"
+        },
+        {
+          "hash": "903c0b0ebeb518033f0eb8273a7260178c3fbe1e",
+          "repository": {
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow"
+              },
+              "html": {
+                "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow"
+              },
+              "avatar": {
+                "href": "https://bytebucket.org/ravatar/%7Bb272cf25-0364-4d02-b50a-1b284de5f0b3%7D?ts=java"
+              }
+            },
+            "type": "repository",
+            "name": "jgit-flow",
+            "full_name": "PaoloPiccinini/jgit-flow",
+            "uuid": "{b272cf25-0364-4d02-b50a-1b284de5f0b3}"
+          },
+          "links": {
+            "self": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/903c0b0ebeb518033f0eb8273a7260178c3fbe1e"
+            },
+            "comments": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/903c0b0ebeb518033f0eb8273a7260178c3fbe1e/comments"
+            },
+            "patch": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/patch/903c0b0ebeb518033f0eb8273a7260178c3fbe1e"
+            },
+            "html": {
+              "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/903c0b0ebeb518033f0eb8273a7260178c3fbe1e"
+            },
+            "diff": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/diff/903c0b0ebeb518033f0eb8273a7260178c3fbe1e"
+            },
+            "approve": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/903c0b0ebeb518033f0eb8273a7260178c3fbe1e/approve"
+            },
+            "statuses": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/903c0b0ebeb518033f0eb8273a7260178c3fbe1e/statuses"
+            }
+          },
+          "author": {
+            "raw": "Paolo Piccinini <paolo.piccinini@gft.com>",
+            "type": "author",
+            "user": {
+              "display_name": "Paolo Piccinini",
+              "uuid": "{a0d264d6-8ee1-4116-b596-1e828a13e404}",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D/"
+                },
+                "avatar": {
+                  "href": "https://secure.gravatar.com/avatar/5842db8cc98f6a596a27efd0a2652d51?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPP-6.png"
+                }
+              },
+              "nickname": "PaoloPiccinini",
+              "type": "user",
+              "account_id": "5a99149615278e2a78fb6f33"
+            }
+          },
+          "summary": {
+            "raw": "reverted changes and used DefaultPomUpdater.removeSnapshotFromPomVersionsKeepSuffix\n\n",
+            "markup": "markdown",
+            "html": "<p>reverted changes and used DefaultPomUpdater.removeSnapshotFromPomVersionsKeepSuffix</p>",
+            "type": "rendered"
+          },
+          "parents": [
+            {
+              "hash": "b7ca42d1a4852d1ad45fcd91653ebba2201d5023",
+              "type": "commit",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/b7ca42d1a4852d1ad45fcd91653ebba2201d5023"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/b7ca42d1a4852d1ad45fcd91653ebba2201d5023"
+                }
+              }
+            }
+          ],
+          "date": "2018-05-15T15:24:57+00:00",
+          "message": "reverted changes and used DefaultPomUpdater.removeSnapshotFromPomVersionsKeepSuffix\n\n",
+          "type": "commit"
+        },
+        {
+          "hash": "b7ca42d1a4852d1ad45fcd91653ebba2201d5023",
+          "repository": {
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow"
+              },
+              "html": {
+                "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow"
+              },
+              "avatar": {
+                "href": "https://bytebucket.org/ravatar/%7Bb272cf25-0364-4d02-b50a-1b284de5f0b3%7D?ts=java"
+              }
+            },
+            "type": "repository",
+            "name": "jgit-flow",
+            "full_name": "PaoloPiccinini/jgit-flow",
+            "uuid": "{b272cf25-0364-4d02-b50a-1b284de5f0b3}"
+          },
+          "links": {
+            "self": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/b7ca42d1a4852d1ad45fcd91653ebba2201d5023"
+            },
+            "comments": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/b7ca42d1a4852d1ad45fcd91653ebba2201d5023/comments"
+            },
+            "html": {
+              "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/b7ca42d1a4852d1ad45fcd91653ebba2201d5023"
+            },
+            "diff": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/diff/b7ca42d1a4852d1ad45fcd91653ebba2201d5023"
+            },
+            "approve": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/b7ca42d1a4852d1ad45fcd91653ebba2201d5023/approve"
+            },
+            "statuses": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/b7ca42d1a4852d1ad45fcd91653ebba2201d5023/statuses"
+            }
+          },
+          "author": {
+            "raw": "Paolo Piccinini <paolo.piccinini@gft.com>",
+            "type": "author",
+            "user": {
+              "display_name": "Paolo Piccinini",
+              "uuid": "{a0d264d6-8ee1-4116-b596-1e828a13e404}",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D/"
+                },
+                "avatar": {
+                  "href": "https://secure.gravatar.com/avatar/5842db8cc98f6a596a27efd0a2652d51?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPP-6.png"
+                }
+              },
+              "nickname": "PaoloPiccinini",
+              "type": "user",
+              "account_id": "5a99149615278e2a78fb6f33"
+            }
+          },
+          "summary": {
+            "raw": "merged develop into feature\n\n",
+            "markup": "markdown",
+            "html": "<p>merged develop into feature</p>",
+            "type": "rendered"
+          },
+          "parents": [
+            {
+              "hash": "5e9d6baa7d0f5c250e63d3b3c20f7c8948608313",
+              "type": "commit",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/5e9d6baa7d0f5c250e63d3b3c20f7c8948608313"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/5e9d6baa7d0f5c250e63d3b3c20f7c8948608313"
+                }
+              }
+            },
+            {
+              "hash": "831bc353594a3633ca5c7144858a25b03fa26ba2",
+              "type": "commit",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/831bc353594a3633ca5c7144858a25b03fa26ba2"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/831bc353594a3633ca5c7144858a25b03fa26ba2"
+                }
+              }
+            }
+          ],
+          "date": "2018-05-11T09:24:33+00:00",
+          "message": "merged develop into feature\n\n",
+          "type": "commit"
+        },
+        {
+          "hash": "5e9d6baa7d0f5c250e63d3b3c20f7c8948608313",
+          "repository": {
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow"
+              },
+              "html": {
+                "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow"
+              },
+              "avatar": {
+                "href": "https://bytebucket.org/ravatar/%7Bb272cf25-0364-4d02-b50a-1b284de5f0b3%7D?ts=java"
+              }
+            },
+            "type": "repository",
+            "name": "jgit-flow",
+            "full_name": "PaoloPiccinini/jgit-flow",
+            "uuid": "{b272cf25-0364-4d02-b50a-1b284de5f0b3}"
+          },
+          "links": {
+            "self": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/5e9d6baa7d0f5c250e63d3b3c20f7c8948608313"
+            },
+            "comments": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/5e9d6baa7d0f5c250e63d3b3c20f7c8948608313/comments"
+            },
+            "html": {
+              "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/5e9d6baa7d0f5c250e63d3b3c20f7c8948608313"
+            },
+            "diff": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/diff/5e9d6baa7d0f5c250e63d3b3c20f7c8948608313"
+            },
+            "approve": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/5e9d6baa7d0f5c250e63d3b3c20f7c8948608313/approve"
+            },
+            "statuses": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/5e9d6baa7d0f5c250e63d3b3c20f7c8948608313/statuses"
+            }
+          },
+          "author": {
+            "raw": "Paolo Piccinini <paolo.piccinini@gft.com>",
+            "type": "author",
+            "user": {
+              "display_name": "Paolo Piccinini",
+              "uuid": "{a0d264d6-8ee1-4116-b596-1e828a13e404}",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D/"
+                },
+                "avatar": {
+                  "href": "https://secure.gravatar.com/avatar/5842db8cc98f6a596a27efd0a2652d51?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPP-6.png"
+                }
+              },
+              "nickname": "PaoloPiccinini",
+              "type": "user",
+              "account_id": "5a99149615278e2a78fb6f33"
+            }
+          },
+          "summary": {
+            "raw": "Merge remote-tracking branch 'origin/feature/Custom-Suffix-for-Tags-and-Pom-Version' into feature/Custom-Suffix-for-Tags-and-Pom-Version\n\n",
+            "markup": "markdown",
+            "html": "<p>Merge remote-tracking branch 'origin/feature/Custom-Suffix-for-Tags-and-Pom-Version' into feature/Custom-Suffix-for-Tags-and-Pom-Version</p>",
+            "type": "rendered"
+          },
+          "parents": [
+            {
+              "hash": "55ba2ce73cde4d4afab08add4b6a4f41a2bba0af",
+              "type": "commit",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/55ba2ce73cde4d4afab08add4b6a4f41a2bba0af"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/55ba2ce73cde4d4afab08add4b6a4f41a2bba0af"
+                }
+              }
+            },
+            {
+              "hash": "38a4013a297a67e0ac693a650ceb9267fc7fd0dd",
+              "type": "commit",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/38a4013a297a67e0ac693a650ceb9267fc7fd0dd"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/38a4013a297a67e0ac693a650ceb9267fc7fd0dd"
+                }
+              }
+            }
+          ],
+          "date": "2018-05-11T08:58:33+00:00",
+          "message": "Merge remote-tracking branch 'origin/feature/Custom-Suffix-for-Tags-and-Pom-Version' into feature/Custom-Suffix-for-Tags-and-Pom-Version\n\n",
+          "type": "commit"
+        },
+        {
+          "hash": "55ba2ce73cde4d4afab08add4b6a4f41a2bba0af",
+          "repository": {
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow"
+              },
+              "html": {
+                "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow"
+              },
+              "avatar": {
+                "href": "https://bytebucket.org/ravatar/%7Bb272cf25-0364-4d02-b50a-1b284de5f0b3%7D?ts=java"
+              }
+            },
+            "type": "repository",
+            "name": "jgit-flow",
+            "full_name": "PaoloPiccinini/jgit-flow",
+            "uuid": "{b272cf25-0364-4d02-b50a-1b284de5f0b3}"
+          },
+          "links": {
+            "self": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/55ba2ce73cde4d4afab08add4b6a4f41a2bba0af"
+            },
+            "comments": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/55ba2ce73cde4d4afab08add4b6a4f41a2bba0af/comments"
+            },
+            "patch": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/patch/55ba2ce73cde4d4afab08add4b6a4f41a2bba0af"
+            },
+            "html": {
+              "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/55ba2ce73cde4d4afab08add4b6a4f41a2bba0af"
+            },
+            "diff": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/diff/55ba2ce73cde4d4afab08add4b6a4f41a2bba0af"
+            },
+            "approve": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/55ba2ce73cde4d4afab08add4b6a4f41a2bba0af/approve"
+            },
+            "statuses": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/55ba2ce73cde4d4afab08add4b6a4f41a2bba0af/statuses"
+            }
+          },
+          "author": {
+            "raw": "Paolo Piccinini <paolo.piccinini@gft.com>",
+            "type": "author",
+            "user": {
+              "display_name": "Paolo Piccinini",
+              "uuid": "{a0d264d6-8ee1-4116-b596-1e828a13e404}",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D/"
+                },
+                "avatar": {
+                  "href": "https://secure.gravatar.com/avatar/5842db8cc98f6a596a27efd0a2652d51?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPP-6.png"
+                }
+              },
+              "nickname": "PaoloPiccinini",
+              "type": "user",
+              "account_id": "5a99149615278e2a78fb6f33"
+            }
+          },
+          "summary": {
+            "raw": "We need to release via jenkins, with customm suffix for tag and pom version\n\nWe need to relese via jenkins, with customm suffix for tags and pom's version. Not sure releaseBranchVersionSuffix behaviour. It is only suffix the release branch name. I've added another propery releaseVersionTagSuffix for this.",
+            "markup": "markdown",
+            "html": "<p>We need to release via jenkins, with customm suffix for tag and pom version</p>\n<p>We need to relese via jenkins, with customm suffix for tags and pom's version. Not sure releaseBranchVersionSuffix behaviour. It is only suffix the release branch name. I've added another propery releaseVersionTagSuffix for this.</p>",
+            "type": "rendered"
+          },
+          "parents": [
+            {
+              "hash": "3695cbf0e073a66264e5641bd5dd7da4b246ae3c",
+              "type": "commit",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/3695cbf0e073a66264e5641bd5dd7da4b246ae3c"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/3695cbf0e073a66264e5641bd5dd7da4b246ae3c"
+                }
+              }
+            }
+          ],
+          "date": "2018-05-11T08:58:10+00:00",
+          "message": "We need to release via jenkins, with customm suffix for tag and pom version\n\nWe need to relese via jenkins, with customm suffix for tags and pom's version. Not sure releaseBranchVersionSuffix behaviour. It is only suffix the release branch name. I've added another propery releaseVersionTagSuffix for this.",
+          "type": "commit"
+        },
+        {
+          "hash": "38a4013a297a67e0ac693a650ceb9267fc7fd0dd",
+          "repository": {
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow"
+              },
+              "html": {
+                "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow"
+              },
+              "avatar": {
+                "href": "https://bytebucket.org/ravatar/%7Bb272cf25-0364-4d02-b50a-1b284de5f0b3%7D?ts=java"
+              }
+            },
+            "type": "repository",
+            "name": "jgit-flow",
+            "full_name": "PaoloPiccinini/jgit-flow",
+            "uuid": "{b272cf25-0364-4d02-b50a-1b284de5f0b3}"
+          },
+          "links": {
+            "self": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/38a4013a297a67e0ac693a650ceb9267fc7fd0dd"
+            },
+            "comments": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/38a4013a297a67e0ac693a650ceb9267fc7fd0dd/comments"
+            },
+            "patch": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/patch/38a4013a297a67e0ac693a650ceb9267fc7fd0dd"
+            },
+            "html": {
+              "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/38a4013a297a67e0ac693a650ceb9267fc7fd0dd"
+            },
+            "diff": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/diff/38a4013a297a67e0ac693a650ceb9267fc7fd0dd"
+            },
+            "approve": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/38a4013a297a67e0ac693a650ceb9267fc7fd0dd/approve"
+            },
+            "statuses": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/38a4013a297a67e0ac693a650ceb9267fc7fd0dd/statuses"
+            }
+          },
+          "author": {
+            "raw": "Paolo Piccinini <paolo.piccinini@gft.com>",
+            "type": "author",
+            "user": {
+              "display_name": "Paolo Piccinini",
+              "uuid": "{a0d264d6-8ee1-4116-b596-1e828a13e404}",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D/"
+                },
+                "avatar": {
+                  "href": "https://secure.gravatar.com/avatar/5842db8cc98f6a596a27efd0a2652d51?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPP-6.png"
+                }
+              },
+              "nickname": "PaoloPiccinini",
+              "type": "user",
+              "account_id": "5a99149615278e2a78fb6f33"
+            }
+          },
+          "summary": {
+            "raw": "We need to relese via jenkins, with customm suffix for tag and pom version\n\nWe need to relese via jenkins, with customm suffix for tags and pom's version. Not sure releaseBranchVersionSuffix behaviour. It is only suffix the release branch name. I've added another propery releaseVersionTagSuffix for this.",
+            "markup": "markdown",
+            "html": "<p>We need to relese via jenkins, with customm suffix for tag and pom version</p>\n<p>We need to relese via jenkins, with customm suffix for tags and pom's version. Not sure releaseBranchVersionSuffix behaviour. It is only suffix the release branch name. I've added another propery releaseVersionTagSuffix for this.</p>",
+            "type": "rendered"
+          },
+          "parents": [
+            {
+              "hash": "3695cbf0e073a66264e5641bd5dd7da4b246ae3c",
+              "type": "commit",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/3695cbf0e073a66264e5641bd5dd7da4b246ae3c"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/3695cbf0e073a66264e5641bd5dd7da4b246ae3c"
+                }
+              }
+            }
+          ],
+          "date": "2018-05-11T08:57:40+00:00",
+          "message": "We need to relese via jenkins, with customm suffix for tag and pom version\n\nWe need to relese via jenkins, with customm suffix for tags and pom's version. Not sure releaseBranchVersionSuffix behaviour. It is only suffix the release branch name. I've added another propery releaseVersionTagSuffix for this.",
+          "type": "commit"
+        },
+        {
+          "hash": "3695cbf0e073a66264e5641bd5dd7da4b246ae3c",
+          "repository": {
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow"
+              },
+              "html": {
+                "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow"
+              },
+              "avatar": {
+                "href": "https://bytebucket.org/ravatar/%7Bb272cf25-0364-4d02-b50a-1b284de5f0b3%7D?ts=java"
+              }
+            },
+            "type": "repository",
+            "name": "jgit-flow",
+            "full_name": "PaoloPiccinini/jgit-flow",
+            "uuid": "{b272cf25-0364-4d02-b50a-1b284de5f0b3}"
+          },
+          "links": {
+            "self": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/3695cbf0e073a66264e5641bd5dd7da4b246ae3c"
+            },
+            "comments": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/3695cbf0e073a66264e5641bd5dd7da4b246ae3c/comments"
+            },
+            "patch": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/patch/3695cbf0e073a66264e5641bd5dd7da4b246ae3c"
+            },
+            "html": {
+              "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/3695cbf0e073a66264e5641bd5dd7da4b246ae3c"
+            },
+            "diff": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/diff/3695cbf0e073a66264e5641bd5dd7da4b246ae3c"
+            },
+            "approve": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/3695cbf0e073a66264e5641bd5dd7da4b246ae3c/approve"
+            },
+            "statuses": {
+              "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/3695cbf0e073a66264e5641bd5dd7da4b246ae3c/statuses"
+            }
+          },
+          "author": {
+            "raw": "Jonathan Doklovic <doklovic@atlassian.com>",
+            "type": "author",
+            "user": {
+              "display_name": "Jonathan Doklovic",
+              "uuid": "{b88deb29-9897-4618-a62e-c39a5f6c6db7}",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/%7Bb88deb29-9897-4618-a62e-c39a5f6c6db7%7D"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/%7Bb88deb29-9897-4618-a62e-c39a5f6c6db7%7D/"
+                },
+                "avatar": {
+                  "href": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/557057:3695b794-cde3-43a2-99aa-c0fc6151b754/7e9fea3f-897e-4a08-82ee-7b5b24bbbb10/128"
+                }
+              },
+              "nickname": "brainicorn",
+              "type": "user",
+              "account_id": "557057:3695b794-cde3-43a2-99aa-c0fc6151b754"
+            }
+          },
+          "summary": {
+            "raw": "bump plugin version\n",
+            "markup": "markdown",
+            "html": "<p>bump plugin version</p>",
+            "type": "rendered"
+          },
+          "parents": [
+            {
+              "hash": "656b18e02213f2c9181466ea14819290b79190ca",
+              "type": "commit",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/656b18e02213f2c9181466ea14819290b79190ca"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/656b18e02213f2c9181466ea14819290b79190ca"
+                }
+              }
+            }
+          ],
+          "date": "2015-05-18T19:26:36+00:00",
+          "message": "bump plugin version\n",
+          "type": "commit"
+        }
+      ],
+      "comments": [
+        {
+          "links": {
+            "self": {
+              "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80/comments/64276049"
+            },
+            "code": {
+              "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/diff/PaoloPiccinini/jgit-flow:b7ca42d1a485..831bc353594a?path=jgit-flow-core%2Fsrc%2Fmain%2Fjava%2Fcom%2Fatlassian%2Fjgitflow%2Fcore%2Fcommand%2FAbstractBranchMergingCommand.java"
+            },
+            "html": {
+              "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80/_/diff#comment-64276049"
+            }
+          },
+          "deleted": false,
+          "pullrequest": {
+            "type": "pullrequest",
+            "id": 80,
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+              }
+            },
+            "title": "Custom suffix for tags and POM's version"
+          },
+          "content": {
+            "raw": "If `tagSuffix`is null, then the four characters \"null\" are appended.  ",
+            "markup": "markdown",
+            "html": "<p>If <code>tagSuffix</code>is null, then the four characters \"null\" are appended.  </p>",
+            "type": "rendered"
+          },
+          "created_on": "2018-05-15T12:49:53.367320+00:00",
+          "user": {
+            "display_name": "Mario Papandrea",
+            "uuid": "{271d5aa4-ff3e-433e-a292-00faf12007f0}",
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/users/%7B271d5aa4-ff3e-433e-a292-00faf12007f0%7D"
+              },
+              "html": {
+                "href": "https://bitbucket.org/%7B271d5aa4-ff3e-433e-a292-00faf12007f0%7D/"
+              },
+              "avatar": {
+                "href": "https://secure.gravatar.com/avatar/6f8944648fe3c74c2193d74f5313fb77?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FMP-2.png"
+              }
+            },
+            "nickname": "Mario Papandrea",
+            "type": "user",
+            "account_id": "5a78242c4cf5e3293b23b864"
+          },
+          "inline": {
+            "to": 122,
+            "from": null,
+            "path": "jgit-flow-core/src/main/java/com/atlassian/jgitflow/core/command/AbstractBranchMergingCommand.java"
+          },
+          "updated_on": "2018-05-15T12:49:53.428059+00:00",
+          "type": "pullrequest_comment",
+          "id": 64276049
+        },
+        {
+          "links": {
+            "self": {
+              "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80/comments/64276309"
+            },
+            "code": {
+              "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/diff/PaoloPiccinini/jgit-flow:b7ca42d1a485..831bc353594a?path=jgitflow-maven-plugin%2Fsrc%2Fmain%2Fjava%2Fcom%2Fatlassian%2Fmaven%2Fplugins%2Fjgitflow%2Fextension%2Fcommand%2FUpdatePomsWithNonSnapshotCommand.java"
+            },
+            "html": {
+              "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80/_/diff#comment-64276309"
+            }
+          },
+          "deleted": false,
+          "pullrequest": {
+            "type": "pullrequest",
+            "id": 80,
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+              }
+            },
+            "title": "Custom suffix for tags and POM's version"
+          },
+          "content": {
+            "raw": "remove this line",
+            "markup": "markdown",
+            "html": "<p>remove this line</p>",
+            "type": "rendered"
+          },
+          "created_on": "2018-05-15T12:51:33.203290+00:00",
+          "user": {
+            "display_name": "Mario Papandrea",
+            "uuid": "{271d5aa4-ff3e-433e-a292-00faf12007f0}",
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/users/%7B271d5aa4-ff3e-433e-a292-00faf12007f0%7D"
+              },
+              "html": {
+                "href": "https://bitbucket.org/%7B271d5aa4-ff3e-433e-a292-00faf12007f0%7D/"
+              },
+              "avatar": {
+                "href": "https://secure.gravatar.com/avatar/6f8944648fe3c74c2193d74f5313fb77?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FMP-2.png"
+              }
+            },
+            "nickname": "Mario Papandrea",
+            "type": "user",
+            "account_id": "5a78242c4cf5e3293b23b864"
+          },
+          "inline": {
+            "to": 71,
+            "from": null,
+            "path": "jgitflow-maven-plugin/src/main/java/com/atlassian/maven/plugins/jgitflow/extension/command/UpdatePomsWithNonSnapshotCommand.java"
+          },
+          "updated_on": "2018-05-15T12:51:33.620823+00:00",
+          "type": "pullrequest_comment",
+          "id": 64276309
+        },
+        {
+          "links": {
+            "self": {
+              "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80/comments/64278833"
+            },
+            "code": {
+              "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/diff/PaoloPiccinini/jgit-flow:b7ca42d1a485..831bc353594a?path=jgitflow-maven-plugin%2Fsrc%2Fmain%2Fjava%2Fcom%2Fatlassian%2Fmaven%2Fplugins%2Fjgitflow%2Fextension%2Fcommand%2FUpdatePomsWithNonSnapshotCommand.java"
+            },
+            "html": {
+              "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80/_/diff#comment-64278833"
+            }
+          },
+          "deleted": false,
+          "pullrequest": {
+            "type": "pullrequest",
+            "id": 80,
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+              }
+            },
+            "title": "Custom suffix for tags and POM's version"
+          },
+          "content": {
+            "raw": "we are not preserving original functionality of `ReleaseBranchVersionSuffix`. We should….",
+            "markup": "markdown",
+            "html": "<p>we are not preserving original functionality of <code>ReleaseBranchVersionSuffix</code>. We should….</p>",
+            "type": "rendered"
+          },
+          "created_on": "2018-05-15T13:07:25.087421+00:00",
+          "user": {
+            "display_name": "Mario Papandrea",
+            "uuid": "{271d5aa4-ff3e-433e-a292-00faf12007f0}",
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/users/%7B271d5aa4-ff3e-433e-a292-00faf12007f0%7D"
+              },
+              "html": {
+                "href": "https://bitbucket.org/%7B271d5aa4-ff3e-433e-a292-00faf12007f0%7D/"
+              },
+              "avatar": {
+                "href": "https://secure.gravatar.com/avatar/6f8944648fe3c74c2193d74f5313fb77?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FMP-2.png"
+              }
+            },
+            "nickname": "Mario Papandrea",
+            "type": "user",
+            "account_id": "5a78242c4cf5e3293b23b864"
+          },
+          "inline": {
+            "to": 72,
+            "from": null,
+            "path": "jgitflow-maven-plugin/src/main/java/com/atlassian/maven/plugins/jgitflow/extension/command/UpdatePomsWithNonSnapshotCommand.java"
+          },
+          "updated_on": "2018-05-15T13:07:36.585128+00:00",
+          "type": "pullrequest_comment",
+          "id": 64278833
+        },
+        {
+          "links": {
+            "self": {
+              "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80/comments/64282246"
+            },
+            "code": {
+              "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/diff/PaoloPiccinini/jgit-flow:5015bdb19c63..6a57ef1ec9c4?path=jgitflow-maven-plugin%2Fsrc%2Fmain%2Fjava%2Fcom%2Fatlassian%2Fmaven%2Fplugins%2Fjgitflow%2Fextension%2Fcommand%2FUpdatePomsWithNonSnapshotCommand.java"
+            },
+            "html": {
+              "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80/_/diff#comment-64282246"
+            }
+          },
+          "parent": {
+            "id": 64278833,
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80/comments/64278833"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80/_/diff#comment-64278833"
+              }
+            }
+          },
+          "deleted": false,
+          "pullrequest": {
+            "type": "pullrequest",
+            "id": 80,
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+              }
+            },
+            "title": "Custom suffix for tags and POM's version"
+          },
+          "content": {
+            "raw": "the functionality is preserved with this new tags. Maybe i've misunderstood the behavior of that property.",
+            "markup": "markdown",
+            "html": "<p>the functionality is preserved with this new tags. Maybe i've misunderstood the behavior of that property.</p>",
+            "type": "rendered"
+          },
+          "created_on": "2018-05-15T13:27:49.203310+00:00",
+          "user": {
+            "display_name": "Paolo Piccinini",
+            "uuid": "{a0d264d6-8ee1-4116-b596-1e828a13e404}",
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/users/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D"
+              },
+              "html": {
+                "href": "https://bitbucket.org/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D/"
+              },
+              "avatar": {
+                "href": "https://secure.gravatar.com/avatar/5842db8cc98f6a596a27efd0a2652d51?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPP-6.png"
+              }
+            },
+            "nickname": "PaoloPiccinini",
+            "type": "user",
+            "account_id": "5a99149615278e2a78fb6f33"
+          },
+          "inline": {
+            "to": null,
+            "from": null,
+            "path": "jgitflow-maven-plugin/src/main/java/com/atlassian/maven/plugins/jgitflow/extension/command/UpdatePomsWithNonSnapshotCommand.java"
+          },
+          "updated_on": "2018-05-15T13:27:49.267764+00:00",
+          "type": "pullrequest_comment",
+          "id": 64282246
+        },
+        {
+          "links": {
+            "self": {
+              "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80/comments/64302358"
+            },
+            "html": {
+              "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80/_/diff#comment-64302358"
+            }
+          },
+          "deleted": false,
+          "pullrequest": {
+            "type": "pullrequest",
+            "id": 80,
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+              }
+            },
+            "title": "Custom suffix for tags and POM's version"
+          },
+          "content": {
+            "raw": "I've found a better way to achieve  this without breaking anything. DefaultPomUpdater already has a method that was doing this stuff.",
+            "markup": "markdown",
+            "html": "<p>I've found a better way to achieve  this without breaking anything. DefaultPomUpdater already has a method that was doing this stuff.</p>",
+            "type": "rendered"
+          },
+          "created_on": "2018-05-15T15:26:44.908347+00:00",
+          "user": {
+            "display_name": "Paolo Piccinini",
+            "uuid": "{a0d264d6-8ee1-4116-b596-1e828a13e404}",
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/users/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D"
+              },
+              "html": {
+                "href": "https://bitbucket.org/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D/"
+              },
+              "avatar": {
+                "href": "https://secure.gravatar.com/avatar/5842db8cc98f6a596a27efd0a2652d51?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPP-6.png"
+              }
+            },
+            "nickname": "PaoloPiccinini",
+            "type": "user",
+            "account_id": "5a99149615278e2a78fb6f33"
+          },
+          "updated_on": "2018-05-15T15:26:44.987283+00:00",
+          "type": "pullrequest_comment",
+          "id": 64302358
+        },
+        {
+          "links": {
+            "self": {
+              "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80/comments/64726521"
+            },
+            "html": {
+              "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80/_/diff#comment-64726521"
+            }
+          },
+          "deleted": false,
+          "pullrequest": {
+            "type": "pullrequest",
+            "id": 80,
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+              }
+            },
+            "title": "Custom suffix for tags and POM's version"
+          },
+          "content": {
+            "raw": "Exactly matches what am looking for. Can this be expedited? @PaoloPiccinini @mariopapandrea ",
+            "markup": "markdown",
+            "html": "<p>Exactly matches what am looking for. Can this be expedited? @PaoloPiccinini @mariopapandrea </p>",
+            "type": "rendered"
+          },
+          "created_on": "2018-05-18T21:00:13.237144+00:00",
+          "user": {
+            "display_name": "Dhandapani Ponnurangam",
+            "uuid": "{9bb51d45-d34f-4953-bee4-23ef1be3537a}",
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/users/%7B9bb51d45-d34f-4953-bee4-23ef1be3537a%7D"
+              },
+              "html": {
+                "href": "https://bitbucket.org/%7B9bb51d45-d34f-4953-bee4-23ef1be3537a%7D/"
+              },
+              "avatar": {
+                "href": "https://secure.gravatar.com/avatar/de08d7caf417a237e5c612ce348de10e?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FDP-2.png"
+              }
+            },
+            "nickname": "inspiregates",
+            "type": "user",
+            "account_id": "557058:e5d42638-9ea5-4086-bdd9-455d8caae8d7"
+          },
+          "updated_on": "2018-05-18T21:00:13.320918+00:00",
+          "type": "pullrequest_comment",
+          "id": 64726521
+        },
+        {
+          "links": {
+            "self": {
+              "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80/comments/64830332"
+            },
+            "html": {
+              "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80/_/diff#comment-64830332"
+            }
+          },
+          "deleted": false,
+          "pullrequest": {
+            "type": "pullrequest",
+            "id": 80,
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+              }
+            },
+            "title": "Custom suffix for tags and POM's version"
+          },
+          "content": {
+            "raw": "For the Atlassian repository we don’t know if they want to merge it. You can release this version on your local artifactory and use it. You should merge this stuff on master branch before deploy it. I’ve branched from develop and i don’t know if it’s stable. @inspiregates ",
+            "markup": "markdown",
+            "html": "<p>For the Atlassian repository we don’t know if they want to merge it. You can release this version on your local artifactory and use it. You should merge this stuff on master branch before deploy it. I’ve branched from develop and i don’t know if it’s stable. @inspiregates </p>",
+            "type": "rendered"
+          },
+          "created_on": "2018-05-21T16:38:09.650820+00:00",
+          "user": {
+            "display_name": "Paolo Piccinini",
+            "uuid": "{a0d264d6-8ee1-4116-b596-1e828a13e404}",
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/users/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D"
+              },
+              "html": {
+                "href": "https://bitbucket.org/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D/"
+              },
+              "avatar": {
+                "href": "https://secure.gravatar.com/avatar/5842db8cc98f6a596a27efd0a2652d51?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPP-6.png"
+              }
+            },
+            "nickname": "PaoloPiccinini",
+            "type": "user",
+            "account_id": "5a99149615278e2a78fb6f33"
+          },
+          "updated_on": "2018-05-21T16:40:01.437413+00:00",
+          "type": "pullrequest_comment",
+          "id": 64830332
+        },
+        {
+          "links": {
+            "self": {
+              "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80/comments/64840430"
+            },
+            "html": {
+              "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80/_/diff#comment-64840430"
+            }
+          },
+          "deleted": false,
+          "pullrequest": {
+            "type": "pullrequest",
+            "id": 80,
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+              }
+            },
+            "title": "Custom suffix for tags and POM's version"
+          },
+          "content": {
+            "raw": "Thanks @PaoloPiccinini .",
+            "markup": "markdown",
+            "html": "<p>Thanks @PaoloPiccinini .</p>",
+            "type": "rendered"
+          },
+          "created_on": "2018-05-21T18:49:19.818058+00:00",
+          "user": {
+            "display_name": "Dhandapani Ponnurangam",
+            "uuid": "{9bb51d45-d34f-4953-bee4-23ef1be3537a}",
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/users/%7B9bb51d45-d34f-4953-bee4-23ef1be3537a%7D"
+              },
+              "html": {
+                "href": "https://bitbucket.org/%7B9bb51d45-d34f-4953-bee4-23ef1be3537a%7D/"
+              },
+              "avatar": {
+                "href": "https://secure.gravatar.com/avatar/de08d7caf417a237e5c612ce348de10e?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FDP-2.png"
+              }
+            },
+            "nickname": "inspiregates",
+            "type": "user",
+            "account_id": "557058:e5d42638-9ea5-4086-bdd9-455d8caae8d7"
+          },
+          "updated_on": "2018-05-21T18:49:19.874660+00:00",
+          "type": "pullrequest_comment",
+          "id": 64840430
+        }
+      ],
+      "activities": [
+        {
+          "update": {
+            "description": "Hi, we need to release via jenkins in one step automatic command. Not sure for the behaviour of releaseBranchVersionSuffix. I think it is only suffix the releases branch name. i've added another property to suffix the Tags and Pom's versions releaseVersionTagSuffix. Maybe we can use releaseBranchVersionSuffix to achieve this?",
+            "title": "Custom suffix for tags and POM's version",
+            "reviewers": [],
+            "destination": {
+              "commit": {
+                "hash": "831bc353594a",
+                "type": "commit",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/commit/831bc353594a"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/atlassian/jgit-flow/commits/831bc353594a"
+                  }
+                }
+              },
+              "repository": {
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/atlassian/jgit-flow"
+                  },
+                  "avatar": {
+                    "href": "https://bytebucket.org/ravatar/%7B62a7b075-0640-4af8-a55a-c45812ca75a8%7D?ts=java"
+                  }
+                },
+                "type": "repository",
+                "name": "jgit-flow",
+                "full_name": "atlassian/jgit-flow",
+                "uuid": "{62a7b075-0640-4af8-a55a-c45812ca75a8}"
+              },
+              "branch": {
+                "name": "develop"
+              }
+            },
+            "state": "OPEN",
+            "source": {
+              "commit": {
+                "hash": "5015bdb19c63",
+                "type": "commit",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/5015bdb19c63"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/5015bdb19c63"
+                  }
+                }
+              },
+              "repository": {
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow"
+                  },
+                  "avatar": {
+                    "href": "https://bytebucket.org/ravatar/%7Bb272cf25-0364-4d02-b50a-1b284de5f0b3%7D?ts=java"
+                  }
+                },
+                "type": "repository",
+                "name": "jgit-flow",
+                "full_name": "PaoloPiccinini/jgit-flow",
+                "uuid": "{b272cf25-0364-4d02-b50a-1b284de5f0b3}"
+              },
+              "branch": {
+                "name": "feature/Custom-Suffix-for-Tags-and-Pom-Version"
+              }
+            },
+            "reason": "",
+            "author": {
+              "display_name": "Lukasz Janicki",
+              "uuid": "{27ef88c8-cfc0-47cd-8a06-b0b60610ad41}",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/%7B27ef88c8-cfc0-47cd-8a06-b0b60610ad41%7D"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/%7B27ef88c8-cfc0-47cd-8a06-b0b60610ad41%7D/"
+                },
+                "avatar": {
+                  "href": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5ad478775f7e4d2b95899e27/f7ce983a-30e9-484f-9d8e-00e62ba3b893/128"
+                }
+              },
+              "nickname": "Lukasz Janicki",
+              "type": "user",
+              "account_id": "5ad478775f7e4d2b95899e27"
+            },
+            "date": "2018-10-05T16:10:07.493086+00:00",
+            "changes": {}
+          },
+          "pull_request": {
+            "type": "pullrequest",
+            "id": 80,
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+              }
+            },
+            "title": "Custom suffix for tags and POM's version"
+          }
+        },
+        {
+          "approval": {
+            "date": "2018-06-13T08:47:08.197086+00:00",
+            "pullrequest": {
+              "type": "pullrequest",
+              "id": 80,
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+                }
+              },
+              "title": "Custom suffix for tags and POM's version"
+            },
+            "user": {
+              "display_name": "Pawel Stacherzak",
+              "uuid": "{db0907f8-6fa9-446b-8a6c-2b477110d3d3}",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/%7Bdb0907f8-6fa9-446b-8a6c-2b477110d3d3%7D"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/%7Bdb0907f8-6fa9-446b-8a6c-2b477110d3d3%7D/"
+                },
+                "avatar": {
+                  "href": "https://secure.gravatar.com/avatar/19adc753565f2d370c6f40f1edcf9ebf?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPS-3.png"
+                }
+              },
+              "nickname": "Pawel Stacherzak",
+              "type": "user",
+              "account_id": "5aa271a84712c13220b741cb"
+            }
+          },
+          "pull_request": {
+            "type": "pullrequest",
+            "id": 80,
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+              }
+            },
+            "title": "Custom suffix for tags and POM's version"
+          }
+        },
+        {
+          "comment": {
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80/comments/64840430"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80/_/diff#comment-64840430"
+              }
+            },
+            "deleted": false,
+            "pullrequest": {
+              "type": "pullrequest",
+              "id": 80,
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+                }
+              },
+              "title": "Custom suffix for tags and POM's version"
+            },
+            "content": {
+              "raw": "Thanks @PaoloPiccinini .",
+              "markup": "markdown",
+              "html": "<p>Thanks @PaoloPiccinini .</p>",
+              "type": "rendered"
+            },
+            "created_on": "2018-05-21T18:49:19.818058+00:00",
+            "user": {
+              "display_name": "Dhandapani Ponnurangam",
+              "uuid": "{9bb51d45-d34f-4953-bee4-23ef1be3537a}",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/%7B9bb51d45-d34f-4953-bee4-23ef1be3537a%7D"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/%7B9bb51d45-d34f-4953-bee4-23ef1be3537a%7D/"
+                },
+                "avatar": {
+                  "href": "https://secure.gravatar.com/avatar/de08d7caf417a237e5c612ce348de10e?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FDP-2.png"
+                }
+              },
+              "nickname": "inspiregates",
+              "type": "user",
+              "account_id": "557058:e5d42638-9ea5-4086-bdd9-455d8caae8d7"
+            },
+            "updated_on": "2018-05-21T18:49:19.874660+00:00",
+            "type": "pullrequest_comment",
+            "id": 64840430
+          },
+          "pull_request": {
+            "type": "pullrequest",
+            "id": 80,
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+              }
+            },
+            "title": "Custom suffix for tags and POM's version"
+          }
+        },
+        {
+          "comment": {
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80/comments/64830332"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80/_/diff#comment-64830332"
+              }
+            },
+            "deleted": false,
+            "pullrequest": {
+              "type": "pullrequest",
+              "id": 80,
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+                }
+              },
+              "title": "Custom suffix for tags and POM's version"
+            },
+            "content": {
+              "raw": "For the Atlassian repository we don’t know if they want to merge it. You can release this version on your local artifactory and use it. You should merge this stuff on master branch before deploy it. I’ve branched from develop and i don’t know if it’s stable. @inspiregates ",
+              "markup": "markdown",
+              "html": "<p>For the Atlassian repository we don’t know if they want to merge it. You can release this version on your local artifactory and use it. You should merge this stuff on master branch before deploy it. I’ve branched from develop and i don’t know if it’s stable. @inspiregates </p>",
+              "type": "rendered"
+            },
+            "created_on": "2018-05-21T16:38:09.650820+00:00",
+            "user": {
+              "display_name": "Paolo Piccinini",
+              "uuid": "{a0d264d6-8ee1-4116-b596-1e828a13e404}",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D/"
+                },
+                "avatar": {
+                  "href": "https://secure.gravatar.com/avatar/5842db8cc98f6a596a27efd0a2652d51?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPP-6.png"
+                }
+              },
+              "nickname": "PaoloPiccinini",
+              "type": "user",
+              "account_id": "5a99149615278e2a78fb6f33"
+            },
+            "updated_on": "2018-05-21T16:40:01.437413+00:00",
+            "type": "pullrequest_comment",
+            "id": 64830332
+          },
+          "pull_request": {
+            "type": "pullrequest",
+            "id": 80,
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+              }
+            },
+            "title": "Custom suffix for tags and POM's version"
+          }
+        },
+        {
+          "comment": {
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80/comments/64726521"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80/_/diff#comment-64726521"
+              }
+            },
+            "deleted": false,
+            "pullrequest": {
+              "type": "pullrequest",
+              "id": 80,
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+                }
+              },
+              "title": "Custom suffix for tags and POM's version"
+            },
+            "content": {
+              "raw": "Exactly matches what am looking for. Can this be expedited? @PaoloPiccinini @mariopapandrea ",
+              "markup": "markdown",
+              "html": "<p>Exactly matches what am looking for. Can this be expedited? @PaoloPiccinini @mariopapandrea </p>",
+              "type": "rendered"
+            },
+            "created_on": "2018-05-18T21:00:13.237144+00:00",
+            "user": {
+              "display_name": "Dhandapani Ponnurangam",
+              "uuid": "{9bb51d45-d34f-4953-bee4-23ef1be3537a}",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/%7B9bb51d45-d34f-4953-bee4-23ef1be3537a%7D"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/%7B9bb51d45-d34f-4953-bee4-23ef1be3537a%7D/"
+                },
+                "avatar": {
+                  "href": "https://secure.gravatar.com/avatar/de08d7caf417a237e5c612ce348de10e?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FDP-2.png"
+                }
+              },
+              "nickname": "inspiregates",
+              "type": "user",
+              "account_id": "557058:e5d42638-9ea5-4086-bdd9-455d8caae8d7"
+            },
+            "updated_on": "2018-05-18T21:00:13.320918+00:00",
+            "type": "pullrequest_comment",
+            "id": 64726521
+          },
+          "pull_request": {
+            "type": "pullrequest",
+            "id": 80,
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+              }
+            },
+            "title": "Custom suffix for tags and POM's version"
+          }
+        },
+        {
+          "update": {
+            "description": "Hi, we need to release via jenkins in one step automatic command. Not sure for the behaviour of releaseBranchVersionSuffix. I think it is only suffix the releases branch name. i've added another property to suffix the Tags and Pom's versions releaseVersionTagSuffix. Maybe we can use releaseBranchVersionSuffix to achieve this?",
+            "title": "Custom suffix for tags and POM's version",
+            "reviewers": [],
+            "destination": {
+              "commit": {
+                "hash": "831bc353594a",
+                "type": "commit",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/commit/831bc353594a"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/atlassian/jgit-flow/commits/831bc353594a"
+                  }
+                }
+              },
+              "repository": {
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/atlassian/jgit-flow"
+                  },
+                  "avatar": {
+                    "href": "https://bytebucket.org/ravatar/%7B62a7b075-0640-4af8-a55a-c45812ca75a8%7D?ts=java"
+                  }
+                },
+                "type": "repository",
+                "name": "jgit-flow",
+                "full_name": "atlassian/jgit-flow",
+                "uuid": "{62a7b075-0640-4af8-a55a-c45812ca75a8}"
+              },
+              "branch": {
+                "name": "develop"
+              }
+            },
+            "state": "OPEN",
+            "source": {
+              "commit": {
+                "hash": "5015bdb19c63",
+                "type": "commit",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/5015bdb19c63"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/5015bdb19c63"
+                  }
+                }
+              },
+              "repository": {
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow"
+                  },
+                  "avatar": {
+                    "href": "https://bytebucket.org/ravatar/%7Bb272cf25-0364-4d02-b50a-1b284de5f0b3%7D?ts=java"
+                  }
+                },
+                "type": "repository",
+                "name": "jgit-flow",
+                "full_name": "PaoloPiccinini/jgit-flow",
+                "uuid": "{b272cf25-0364-4d02-b50a-1b284de5f0b3}"
+              },
+              "branch": {
+                "name": "feature/Custom-Suffix-for-Tags-and-Pom-Version"
+              }
+            },
+            "reason": "",
+            "author": {
+              "display_name": "Paolo Piccinini",
+              "uuid": "{a0d264d6-8ee1-4116-b596-1e828a13e404}",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D/"
+                },
+                "avatar": {
+                  "href": "https://secure.gravatar.com/avatar/5842db8cc98f6a596a27efd0a2652d51?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPP-6.png"
+                }
+              },
+              "nickname": "PaoloPiccinini",
+              "type": "user",
+              "account_id": "5a99149615278e2a78fb6f33"
+            },
+            "date": "2018-05-15T15:28:28.944004+00:00",
+            "changes": {}
+          },
+          "pull_request": {
+            "type": "pullrequest",
+            "id": 80,
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+              }
+            },
+            "title": "Custom suffix for tags and POM's version"
+          }
+        },
+        {
+          "update": {
+            "description": "Hi, we need to release via jenkins in one step automatic command. Not sure for the behaviour of releaseBranchVersionSuffix. I think it is only suffix the releases branch name. i've added another property to suffix the Tags and Pom's versions releaseVersionTagSuffix. Maybe we can use releaseBranchVersionSuffix to achieve this?",
+            "title": "Custom suffix for tags and POM's version",
+            "reviewers": [],
+            "destination": {
+              "commit": {
+                "hash": "831bc353594a",
+                "type": "commit",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/commit/831bc353594a"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/atlassian/jgit-flow/commits/831bc353594a"
+                  }
+                }
+              },
+              "repository": {
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/atlassian/jgit-flow"
+                  },
+                  "avatar": {
+                    "href": "https://bytebucket.org/ravatar/%7B62a7b075-0640-4af8-a55a-c45812ca75a8%7D?ts=java"
+                  }
+                },
+                "type": "repository",
+                "name": "jgit-flow",
+                "full_name": "atlassian/jgit-flow",
+                "uuid": "{62a7b075-0640-4af8-a55a-c45812ca75a8}"
+              },
+              "branch": {
+                "name": "develop"
+              }
+            },
+            "state": "OPEN",
+            "source": {
+              "commit": {
+                "hash": "5015bdb19c63",
+                "type": "commit",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/5015bdb19c63"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/5015bdb19c63"
+                  }
+                }
+              },
+              "repository": {
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow"
+                  },
+                  "avatar": {
+                    "href": "https://bytebucket.org/ravatar/%7Bb272cf25-0364-4d02-b50a-1b284de5f0b3%7D?ts=java"
+                  }
+                },
+                "type": "repository",
+                "name": "jgit-flow",
+                "full_name": "PaoloPiccinini/jgit-flow",
+                "uuid": "{b272cf25-0364-4d02-b50a-1b284de5f0b3}"
+              },
+              "branch": {
+                "name": "feature/Custom-Suffix-for-Tags-and-Pom-Version"
+              }
+            },
+            "reason": "",
+            "author": {
+              "display_name": "Paolo Piccinini",
+              "uuid": "{a0d264d6-8ee1-4116-b596-1e828a13e404}",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D/"
+                },
+                "avatar": {
+                  "href": "https://secure.gravatar.com/avatar/5842db8cc98f6a596a27efd0a2652d51?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPP-6.png"
+                }
+              },
+              "nickname": "PaoloPiccinini",
+              "type": "user",
+              "account_id": "5a99149615278e2a78fb6f33"
+            },
+            "date": "2018-05-15T15:28:27.436010+00:00",
+            "changes": {}
+          },
+          "pull_request": {
+            "type": "pullrequest",
+            "id": 80,
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+              }
+            },
+            "title": "Custom suffix for tags and POM's version"
+          }
+        },
+        {
+          "comment": {
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80/comments/64302358"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80/_/diff#comment-64302358"
+              }
+            },
+            "deleted": false,
+            "pullrequest": {
+              "type": "pullrequest",
+              "id": 80,
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+                }
+              },
+              "title": "Custom suffix for tags and POM's version"
+            },
+            "content": {
+              "raw": "I've found a better way to achieve  this without breaking anything. DefaultPomUpdater already has a method that was doing this stuff.",
+              "markup": "markdown",
+              "html": "<p>I've found a better way to achieve  this without breaking anything. DefaultPomUpdater already has a method that was doing this stuff.</p>",
+              "type": "rendered"
+            },
+            "created_on": "2018-05-15T15:26:44.908347+00:00",
+            "user": {
+              "display_name": "Paolo Piccinini",
+              "uuid": "{a0d264d6-8ee1-4116-b596-1e828a13e404}",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D/"
+                },
+                "avatar": {
+                  "href": "https://secure.gravatar.com/avatar/5842db8cc98f6a596a27efd0a2652d51?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPP-6.png"
+                }
+              },
+              "nickname": "PaoloPiccinini",
+              "type": "user",
+              "account_id": "5a99149615278e2a78fb6f33"
+            },
+            "updated_on": "2018-05-15T15:26:44.987283+00:00",
+            "type": "pullrequest_comment",
+            "id": 64302358
+          },
+          "pull_request": {
+            "type": "pullrequest",
+            "id": 80,
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+              }
+            },
+            "title": "Custom suffix for tags and POM's version"
+          }
+        },
+        {
+          "update": {
+            "description": "Hi, we need to release via jenkins in one step automatic command. Not sure for the behaviour of releaseBranchVersionSuffix. I think it is only suffix the releases branch name. i've added another property to suffix the Tags and Pom's versions releaseVersionTagSuffix. Maybe we can use releaseBranchVersionSuffix to achieve this?",
+            "title": "Custom suffix for tags and POM's version",
+            "reviewers": [],
+            "destination": {
+              "commit": {
+                "hash": "831bc353594a",
+                "type": "commit",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/commit/831bc353594a"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/atlassian/jgit-flow/commits/831bc353594a"
+                  }
+                }
+              },
+              "repository": {
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/atlassian/jgit-flow"
+                  },
+                  "avatar": {
+                    "href": "https://bytebucket.org/ravatar/%7B62a7b075-0640-4af8-a55a-c45812ca75a8%7D?ts=java"
+                  }
+                },
+                "type": "repository",
+                "name": "jgit-flow",
+                "full_name": "atlassian/jgit-flow",
+                "uuid": "{62a7b075-0640-4af8-a55a-c45812ca75a8}"
+              },
+              "branch": {
+                "name": "develop"
+              }
+            },
+            "state": "OPEN",
+            "source": {
+              "commit": {
+                "hash": "903c0b0ebeb5",
+                "type": "commit",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/903c0b0ebeb5"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/903c0b0ebeb5"
+                  }
+                }
+              },
+              "repository": {
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow"
+                  },
+                  "avatar": {
+                    "href": "https://bytebucket.org/ravatar/%7Bb272cf25-0364-4d02-b50a-1b284de5f0b3%7D?ts=java"
+                  }
+                },
+                "type": "repository",
+                "name": "jgit-flow",
+                "full_name": "PaoloPiccinini/jgit-flow",
+                "uuid": "{b272cf25-0364-4d02-b50a-1b284de5f0b3}"
+              },
+              "branch": {
+                "name": "feature/Custom-Suffix-for-Tags-and-Pom-Version"
+              }
+            },
+            "reason": "",
+            "author": {
+              "display_name": "Paolo Piccinini",
+              "uuid": "{a0d264d6-8ee1-4116-b596-1e828a13e404}",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D/"
+                },
+                "avatar": {
+                  "href": "https://secure.gravatar.com/avatar/5842db8cc98f6a596a27efd0a2652d51?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPP-6.png"
+                }
+              },
+              "nickname": "PaoloPiccinini",
+              "type": "user",
+              "account_id": "5a99149615278e2a78fb6f33"
+            },
+            "date": "2018-05-15T15:25:12.744055+00:00",
+            "changes": {}
+          },
+          "pull_request": {
+            "type": "pullrequest",
+            "id": 80,
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+              }
+            },
+            "title": "Custom suffix for tags and POM's version"
+          }
+        },
+        {
+          "comment": {
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80/comments/64282246"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80/_/diff#comment-64282246"
+              }
+            },
+            "parent": {
+              "id": 64278833,
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80/comments/64278833"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80/_/diff#comment-64278833"
+                }
+              }
+            },
+            "deleted": false,
+            "pullrequest": {
+              "type": "pullrequest",
+              "id": 80,
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+                }
+              },
+              "title": "Custom suffix for tags and POM's version"
+            },
+            "content": {
+              "raw": "the functionality is preserved with this new tags. Maybe i've misunderstood the behavior of that property.",
+              "markup": "markdown",
+              "html": "<p>the functionality is preserved with this new tags. Maybe i've misunderstood the behavior of that property.</p>",
+              "type": "rendered"
+            },
+            "created_on": "2018-05-15T13:27:49.203310+00:00",
+            "user": {
+              "display_name": "Paolo Piccinini",
+              "uuid": "{a0d264d6-8ee1-4116-b596-1e828a13e404}",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D/"
+                },
+                "avatar": {
+                  "href": "https://secure.gravatar.com/avatar/5842db8cc98f6a596a27efd0a2652d51?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPP-6.png"
+                }
+              },
+              "nickname": "PaoloPiccinini",
+              "type": "user",
+              "account_id": "5a99149615278e2a78fb6f33"
+            },
+            "inline": {},
+            "updated_on": "2018-05-15T13:27:49.267764+00:00",
+            "type": "pullrequest_comment",
+            "id": 64282246
+          },
+          "pull_request": {
+            "type": "pullrequest",
+            "id": 80,
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+              }
+            },
+            "title": "Custom suffix for tags and POM's version"
+          }
+        },
+        {
+          "comment": {
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80/comments/64278833"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80/_/diff#comment-64278833"
+              }
+            },
+            "deleted": false,
+            "pullrequest": {
+              "type": "pullrequest",
+              "id": 80,
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+                }
+              },
+              "title": "Custom suffix for tags and POM's version"
+            },
+            "content": {
+              "raw": "we are not preserving original functionality of `ReleaseBranchVersionSuffix`. We should….",
+              "markup": "markdown",
+              "html": "<p>we are not preserving original functionality of <code>ReleaseBranchVersionSuffix</code>. We should….</p>",
+              "type": "rendered"
+            },
+            "created_on": "2018-05-15T13:07:25.087421+00:00",
+            "user": {
+              "display_name": "Mario Papandrea",
+              "uuid": "{271d5aa4-ff3e-433e-a292-00faf12007f0}",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/%7B271d5aa4-ff3e-433e-a292-00faf12007f0%7D"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/%7B271d5aa4-ff3e-433e-a292-00faf12007f0%7D/"
+                },
+                "avatar": {
+                  "href": "https://secure.gravatar.com/avatar/6f8944648fe3c74c2193d74f5313fb77?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FMP-2.png"
+                }
+              },
+              "nickname": "Mario Papandrea",
+              "type": "user",
+              "account_id": "5a78242c4cf5e3293b23b864"
+            },
+            "inline": {},
+            "updated_on": "2018-05-15T13:07:36.585128+00:00",
+            "type": "pullrequest_comment",
+            "id": 64278833
+          },
+          "pull_request": {
+            "type": "pullrequest",
+            "id": 80,
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+              }
+            },
+            "title": "Custom suffix for tags and POM's version"
+          }
+        },
+        {
+          "comment": {
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80/comments/64276309"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80/_/diff#comment-64276309"
+              }
+            },
+            "deleted": false,
+            "pullrequest": {
+              "type": "pullrequest",
+              "id": 80,
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+                }
+              },
+              "title": "Custom suffix for tags and POM's version"
+            },
+            "content": {
+              "raw": "remove this line",
+              "markup": "markdown",
+              "html": "<p>remove this line</p>",
+              "type": "rendered"
+            },
+            "created_on": "2018-05-15T12:51:33.203290+00:00",
+            "user": {
+              "display_name": "Mario Papandrea",
+              "uuid": "{271d5aa4-ff3e-433e-a292-00faf12007f0}",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/%7B271d5aa4-ff3e-433e-a292-00faf12007f0%7D"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/%7B271d5aa4-ff3e-433e-a292-00faf12007f0%7D/"
+                },
+                "avatar": {
+                  "href": "https://secure.gravatar.com/avatar/6f8944648fe3c74c2193d74f5313fb77?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FMP-2.png"
+                }
+              },
+              "nickname": "Mario Papandrea",
+              "type": "user",
+              "account_id": "5a78242c4cf5e3293b23b864"
+            },
+            "inline": {},
+            "updated_on": "2018-05-15T12:51:33.620823+00:00",
+            "type": "pullrequest_comment",
+            "id": 64276309
+          },
+          "pull_request": {
+            "type": "pullrequest",
+            "id": 80,
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+              }
+            },
+            "title": "Custom suffix for tags and POM's version"
+          }
+        },
+        {
+          "comment": {
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80/comments/64276049"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80/_/diff#comment-64276049"
+              }
+            },
+            "deleted": false,
+            "pullrequest": {
+              "type": "pullrequest",
+              "id": 80,
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+                }
+              },
+              "title": "Custom suffix for tags and POM's version"
+            },
+            "content": {
+              "raw": "If `tagSuffix`is null, then the four characters \"null\" are appended.  ",
+              "markup": "markdown",
+              "html": "<p>If <code>tagSuffix</code>is null, then the four characters \"null\" are appended.  </p>",
+              "type": "rendered"
+            },
+            "created_on": "2018-05-15T12:49:53.367320+00:00",
+            "user": {
+              "display_name": "Mario Papandrea",
+              "uuid": "{271d5aa4-ff3e-433e-a292-00faf12007f0}",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/%7B271d5aa4-ff3e-433e-a292-00faf12007f0%7D"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/%7B271d5aa4-ff3e-433e-a292-00faf12007f0%7D/"
+                },
+                "avatar": {
+                  "href": "https://secure.gravatar.com/avatar/6f8944648fe3c74c2193d74f5313fb77?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FMP-2.png"
+                }
+              },
+              "nickname": "Mario Papandrea",
+              "type": "user",
+              "account_id": "5a78242c4cf5e3293b23b864"
+            },
+            "inline": {},
+            "updated_on": "2018-05-15T12:49:53.428059+00:00",
+            "type": "pullrequest_comment",
+            "id": 64276049
+          },
+          "pull_request": {
+            "type": "pullrequest",
+            "id": 80,
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+              }
+            },
+            "title": "Custom suffix for tags and POM's version"
+          }
+        },
+        {
+          "update": {
+            "description": "Hi, we need to release via jenkins in one step automatic command. Not sure for the behaviour of releaseBranchVersionSuffix. I think it is only suffix the releases branch name. i've added another property to suffix the Tags and Pom's versions releaseVersionTagSuffix. Maybe we can use releaseBranchVersionSuffix to achieve this?",
+            "title": "Custom suffix for tags and POM's version",
+            "reviewers": [],
+            "destination": {
+              "commit": {
+                "hash": "831bc353594a",
+                "type": "commit",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/commit/831bc353594a"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/atlassian/jgit-flow/commits/831bc353594a"
+                  }
+                }
+              },
+              "repository": {
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/atlassian/jgit-flow"
+                  },
+                  "avatar": {
+                    "href": "https://bytebucket.org/ravatar/%7B62a7b075-0640-4af8-a55a-c45812ca75a8%7D?ts=java"
+                  }
+                },
+                "type": "repository",
+                "name": "jgit-flow",
+                "full_name": "atlassian/jgit-flow",
+                "uuid": "{62a7b075-0640-4af8-a55a-c45812ca75a8}"
+              },
+              "branch": {
+                "name": "develop"
+              }
+            },
+            "state": "OPEN",
+            "source": {
+              "commit": {
+                "hash": "b7ca42d1a485",
+                "type": "commit",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/b7ca42d1a485"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/b7ca42d1a485"
+                  }
+                }
+              },
+              "repository": {
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow"
+                  },
+                  "avatar": {
+                    "href": "https://bytebucket.org/ravatar/%7Bb272cf25-0364-4d02-b50a-1b284de5f0b3%7D?ts=java"
+                  }
+                },
+                "type": "repository",
+                "name": "jgit-flow",
+                "full_name": "PaoloPiccinini/jgit-flow",
+                "uuid": "{b272cf25-0364-4d02-b50a-1b284de5f0b3}"
+              },
+              "branch": {
+                "name": "feature/Custom-Suffix-for-Tags-and-Pom-Version"
+              }
+            },
+            "reason": "",
+            "author": {
+              "display_name": "Paolo Piccinini",
+              "uuid": "{a0d264d6-8ee1-4116-b596-1e828a13e404}",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D/"
+                },
+                "avatar": {
+                  "href": "https://secure.gravatar.com/avatar/5842db8cc98f6a596a27efd0a2652d51?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPP-6.png"
+                }
+              },
+              "nickname": "PaoloPiccinini",
+              "type": "user",
+              "account_id": "5a99149615278e2a78fb6f33"
+            },
+            "date": "2018-05-11T09:24:53.926527+00:00",
+            "changes": {}
+          },
+          "pull_request": {
+            "type": "pullrequest",
+            "id": 80,
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+              }
+            },
+            "title": "Custom suffix for tags and POM's version"
+          }
+        },
+        {
+          "update": {
+            "description": "Hi, we need to release via jenkins in one step automatic command. Not sure for the behaviour of releaseBranchVersionSuffix. I think it is only suffix the releases branch name. i've added another property to suffix the Tags and Pom's versions releaseVersionTagSuffix. Maybe we can use releaseBranchVersionSuffix to achieve this?",
+            "title": "Custom suffix for tags and POM's version",
+            "reviewers": [],
+            "destination": {
+              "commit": {
+                "hash": "831bc353594a",
+                "type": "commit",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/commit/831bc353594a"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/atlassian/jgit-flow/commits/831bc353594a"
+                  }
+                }
+              },
+              "repository": {
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/atlassian/jgit-flow"
+                  },
+                  "avatar": {
+                    "href": "https://bytebucket.org/ravatar/%7B62a7b075-0640-4af8-a55a-c45812ca75a8%7D?ts=java"
+                  }
+                },
+                "type": "repository",
+                "name": "jgit-flow",
+                "full_name": "atlassian/jgit-flow",
+                "uuid": "{62a7b075-0640-4af8-a55a-c45812ca75a8}"
+              },
+              "branch": {
+                "name": "develop"
+              }
+            },
+            "state": "OPEN",
+            "source": {
+              "commit": {
+                "hash": "5e9d6baa7d0f",
+                "type": "commit",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/5e9d6baa7d0f"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/5e9d6baa7d0f"
+                  }
+                }
+              },
+              "repository": {
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow"
+                  },
+                  "avatar": {
+                    "href": "https://bytebucket.org/ravatar/%7Bb272cf25-0364-4d02-b50a-1b284de5f0b3%7D?ts=java"
+                  }
+                },
+                "type": "repository",
+                "name": "jgit-flow",
+                "full_name": "PaoloPiccinini/jgit-flow",
+                "uuid": "{b272cf25-0364-4d02-b50a-1b284de5f0b3}"
+              },
+              "branch": {
+                "name": "feature/Custom-Suffix-for-Tags-and-Pom-Version"
+              }
+            },
+            "reason": "",
+            "author": {
+              "display_name": "Paolo Piccinini",
+              "uuid": "{a0d264d6-8ee1-4116-b596-1e828a13e404}",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D/"
+                },
+                "avatar": {
+                  "href": "https://secure.gravatar.com/avatar/5842db8cc98f6a596a27efd0a2652d51?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPP-6.png"
+                }
+              },
+              "nickname": "PaoloPiccinini",
+              "type": "user",
+              "account_id": "5a99149615278e2a78fb6f33"
+            },
+            "date": "2018-05-11T09:22:33.088336+00:00",
+            "changes": {}
+          },
+          "pull_request": {
+            "type": "pullrequest",
+            "id": 80,
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+              }
+            },
+            "title": "Custom suffix for tags and POM's version"
+          }
+        },
+        {
+          "update": {
+            "description": "Hi, we need to release via jenkins in one step automatic command. Not sure for the behaviour of releaseBranchVersionSuffix. I think it is only suffix the releases branch name. i've added another property to suffix the Tags and Pom's versions releaseVersionTagSuffix. Maybe we can use releaseBranchVersionSuffix to achieve this?",
+            "title": "Custom suffix for tags and POM's version",
+            "reviewers": [],
+            "destination": {
+              "commit": {
+                "hash": "831bc353594a",
+                "type": "commit",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/commit/831bc353594a"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/atlassian/jgit-flow/commits/831bc353594a"
+                  }
+                }
+              },
+              "repository": {
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/atlassian/jgit-flow"
+                  },
+                  "avatar": {
+                    "href": "https://bytebucket.org/ravatar/%7B62a7b075-0640-4af8-a55a-c45812ca75a8%7D?ts=java"
+                  }
+                },
+                "type": "repository",
+                "name": "jgit-flow",
+                "full_name": "atlassian/jgit-flow",
+                "uuid": "{62a7b075-0640-4af8-a55a-c45812ca75a8}"
+              },
+              "branch": {
+                "name": "develop"
+              }
+            },
+            "state": "OPEN",
+            "source": {
+              "commit": {
+                "hash": "38a4013a297a",
+                "type": "commit",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/38a4013a297a"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/38a4013a297a"
+                  }
+                }
+              },
+              "repository": {
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow"
+                  },
+                  "avatar": {
+                    "href": "https://bytebucket.org/ravatar/%7Bb272cf25-0364-4d02-b50a-1b284de5f0b3%7D?ts=java"
+                  }
+                },
+                "type": "repository",
+                "name": "jgit-flow",
+                "full_name": "PaoloPiccinini/jgit-flow",
+                "uuid": "{b272cf25-0364-4d02-b50a-1b284de5f0b3}"
+              },
+              "branch": {
+                "name": "feature/Custom-Suffix-for-Tags-and-Pom-Version"
+              }
+            },
+            "reason": "",
+            "author": {
+              "display_name": "Paolo Piccinini",
+              "uuid": "{a0d264d6-8ee1-4116-b596-1e828a13e404}",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D/"
+                },
+                "avatar": {
+                  "href": "https://secure.gravatar.com/avatar/5842db8cc98f6a596a27efd0a2652d51?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPP-6.png"
+                }
+              },
+              "nickname": "PaoloPiccinini",
+              "type": "user",
+              "account_id": "5a99149615278e2a78fb6f33"
+            },
+            "date": "2018-05-11T09:20:12.594016+00:00",
+            "changes": {}
+          },
+          "pull_request": {
+            "type": "pullrequest",
+            "id": 80,
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+              }
+            },
+            "title": "Custom suffix for tags and POM's version"
+          }
+        },
+        {
+          "update": {
+            "description": "Hi, we need to release via jenkins in one step automatic command. Not sure for the behaviour of releaseBranchVersionSuffix. I think it is only suffix the releases branch name. i've added another property to suffix the Tags and Pom's versions releaseVersionTagSuffix. Maybe we can use releaseBranchVersionSuffix to achieve this?",
+            "title": "Custom suffix for tags and POM's version",
+            "reviewers": [],
+            "destination": {
+              "commit": {
+                "hash": "831bc353594a",
+                "type": "commit",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/commit/831bc353594a"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/atlassian/jgit-flow/commits/831bc353594a"
+                  }
+                }
+              },
+              "repository": {
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/atlassian/jgit-flow"
+                  },
+                  "avatar": {
+                    "href": "https://bytebucket.org/ravatar/%7B62a7b075-0640-4af8-a55a-c45812ca75a8%7D?ts=java"
+                  }
+                },
+                "type": "repository",
+                "name": "jgit-flow",
+                "full_name": "atlassian/jgit-flow",
+                "uuid": "{62a7b075-0640-4af8-a55a-c45812ca75a8}"
+              },
+              "branch": {
+                "name": "develop"
+              }
+            },
+            "state": "OPEN",
+            "source": {
+              "commit": {
+                "hash": "38a4013a297a",
+                "type": "commit",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/38a4013a297a"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/38a4013a297a"
+                  }
+                }
+              },
+              "repository": {
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow"
+                  },
+                  "avatar": {
+                    "href": "https://bytebucket.org/ravatar/%7Bb272cf25-0364-4d02-b50a-1b284de5f0b3%7D?ts=java"
+                  }
+                },
+                "type": "repository",
+                "name": "jgit-flow",
+                "full_name": "PaoloPiccinini/jgit-flow",
+                "uuid": "{b272cf25-0364-4d02-b50a-1b284de5f0b3}"
+              },
+              "branch": {
+                "name": "feature/Custom-Suffix-for-Tags-and-Pom-Version"
+              }
+            },
+            "reason": "",
+            "author": {
+              "display_name": "Paolo Piccinini",
+              "uuid": "{a0d264d6-8ee1-4116-b596-1e828a13e404}",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D/"
+                },
+                "avatar": {
+                  "href": "https://secure.gravatar.com/avatar/5842db8cc98f6a596a27efd0a2652d51?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPP-6.png"
+                }
+              },
+              "nickname": "PaoloPiccinini",
+              "type": "user",
+              "account_id": "5a99149615278e2a78fb6f33"
+            },
+            "date": "2018-05-11T09:20:12.519347+00:00",
+            "changes": {}
+          },
+          "pull_request": {
+            "type": "pullrequest",
+            "id": 80,
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+              }
+            },
+            "title": "Custom suffix for tags and POM's version"
+          }
+        },
+        {
+          "update": {
+            "description": "Hi, we need to release via jenkins in one step automatic command. Not sure for the behaviour of releaseBranchVersionSuffix. I think it is only suffix the releases branch name. i've added another property to suffix the Tags and Pom's versions releaseVersionTagSuffix. Maybe we can use releaseBranchVersionSuffix to achieve this?",
+            "title": "Custom suffix for tags and POM's version",
+            "reviewers": [],
+            "destination": {
+              "commit": {
+                "hash": "3695cbf0e073",
+                "type": "commit",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/commit/3695cbf0e073"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/atlassian/jgit-flow/commits/3695cbf0e073"
+                  }
+                }
+              },
+              "repository": {
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/atlassian/jgit-flow"
+                  },
+                  "avatar": {
+                    "href": "https://bytebucket.org/ravatar/%7B62a7b075-0640-4af8-a55a-c45812ca75a8%7D?ts=java"
+                  }
+                },
+                "type": "repository",
+                "name": "jgit-flow",
+                "full_name": "atlassian/jgit-flow",
+                "uuid": "{62a7b075-0640-4af8-a55a-c45812ca75a8}"
+              },
+              "branch": {
+                "name": "develop"
+              }
+            },
+            "state": "OPEN",
+            "source": {
+              "commit": {
+                "hash": "38a4013a297a",
+                "type": "commit",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/38a4013a297a"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/38a4013a297a"
+                  }
+                }
+              },
+              "repository": {
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow"
+                  },
+                  "avatar": {
+                    "href": "https://bytebucket.org/ravatar/%7Bb272cf25-0364-4d02-b50a-1b284de5f0b3%7D?ts=java"
+                  }
+                },
+                "type": "repository",
+                "name": "jgit-flow",
+                "full_name": "PaoloPiccinini/jgit-flow",
+                "uuid": "{b272cf25-0364-4d02-b50a-1b284de5f0b3}"
+              },
+              "branch": {
+                "name": "feature/Custom-Suffix-for-Tags-and-Pom-Version"
+              }
+            },
+            "reason": "",
+            "author": {
+              "display_name": "Paolo Piccinini",
+              "uuid": "{a0d264d6-8ee1-4116-b596-1e828a13e404}",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D/"
+                },
+                "avatar": {
+                  "href": "https://secure.gravatar.com/avatar/5842db8cc98f6a596a27efd0a2652d51?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPP-6.png"
+                }
+              },
+              "nickname": "PaoloPiccinini",
+              "type": "user",
+              "account_id": "5a99149615278e2a78fb6f33"
+            },
+            "date": "2018-05-11T09:07:16.736883+00:00",
+            "changes": {}
+          },
+          "pull_request": {
+            "type": "pullrequest",
+            "id": 80,
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+              }
+            },
+            "title": "Custom suffix for tags and POM's version"
+          }
+        },
+        {
+          "update": {
+            "description": "Hi, we need to release via jenkins in one step automatic command. Not sure for the behaviour of releaseBranchVersionSuffix. I think it is only suffix the releases branch name. i've added another property to suffix the Tags and Pom's versions releaseVersionTagSuffix. Maybe we can use releaseBranchVersionSuffix to achieve this?",
+            "title": "Custom suffix for tags and POM's version",
+            "reviewers": [],
+            "destination": {
+              "commit": {
+                "hash": "3695cbf0e073",
+                "type": "commit",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/commit/3695cbf0e073"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/atlassian/jgit-flow/commits/3695cbf0e073"
+                  }
+                }
+              },
+              "repository": {
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/atlassian/jgit-flow"
+                  },
+                  "avatar": {
+                    "href": "https://bytebucket.org/ravatar/%7B62a7b075-0640-4af8-a55a-c45812ca75a8%7D?ts=java"
+                  }
+                },
+                "type": "repository",
+                "name": "jgit-flow",
+                "full_name": "atlassian/jgit-flow",
+                "uuid": "{62a7b075-0640-4af8-a55a-c45812ca75a8}"
+              },
+              "branch": {
+                "name": "develop"
+              }
+            },
+            "state": "OPEN",
+            "source": {
+              "commit": {
+                "hash": "38a4013a297a",
+                "type": "commit",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/38a4013a297a"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/38a4013a297a"
+                  }
+                }
+              },
+              "repository": {
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow"
+                  },
+                  "avatar": {
+                    "href": "https://bytebucket.org/ravatar/%7Bb272cf25-0364-4d02-b50a-1b284de5f0b3%7D?ts=java"
+                  }
+                },
+                "type": "repository",
+                "name": "jgit-flow",
+                "full_name": "PaoloPiccinini/jgit-flow",
+                "uuid": "{b272cf25-0364-4d02-b50a-1b284de5f0b3}"
+              },
+              "branch": {
+                "name": "feature/Custom-Suffix-for-Tags-and-Pom-Version"
+              }
+            },
+            "reason": "",
+            "author": {
+              "display_name": "Paolo Piccinini",
+              "uuid": "{a0d264d6-8ee1-4116-b596-1e828a13e404}",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D/"
+                },
+                "avatar": {
+                  "href": "https://secure.gravatar.com/avatar/5842db8cc98f6a596a27efd0a2652d51?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPP-6.png"
+                }
+              },
+              "nickname": "PaoloPiccinini",
+              "type": "user",
+              "account_id": "5a99149615278e2a78fb6f33"
+            },
+            "date": "2018-05-11T09:03:25.931746+00:00",
+            "changes": {}
+          },
+          "pull_request": {
+            "type": "pullrequest",
+            "id": 80,
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+              }
+            },
+            "title": "Custom suffix for tags and POM's version"
+          }
+        },
+        {
+          "update": {
+            "description": "Hi, we need to release via jenkins in one step automatic command. Not sure for the behaviour of releaseBranchVersionSuffix. I think it is only suffix the releases branch name. i've added another property to suffix the Tags and Pom's versions releaseVersionTagSuffix. Maybe we can use releaseBranchVersionSuffix to achieve this?",
+            "title": "Custom suffix for tags and POM's version",
+            "reviewers": [],
+            "destination": {
+              "commit": {
+                "hash": "3695cbf0e073",
+                "type": "commit",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/commit/3695cbf0e073"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/atlassian/jgit-flow/commits/3695cbf0e073"
+                  }
+                }
+              },
+              "repository": {
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/atlassian/jgit-flow"
+                  },
+                  "avatar": {
+                    "href": "https://bytebucket.org/ravatar/%7B62a7b075-0640-4af8-a55a-c45812ca75a8%7D?ts=java"
+                  }
+                },
+                "type": "repository",
+                "name": "jgit-flow",
+                "full_name": "atlassian/jgit-flow",
+                "uuid": "{62a7b075-0640-4af8-a55a-c45812ca75a8}"
+              },
+              "branch": {
+                "name": "develop"
+              }
+            },
+            "state": "OPEN",
+            "source": {
+              "commit": {
+                "hash": "38a4013a297a",
+                "type": "commit",
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow/commit/38a4013a297a"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow/commits/38a4013a297a"
+                  }
+                }
+              },
+              "repository": {
+                "links": {
+                  "self": {
+                    "href": "https://api.bitbucket.org/2.0/repositories/PaoloPiccinini/jgit-flow"
+                  },
+                  "html": {
+                    "href": "https://bitbucket.org/PaoloPiccinini/jgit-flow"
+                  },
+                  "avatar": {
+                    "href": "https://bytebucket.org/ravatar/%7Bb272cf25-0364-4d02-b50a-1b284de5f0b3%7D?ts=java"
+                  }
+                },
+                "type": "repository",
+                "name": "jgit-flow",
+                "full_name": "PaoloPiccinini/jgit-flow",
+                "uuid": "{b272cf25-0364-4d02-b50a-1b284de5f0b3}"
+              },
+              "branch": {
+                "name": "feature/Custom-Suffix-for-Tags-and-Pom-Version"
+              }
+            },
+            "reason": "",
+            "author": {
+              "display_name": "Paolo Piccinini",
+              "uuid": "{a0d264d6-8ee1-4116-b596-1e828a13e404}",
+              "links": {
+                "self": {
+                  "href": "https://api.bitbucket.org/2.0/users/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D"
+                },
+                "html": {
+                  "href": "https://bitbucket.org/%7Ba0d264d6-8ee1-4116-b596-1e828a13e404%7D/"
+                },
+                "avatar": {
+                  "href": "https://secure.gravatar.com/avatar/5842db8cc98f6a596a27efd0a2652d51?d=https%3A%2F%2Favatar-management--avatars.us-west-2.prod.public.atl-paas.net%2Finitials%2FPP-6.png"
+                }
+              },
+              "nickname": "PaoloPiccinini",
+              "type": "user",
+              "account_id": "5a99149615278e2a78fb6f33"
+            },
+            "date": "2018-05-11T09:03:25.889818+00:00",
+            "changes": {}
+          },
+          "pull_request": {
+            "type": "pullrequest",
+            "id": 80,
+            "links": {
+              "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/atlassian/jgit-flow/pullrequests/80"
+              },
+              "html": {
+                "href": "https://bitbucket.org/atlassian/jgit-flow/pull-requests/80"
+              }
+            },
+            "title": "Custom suffix for tags and POM's version"
+          }
+        }
+      ]
+    },
+    "settings": {
+      "github": {
+        "accessToken": "NO_TOKEN",
+        "additionalHeaders": {}
+      },
+      "cliArgs": {
+        "dangerfile": "LICENSE",
+        "textOnly": true
+      }
+    }
+  }
+}

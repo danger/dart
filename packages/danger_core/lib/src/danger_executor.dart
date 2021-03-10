@@ -1,25 +1,48 @@
-
-import 'package:danger_core/src/danger_incoming_message.dart';
+import 'package:danger_core/src/models/danger_dsl.dart';
+import 'package:danger_core/src/models/violation.dart';
 
 class DangerExecutor {
-  final DangerDsljsonType schema;
-  var result = <String>[];
+  final fails = <Violation>[];
+  final markdowns = <Violation>[];
+  final messages = <Violation>[];
+  final warnings = <Violation>[];
 
-  DangerExecutor(this.schema);
-
-  void message(String message) {
-    result.add('[Message] $message');
+  static DangerExecutor setupDangerStatic(DangerJSONDSL schema) {
+    danger = schema;
+    _dangerStatic = DangerExecutor();
+    return _dangerStatic;
   }
 
-  void warn(String warn) {
-    result.add('[Warn] $warn');
+  Map<String, List<Violation>> toResult() {
+    var result = <String, List<Violation>>{};
+    result['fails'] = fails;
+    result['markdowns'] = markdowns;
+    result['messages'] = messages;
+    result['warnings'] = warnings;
+    return result;
   }
+}
 
-  void error(String error) {
-    result.add('[Error] $error');
-  }
+late DangerExecutor _dangerStatic;
 
-  String getResult() {
-    return result.join('\n');
-  }
+late DangerJSONDSL danger;
+
+void message(String message, {String? file, int? line, String? icon}) {
+  _dangerStatic.messages
+      .add(Violation(message: message, file: file, line: line, icon: icon));
+}
+
+void warn(String message, {String? file, int? line, String? icon}) {
+  _dangerStatic.warnings
+      .add(Violation(message: message, file: file, line: line, icon: icon));
+}
+
+void fail(String message, {String? file, int? line, String? icon}) {
+  _dangerStatic.fails
+      .add(Violation(message: message, file: file, line: line, icon: icon));
+}
+
+void markdown(String message, {String? file, int? line, String? icon}) {
+  _dangerStatic.markdowns
+      .add(Violation(message: message, file: file, line: line, icon: icon));
 }
