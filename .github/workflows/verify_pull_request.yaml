@@ -3,17 +3,19 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Pull request - pre nullsafety
+name: Pull request - target nullsafety
 
-on:
-  pull_request:
-    branches: [master]
+on: pull_request
 
 jobs:
   build:
     runs-on: macos-latest
 
     steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: "master"
+
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
 
@@ -37,10 +39,18 @@ jobs:
         run: dart pub get
         working-directory: packages/danger_dart/
 
-      - name: Install example app dependencies
+      - name: Install pre nullsafety app dependencies
         run: dart pub get
         working-directory: example/pre_nullsafety/
 
-      - name: Run danger local
+      - name: Run danger on pre nullsafety
         run: danger_dart local
         working-directory: example/pre_nullsafety/
+
+      - name: Install nullsafety app dependencies
+        run: dart pub get
+        working-directory: example/target_nullsafety/
+
+      - name: Run danger on target nullsafety
+        run: danger_dart local
+        working-directory: example/target_nullsafety/
