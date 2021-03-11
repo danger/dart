@@ -1,0 +1,41 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Danger on PR
+
+on: pull_request
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v1
+
+      - uses: dart-lang/setup-dart@9a04e6d73cca37bd455e0608d7e5092f881fd603
+
+      - name: Install Danger-js
+        run: npm install -g danger
+
+      - name: Activate command
+        run: dart pub global activate --source path packages/danger_dart/
+
+      - name: Install danger_core dependencies
+        run: dart pub get
+        working-directory: packages/danger_core/
+
+      - name: Install danger_dart dependencies
+        run: dart pub get
+        working-directory: packages/danger_dart/
+
+      - name: Install app dependencies
+        run: dart pub get
+
+      - name: Run danger ci
+        run: danger_dart ci
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
