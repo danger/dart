@@ -3,7 +3,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Verify non nullsafety
+name: Danger on PR
 
 on: pull_request
 
@@ -43,3 +43,5 @@ jobs:
 
       - name: Run danger ci
         run: danger_dart ci
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
