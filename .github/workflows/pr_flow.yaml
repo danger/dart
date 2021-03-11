@@ -13,12 +13,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.sha }}
-
-      - name: Fetch master
-        run: git fetch origin master:master
 
       - uses: actions/setup-node@v1
 
