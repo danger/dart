@@ -2,7 +2,8 @@ import 'package:danger_core/src/models/bitbucket_cloud.dart';
 import 'package:danger_core/src/models/git_dsl.dart';
 import 'package:danger_core/src/models/cli_args.dart';
 
-import 'package:json_annotation/json_annotation.dart';
+import 'package:json_annotation/json_annotation.dart'
+    if (dart.library.isolate) 'package:danger_core/src/mock_json_annotation.dart';
 
 part 'danger_dsl.g.dart';
 

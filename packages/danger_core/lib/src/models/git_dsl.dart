@@ -1,4 +1,5 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:json_annotation/json_annotation.dart'
+    if (dart.library.isolate) 'package:danger_core/src/mock_json_annotation.dart';
 
 part 'git_dsl.g.dart';
 
