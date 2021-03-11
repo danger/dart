@@ -3,7 +3,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Pull request - target nullsafety
+name: Verify non nullsafety
 
 on: pull_request
 
@@ -19,12 +19,9 @@ jobs:
 
       - name: Fetch master
         run: git fetch origin master:master
+
       - uses: actions/setup-node@v1
 
-      # Note: This workflow uses the latest stable version of the Dart SDK.
-      # You can specify other versions if desired, see documentation here:
-      # https://github.com/dart-lang/setup-dart/blob/main/README.md
-      # - uses: dart-lang/setup-dart@v1
       - uses: dart-lang/setup-dart@9a04e6d73cca37bd455e0608d7e5092f881fd603
 
       - name: Install Danger-js
@@ -41,18 +38,8 @@ jobs:
         run: dart pub get
         working-directory: packages/danger_dart/
 
-      - name: Install pre nullsafety app dependencies
+      - name: Install app dependencies
         run: dart pub get
-        working-directory: example/pre_nullsafety/
 
-      - name: Run danger on pre nullsafety
-        run: danger_dart local
-        working-directory: example/pre_nullsafety/
-
-      - name: Install nullsafety app dependencies
-        run: dart pub get
-        working-directory: example/target_nullsafety/
-
-      - name: Run danger on target nullsafety
-        run: danger_dart local
-        working-directory: example/target_nullsafety/
+      - name: Run danger ci
+        run: danger_dart ci
