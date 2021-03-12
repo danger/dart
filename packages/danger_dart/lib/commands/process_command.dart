@@ -69,7 +69,7 @@ class ProcessCommand extends Command {
 
       instance.invoke(mainSymbol, argsTemp);
 
-      stdout.write(jsonEncode(executor.toResult()));
+      stdout.write(jsonEncode(executor.result));
 
       exitCode = 0;
     } catch (e) {

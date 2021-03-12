@@ -17,40 +17,43 @@ void main() {
     });
 
     test('violation should be empty on the first time', () {
-      expect(executor.messages.length, equals(0));
-      expect(executor.fails.length, equals(0));
-      expect(executor.warnings.length, equals(0));
-      expect(executor.markdowns.length, equals(0));
+      expect(executor.result.messages.length, equals(0));
+      expect(executor.result.fails.length, equals(0));
+      expect(executor.result.warnings.length, equals(0));
+      expect(executor.result.markdowns.length, equals(0));
     });
 
     test('should add violation to messages when message() called', () {
       danger.message('Hello World message');
 
-      expect(executor.messages.length, equals(1));
-      expect(executor.messages.first.message, equals('Hello World message'));
+      expect(executor.result.messages.length, equals(1));
+      expect(executor.result.messages.first.message,
+          equals('Hello World message'));
     });
 
     test('should add violation to fails when fail() called', () {
       danger.fail('Hello World fail', file: 'helloworld.dart');
 
-      expect(executor.fails.length, equals(1));
-      expect(executor.fails.first.message, equals('Hello World fail'));
-      expect(executor.fails.first.file, equals('helloworld.dart'));
+      expect(executor.result.fails.length, equals(1));
+      expect(executor.result.fails.first.message, equals('Hello World fail'));
+      expect(executor.result.fails.first.file, equals('helloworld.dart'));
     });
 
     test('should add violation to warnings when warn() called', () {
       danger.warn('Hello World warn', line: 10);
 
-      expect(executor.warnings.length, equals(1));
-      expect(executor.warnings.first.message, equals('Hello World warn'));
-      expect(executor.warnings.first.line, equals(10));
+      expect(executor.result.warnings.length, equals(1));
+      expect(
+          executor.result.warnings.first.message, equals('Hello World warn'));
+      expect(executor.result.warnings.first.line, equals(10));
     });
 
     test('should add violation to markdowns when markdown() called', () {
       danger.markdown('Hello World markdown');
 
-      expect(executor.markdowns.length, equals(1));
-      expect(executor.markdowns.first.message, equals('Hello World markdown'));
+      expect(executor.result.markdowns.length, equals(1));
+      expect(executor.result.markdowns.first.message,
+          equals('Hello World markdown'));
     });
 
     test('toResult should return map with all 4 keys', () {
@@ -59,11 +62,10 @@ void main() {
       danger.warn('Hello World warn', line: 10);
       danger.fail('Hello World fail', file: 'helloworld.dart');
 
-      final result = executor.toResult();
-      expect(result['fails'].length, equals(1));
-      expect(result['markdowns'].length, equals(1));
-      expect(result['messages'].length, equals(1));
-      expect(result['warnings'].length, equals(1));
+      expect(executor.result.fails.length, equals(1));
+      expect(executor.result.markdowns.length, equals(1));
+      expect(executor.result.messages.length, equals(1));
+      expect(executor.result.warnings.length, equals(1));
     });
 
     test('snapshot result', () {
@@ -71,10 +73,9 @@ void main() {
       danger.warn('Hello World warn', line: 10);
       danger.fail('Hello World fail', file: 'helloworld.dart');
 
-      final result = executor.toResult();
       final expected =
-          r'{"fails":[{"message":"Hello World fail","file":"helloworld.dart"}],"markdowns":[],"messages":[{"message":"Hello World message"}],"warnings":[{"message":"Hello World warn","line":10}]}';
-      final json = jsonEncode(result);
+          r'{"fails":[{"message":"Hello World fail","file":"helloworld.dart"}],"warnings":[{"message":"Hello World warn","line":10}],"messages":[{"message":"Hello World message"}],"markdowns":[]}';
+      final json = jsonEncode(executor.result);
       expect(json, equals(expected));
     });
   });
