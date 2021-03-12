@@ -24,6 +24,9 @@ DangerResults _$DangerResultsFromJson(Map<String, dynamic> json) {
         ?.map((e) =>
             e == null ? null : Violation.fromJson(e as Map<String, dynamic>))
         ?.toList(),
+    meta: json['meta'] == null
+        ? null
+        : DangerResultMetaData.fromJson(json['meta'] as Map<String, dynamic>),
   );
 }
 
@@ -33,12 +36,19 @@ Map<String, dynamic> _$DangerResultsToJson(DangerResults instance) =>
       'warnings': instance.warnings?.map((e) => e?.toJson())?.toList(),
       'messages': instance.messages?.map((e) => e?.toJson())?.toList(),
       'markdowns': instance.markdowns?.map((e) => e?.toJson())?.toList(),
+      'meta': instance.meta?.toJson(),
     };
 
 DangerResultMetaData _$DangerResultMetaDataFromJson(Map<String, dynamic> json) {
-  return DangerResultMetaData();
+  return DangerResultMetaData(
+    runtimeName: json['runtimeName'] as String,
+    runtimeHref: json['runtimeHref'] as String,
+  );
 }
 
 Map<String, dynamic> _$DangerResultMetaDataToJson(
         DangerResultMetaData instance) =>
-    <String, dynamic>{};
+    <String, dynamic>{
+      'runtimeName': instance.runtimeName,
+      'runtimeHref': instance.runtimeHref,
+    };

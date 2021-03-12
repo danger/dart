@@ -14,9 +14,14 @@ class DangerResults {
 
   final List<Violation> markdowns;
 
-  final meta = DangerResultMetaData();
+  final DangerResultMetaData meta;
 
-  DangerResults({this.fails, this.warnings, this.messages, this.markdowns});
+  DangerResults(
+      {this.fails,
+      this.warnings,
+      this.messages,
+      this.markdowns,
+      this.meta = const DangerResultMetaData()});
 
   factory DangerResults.fromJson(Map<String, dynamic> json) =>
       _$DangerResultsFromJson(json);
@@ -25,10 +30,12 @@ class DangerResults {
 
 @JsonSerializable()
 class DangerResultMetaData {
-  final String runtimeName = 'Danger Dart';
-  final String runtimeHref = 'https://danger.systems/dart';
+  final String runtimeName;
+  final String runtimeHref;
 
-  DangerResultMetaData();
+  const DangerResultMetaData(
+      {this.runtimeName = 'Danger Dart',
+      this.runtimeHref = 'https://danger.systems/dart'});
 
   factory DangerResultMetaData.fromJson(Map<String, dynamic> json) =>
       _$DangerResultMetaDataFromJson(json);

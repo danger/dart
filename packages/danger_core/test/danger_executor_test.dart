@@ -74,7 +74,7 @@ void main() {
       danger.fail('Hello World fail', file: 'helloworld.dart');
 
       final expected =
-          r'{"fails":[{"message":"Hello World fail","file":"helloworld.dart"}],"warnings":[{"message":"Hello World warn","line":10}],"messages":[{"message":"Hello World message"}],"markdowns":[]}';
+          r'{"fails":[{"message":"Hello World fail","file":"helloworld.dart"}],"warnings":[{"message":"Hello World warn","line":10}],"messages":[{"message":"Hello World message"}],"markdowns":[],"meta":{"runtimeName":"Danger Dart","runtimeHref":"https://danger.systems/dart"}}';
       final json = jsonEncode(executor.result);
       expect(json, equals(expected));
     });
