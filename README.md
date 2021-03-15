@@ -60,7 +60,7 @@ For GithubAction, you need to set GITHUB_TOKEN as environment [example](https://
 3. Attach process on your editor.
     * For `VSCode`, go to `View > Command Palette` and choose `>Debug: Attach to Dart Process`, and put `http://127.0.0.1:8181/xxxxxxx=/`.
     * For `AndroidStudio` and `Intellij` .....
-4. Debugger will start with pausing at  `danger_runner.dart`, you can skip it, after that it will stop at your `dangerfile`
+4. Debugger will start with pausing at  `danger_dart.dart`, you can skip it, after that it will stop at your `dangerfile`
 
 
 
@@ -75,7 +75,7 @@ $ pub global activate --source path packages/danger_dart/
 Or using `dart` to run directly.
 
 ```bash
-$ dart packages/danger_runner/bin/danger_dart.dart ci
-$ dart packages/danger_runner/bin/danger_dart.dart https://github.com/Moya/Harvey/pull/23
-$ dart packages/danger_runner/bin/danger_dart.dart local
+$ dart packages/danger_dart/bin/danger_dart.dart ci
+$ dart packages/danger_dart/bin/danger_dart.dart https://github.com/Moya/Harvey/pull/23
+$ dart packages/danger_dart/bin/danger_dart.dart local
 ```
