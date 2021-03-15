@@ -76,6 +76,6 @@ Or using `dart` to run directly.
 
 ```bash
 $ dart packages/danger_dart/bin/danger_dart.dart ci
-$ dart packages/danger_dart/bin/danger_dart.dart https://github.com/Moya/Harvey/pull/23
+$ dart packages/danger_dart/bin/danger_dart.dart pr https://github.com/Moya/Harvey/pull/23
 $ dart packages/danger_dart/bin/danger_dart.dart local
 ```
