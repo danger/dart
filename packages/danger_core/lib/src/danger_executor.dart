@@ -1,5 +1,3 @@
-import 'dart:isolate';
-
 import 'package:danger_core/danger_core.dart';
 import 'package:danger_core/src/models/danger_dsl.dart';
 import 'package:danger_core/src/models/violation.dart';
