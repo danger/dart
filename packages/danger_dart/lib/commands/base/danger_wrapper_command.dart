@@ -12,6 +12,7 @@ abstract class DangerWrapperCommand extends Command {
         defaultsTo: 'dangerfile.dart', help: 'Location of dangerfile');
 
     argParser.addOption('danger-js-path', help: 'Path to dangerJS');
+    argParser.addFlag('debug', defaultsTo: false, negatable: false);
     argParser.addFlag('verbose', defaultsTo: false, negatable: false);
   }
 
@@ -30,6 +31,7 @@ abstract class DangerWrapperCommand extends Command {
       }
     }
 
+    final isDebug = args.wasParsed('debug');
     final isVerbose = args.wasParsed('verbose');
     final useColors = (Platform.environment['TERM'] ?? '').contains('xterm');
     if (isVerbose) {
@@ -49,8 +51,21 @@ abstract class DangerWrapperCommand extends Command {
     }
 
     final metaData = await DangerUtil.getDangerJSMetaData(args);
-    final dangerProcess =
-        'dart ${Platform.script.toFilePath()} process --dangerfile "$dangerFilePath"';
+    final dangerProcessCommand = <String>[
+      'dart',
+      'run',
+      ...isDebug
+          ? [
+              '--observe=8181',
+              '--pause-isolates-on-start',
+              '--no-pause-isolates-on-exit'
+            ]
+          : [],
+      '${Platform.script.toFilePath()}',
+      'process',
+      '--dangerfile',
+      dangerFilePath,
+    ].join(' ');
 
     final dangerJSCommand = <String>[
       metaData.executable,
@@ -59,8 +74,8 @@ abstract class DangerWrapperCommand extends Command {
       '--dangerfile',
       args['dangerfile'],
       '--process',
-      "'$dangerProcess'"
-    ];
+      "'$dangerProcessCommand'"
+    ].join(' ');
 
     final shell = Shell(
         verbose: true,
@@ -69,10 +84,10 @@ abstract class DangerWrapperCommand extends Command {
         includeParentEnvironment: true);
     _logger.d('Prepare shell');
     try {
-      _logger.d('Arguments [${dangerJSCommand.join(" ")}]');
+      _logger.d('Arguments [$dangerJSCommand]');
       _logger.d('Run shell');
 
-      final result = await shell.run(dangerJSCommand.join(' '));
+      final result = await shell.run(dangerJSCommand);
 
       _logger.d('Run Completed');
       exitCode = result.last.exitCode;

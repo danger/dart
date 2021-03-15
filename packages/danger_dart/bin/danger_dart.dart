@@ -7,13 +7,11 @@ void main(List<String> arguments) async {
     await danger_runner.main(['--help']);
   }
 
-  final innerArgs = arguments.firstWhere(
-      (element) => LONG_ARS_REGEX.hasMatch(element),
-      orElse: () => null);
+  final runnerIndex = arguments.indexOf('runner');
+  if (runnerIndex != -1) {
+    var newArgs = [...arguments];
+    newArgs.removeRange(runnerIndex, newArgs.length);
 
-  if (innerArgs != null) {
-    final newArgs = innerArgs.split(' ');
-    newArgs.removeRange(0, 2);
     await danger_runner.main(newArgs);
   } else {
     await danger_runner.main(arguments);
