@@ -3,6 +3,19 @@ import 'package:json_annotation/json_annotation.dart'
 
 part 'violation.g.dart';
 
+enum ViolationType {
+  @JsonValue('message')
+  message,
+  @JsonValue('warn')
+  warn,
+
+  @JsonValue('fail')
+  fail,
+
+  @JsonValue('markdown')
+  markdown,
+}
+
 @JsonSerializable()
 class Violation {
   /// The string representation
@@ -25,4 +38,16 @@ class Violation {
 
   Violation({this.message, this.file, this.line, this.icon});
   Map<String, dynamic> toJson() => _$ViolationToJson(this);
+}
+
+@JsonSerializable()
+class WrappedViolation {
+  final ViolationType type;
+  final Violation violation;
+
+  WrappedViolation({this.type, this.violation});
+
+  factory WrappedViolation.fromJson(Map<String, dynamic> json) =>
+      _$WrappedViolationFromJson(json);
+  Map<String, dynamic> toJson() => _$WrappedViolationToJson(this);
 }
