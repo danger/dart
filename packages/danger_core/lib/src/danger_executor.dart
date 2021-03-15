@@ -1,48 +1,37 @@
+import 'package:danger_core/danger_core.dart';
 import 'package:danger_core/src/models/danger_dsl.dart';
 import 'package:danger_core/src/models/violation.dart';
+import 'package:danger_core/src/utils/danger_isolate_sender.dart';
 
-class DangerExecutor {
-  final fails = <Violation>[];
-  final markdowns = <Violation>[];
-  final messages = <Violation>[];
-  final warnings = <Violation>[];
-
-  static DangerExecutor setupDangerStatic(DangerJSONDSL schema) {
-    danger = schema;
-    _dangerStatic = DangerExecutor();
-    return _dangerStatic;
-  }
-
-  Map<String, List<Violation>> toResult() {
-    var result = <String, List<Violation>>{};
-    result['fails'] = fails;
-    result['markdowns'] = markdowns;
-    result['messages'] = messages;
-    result['warnings'] = warnings;
-    return result;
+class Danger {
+  static void setup(dynamic data) {
+    _sender = DangerIsolateSender(data);
   }
 }
 
-DangerExecutor _dangerStatic;
-
-DangerJSONDSL danger;
+DangerIsolateSender _sender;
+DangerJSONDSL get danger => _sender.dangerJSONDSL;
 
 void message(String message, {String file, int line, String icon}) {
-  _dangerStatic.messages
-      .add(Violation(message: message, file: file, line: line, icon: icon));
+  final violation =
+      Violation(message: message, file: file, line: line, icon: icon);
+  _sender.message(violation);
 }
 
 void warn(String message, {String file, int line, String icon}) {
-  _dangerStatic.warnings
-      .add(Violation(message: message, file: file, line: line, icon: icon));
+  final violation =
+      Violation(message: message, file: file, line: line, icon: icon);
+  _sender.warn(violation);
 }
 
 void fail(String message, {String file, int line, String icon}) {
-  _dangerStatic.fails
-      .add(Violation(message: message, file: file, line: line, icon: icon));
+  final violation =
+      Violation(message: message, file: file, line: line, icon: icon);
+  _sender.fail(violation);
 }
 
 void markdown(String message, {String file, int line, String icon}) {
-  _dangerStatic.markdowns
-      .add(Violation(message: message, file: file, line: line, icon: icon));
+  final violation =
+      Violation(message: message, file: file, line: line, icon: icon);
+  _sender.markdown(violation);
 }

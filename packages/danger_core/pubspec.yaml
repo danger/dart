@@ -13,3 +13,4 @@ dev_dependencies:
   json_serializable: ^3.5.1
   build_runner: ^1.11.5
   mockito: ^4.1.4
+  isolate: ^2.0.3

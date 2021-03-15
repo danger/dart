@@ -1,12 +1,14 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'dart:mirrors';
+import 'dart:isolate';
 
 import 'package:args/command_runner.dart';
 import 'package:fimber/fimber.dart';
 
 import 'package:danger_core/danger_core.dart';
 import 'package:danger_core/src/models/danger_dsl.dart';
+import 'package:danger_core/src/utils/danger_isolate_receiver.dart';
 import 'package:path/path.dart' show current, join;
 
 class ProcessCommand extends Command {
@@ -54,31 +56,49 @@ class ProcessCommand extends Command {
 
     try {
       final json = jsonDecode(str);
-      final danger = DangerJSON.fromJson(json);
+      //try parsing json
+      final _ = DangerJSON.fromJson(json);
 
-      final executor = DangerExecutor.setupDangerStatic(danger.danger);
+      final filePath = Uri.parse(join(current, 'dangerfile.dart'));
+      final isolateReceiver = DangerIsolateReceiver(json);
 
-      final isolate = currentMirrorSystem().isolate;
+      await spawnUri(filePath, isolateReceiver.toMessage());
 
-      final instance =
-          await isolate.loadUri(Uri.parse(join(current, 'dangerfile.dart')));
+      stdout.write(jsonEncode(isolateReceiver.dangerResults));
 
-      final mainSymbol = const Symbol('main');
-
-      final argsTemp = <String>[];
-
-      instance.invoke(mainSymbol, argsTemp);
-
-      stdout.write(jsonEncode(executor.toResult()));
-
-      exitCode = 0;
+      exit(0);
     } catch (e) {
       if (e is Error) {
         _logger.e(e.toString(), ex: e, stacktrace: e.stackTrace);
       } else {
         _logger.e(e.toString(), ex: e);
       }
-      exitCode = 1;
+      exit(1);
     }
+  }
+
+  Future<void> spawnUri(Uri uri, dynamic message) async {
+    final exitPort = ReceivePort();
+    final errorPort = ReceivePort();
+
+    final isolateExitCompleter = Completer();
+    final isolateErrorCompleter = Completer();
+
+    exitPort.listen((message) {
+      isolateExitCompleter.complete();
+    });
+
+    errorPort.listen((message) {
+      isolateErrorCompleter.completeError(message);
+    });
+
+    final currentIsolate = await Isolate.spawnUri(uri, [], message,
+        automaticPackageResolution: true,
+        paused: true,
+        onExit: exitPort.sendPort);
+    currentIsolate.resume(currentIsolate.pauseCapability);
+
+    return Future.any(
+        [isolateExitCompleter.future, isolateErrorCompleter.future]);
   }
 }

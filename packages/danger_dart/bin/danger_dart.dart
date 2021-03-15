@@ -1,21 +1,19 @@
-import 'package:danger_dart/danger_runner.dart' as danger_runner;
+import 'package:danger_dart/danger_dart.dart' as danger_dart;
 
 final LONG_ARS_REGEX = RegExp(r'^dart .* process --dangerfile ".*"$');
 
 void main(List<String> arguments) async {
   if (arguments.isEmpty) {
-    await danger_runner.main(['--help']);
+    await danger_dart.main(['--help']);
   }
 
-  final innerArgs = arguments.firstWhere(
-      (element) => LONG_ARS_REGEX.hasMatch(element),
-      orElse: () => null);
+  final runnerIndex = arguments.indexOf('runner');
+  if (runnerIndex != -1) {
+    var newArgs = [...arguments];
+    newArgs.removeRange(runnerIndex, newArgs.length);
 
-  if (innerArgs != null) {
-    final newArgs = innerArgs.split(' ');
-    newArgs.removeRange(0, 2);
-    await danger_runner.main(newArgs);
+    await danger_dart.main(newArgs);
   } else {
-    await danger_runner.main(arguments);
+    await danger_dart.main(arguments);
   }
 }

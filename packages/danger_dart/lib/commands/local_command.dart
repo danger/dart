@@ -19,6 +19,7 @@ class LocalCommand extends Command {
 
     argParser.addFlag('staging',
         defaultsTo: false, negatable: false, help: 'Just use staged changes.');
+    argParser.addFlag('debug', defaultsTo: false, negatable: false);
     argParser.addFlag('verbose', defaultsTo: false, negatable: false);
   }
 
@@ -32,6 +33,7 @@ class LocalCommand extends Command {
   @override
   Future<void> run() async {
     final args = argResults;
+    final isDebug = args.wasParsed('debug');
     final isVerbose = args.wasParsed('verbose');
     final useColors = (Platform.environment['TERM'] ?? '').contains('xterm');
     if (isVerbose) {
@@ -51,8 +53,21 @@ class LocalCommand extends Command {
     }
 
     final metaData = await DangerUtil.getDangerJSMetaData(args);
-    final dangerProcess =
-        'dart ${Platform.script.toFilePath()} process --dangerfile "$dangerFilePath"';
+    final dangerProcessCommand = <String>[
+      'dart',
+      'run',
+      ...isDebug
+          ? [
+              '--observe',
+              '--pause-isolates-on-start',
+              '--no-pause-isolates-on-exit'
+            ]
+          : [],
+      '${Platform.script.toFilePath()}',
+      'process',
+      '--dangerfile',
+      dangerFilePath,
+    ].join(' ');
 
     final dangerJSCommand = <String>[
       metaData.executable,
@@ -60,10 +75,10 @@ class LocalCommand extends Command {
       '--dangerfile',
       args['dangerfile'],
       '--process',
-      "'$dangerProcess'",
+      '"$dangerProcessCommand"',
       ...(argResults['base'] != null ? ['--base', argResults['base']] : []),
       ...(argResults['staging'] ? ['--staging'] : []),
-    ];
+    ].join(' ');
 
     final shell = Shell(
         verbose: true,
@@ -72,10 +87,10 @@ class LocalCommand extends Command {
         includeParentEnvironment: true);
     _logger.d('Prepare shell');
     try {
-      _logger.d('Arguments [${dangerJSCommand.join(" ")}]');
+      _logger.d('Arguments [$dangerJSCommand]');
       _logger.d('Run shell');
 
-      final result = await shell.run(dangerJSCommand.join(' '));
+      final result = await shell.run(dangerJSCommand);
 
       _logger.d('Run Completed');
       exitCode = result.last.exitCode;
