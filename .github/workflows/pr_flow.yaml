@@ -29,7 +29,9 @@ jobs:
         working-directory: packages/danger_core/
 
       - name: Test danger_core
-        run: dart test --reporter json > ../../danger_core_report.json
+        run: |
+          set +e
+          dart test --reporter json > ../../danger_core_report.json
         working-directory: packages/danger_core/
 
       - name: Install danger_dart dependencies
@@ -37,7 +39,9 @@ jobs:
         working-directory: packages/danger_dart/
 
       - name: Test danger_dart
-        run: dart test --reporter json > ../../danger_dart_report.json
+        run: |
+          set +e
+          dart test --reporter json > ../../danger_dart_report.json
         working-directory: packages/danger_dart/
 
       - name: Install danger_plugin_dart_test dependencies
@@ -45,7 +49,9 @@ jobs:
         working-directory: packages/danger_plugin_dart_test/
 
       - name: Test danger_plugin_dart_test
-        run: dart test --reporter json > ../../danger_plugin_dart_test_report.json
+        run: |
+          set +e
+          dart test --reporter json > ../../danger_plugin_dart_test_report.json
         working-directory: packages/danger_plugin_dart_test/
 
       - name: Install app dependencies
