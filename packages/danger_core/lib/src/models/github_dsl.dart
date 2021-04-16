@@ -50,6 +50,8 @@ enum GitHubReviewState {
   comment,
   @JsonValue('PENDING')
   pending,
+  @JsonValue('COMMENTED')
+  commented,
 }
 
 @JsonSerializable()

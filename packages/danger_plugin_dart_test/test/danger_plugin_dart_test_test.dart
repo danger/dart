@@ -28,11 +28,12 @@ void main() {
       expect(_mockDanger.messageList.length, equals(0));
     });
 
-    test('should process failure case correctly', () {
+    test('should process inline failure case correctly', () {
       final fixtureFile =
           File(join(current, 'test', 'fixtures', 'fail_results.json'));
 
       DangerPluginDartTest.readFile(fixtureFile,
+          inline: true,
           workingDirectoryPath:
               '/Users/core/Documents/project/danger.dart/packages/danger_core');
 
@@ -45,6 +46,39 @@ void main() {
           result.message,
           equals(
               '''TestCase [DangerIsolateSender should add multiple violations correctly] on [test/danger_isolate_sender_test.dart] was failed
+```
+Expected: <801>
+  Actual: <80>
+
+package:test_api                                expect
+test/parser/bitbucket_cloud_dsl_test.dart 21:7  main.<fn>.<fn>
+
+```
+'''));
+
+      expect(_mockDanger.warningList.length, equals(0));
+      expect(_mockDanger.markdownList.length, equals(0));
+      expect(_mockDanger.messageList.length, equals(0));
+    });
+
+    test('should process not inline failure case correctly', () {
+      final fixtureFile =
+          File(join(current, 'test', 'fixtures', 'fail_results.json'));
+
+      DangerPluginDartTest.readFile(fixtureFile,
+          inline: false,
+          workingDirectoryPath:
+              '/Users/core/Documents/project/danger.dart/packages/danger_core');
+
+      expect(_mockDanger.failList.length, equals(1));
+
+      final result = _mockDanger.failList.first;
+      expect(result.file, isNull);
+      expect(result.line, isNull);
+      expect(
+          result.message,
+          equals(
+              '''TestCase [DangerIsolateSender should add multiple violations correctly] on [test/danger_isolate_sender_test.dart] line [65] was failed
 ```
 Expected: <801>
   Actual: <80>

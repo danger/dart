@@ -6,7 +6,8 @@ import 'package:danger_plugin_dart_test/src/models/dart_test_result.dart';
 import 'package:path/path.dart' show join, current;
 
 class DangerPluginDartTest {
-  static Future<void> readFile(File file, {String workingDirectoryPath}) async {
+  static Future<void> readFile(File file,
+      {String workingDirectoryPath, bool inline = true}) async {
     final workingPath = workingDirectoryPath ?? current;
 
     final line = file.readAsLinesSync();
@@ -30,12 +31,22 @@ class DangerPluginDartTest {
       }
 
       if (result.isFailure == true) {
-        fail('''TestCase [$testCaseName] on [$fileName] was failed
+        if (inline) {
+          fail('''TestCase [$testCaseName] on [$fileName] was failed
 ```
 ${result.error}
 ${result.stackTrace}
 ```
 ''', file: fileName, line: lineNo);
+        } else {
+          fail(
+              '''TestCase [$testCaseName] on [$fileName] line [$lineNo] was failed
+```
+${result.error}
+${result.stackTrace}
+```
+''');
+        }
       }
     });
   }
