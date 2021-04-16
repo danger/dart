@@ -14,6 +14,7 @@ class DangerPluginDartTest {
 
     var fileName = '';
     var lineNo = 0;
+    var testCaseName = '';
 
     results.forEach((result) {
       if (result.test?.url != null) {
@@ -23,14 +24,15 @@ class DangerPluginDartTest {
         if (fileName.startsWith(workingPath)) {
           fileName = fileName.substring(workingPath.length + 1);
         }
-        
+
         lineNo = result.test.line;
+        testCaseName = result.test.name;
       }
 
       if (result.isFailure == true) {
-        fail('''Test fail
-${result.error}
+        fail('''TestCase [$testCaseName] on [$fileName] was failed
 ```
+${result.error}
 ${result.stackTrace}
 ```
 ''', file: fileName, line: lineNo);
