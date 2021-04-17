@@ -1,15 +1,16 @@
 import 'dart:io';
 
-import 'package:danger_core/danger_core.dart';
+import 'package:danger_plugin_dart_test/src/danger_dart_test_reporter.dart';
+import 'package:danger_plugin_dart_test/src/models/danger_dart_error_case.dart';
 import 'package:danger_plugin_dart_test/src/models/dart_test_result.dart';
+import 'package:danger_plugin_dart_test/src/reporters/default_test_reporter.dart';
 
 import 'package:path/path.dart' show current;
 
 class DangerPluginDartTest {
+  /// Reporter could be `DefaultTestReporter`, `DefaultInlineTestReporter`, `BitbucketCloudTestReporter`, or any class extends `DangerDartTestReporter`
   static Future<void> processFile(File file,
-      {String workingDirectoryPath,
-      bool inline = true,
-      int limitMessageCharsPerLine}) async {
+      {String workingDirectoryPath, int limitMessageCharsPerLine, DangerDartTestReporter reporter}) async {
     final workingPath = workingDirectoryPath ?? current;
 
     final line = file.readAsLinesSync();
@@ -57,51 +58,47 @@ class DangerPluginDartTest {
       }
     });
 
-    results.forEach((result) {
-      if (result.testId != null &&
-          result.result != null &&
-          result.result != Result.SUCCESS) {
-        final testMetaData = testMetaDataByID[result.testId];
-        final printMessage = printMessageByID[result.testId] ?? [];
+    final failureList = results
+        .where((result) => (result.testId != null &&
+            result.result != null &&
+            result.result != Result.SUCCESS))
+        .map((result) {
+      final testMetaData = testMetaDataByID[result.testId];
+      final printMessage = printMessageByID[result.testId] ?? [];
 
-        if (testMetaData != null) {
-          String fileName;
-          int lineNo;
+      String fileName;
+      int lineNo;
+      String testName;
 
-          if (testMetaData.test?.url != null) {
-            if (!testMetaData.test.url.startsWith('package\:')) {
-              fileName = testMetaData.test.url;
-              lineNo = testMetaData.test.line;
-            } else if (testMetaData.test.rootUrl != null) {
-              fileName = testMetaData.test.rootUrl;
-              lineNo = testMetaData.test.rootLine;
-            }
-            if (fileName != null) {
-              fileName = fileName.replaceFirst('file:\/\/', '');
-
-              if (fileName.startsWith(workingPath)) {
-                fileName = fileName.substring(workingPath.length + 1);
-              }
-            }
+      if (testMetaData != null) {
+        if (testMetaData.test?.url != null) {
+          if (!testMetaData.test.url.startsWith('package\:')) {
+            fileName = testMetaData.test.url;
+            lineNo = testMetaData.test.line;
+          } else if (testMetaData.test.rootUrl != null) {
+            fileName = testMetaData.test.rootUrl;
+            lineNo = testMetaData.test.rootLine;
           }
+          if (fileName != null) {
+            fileName = fileName.replaceFirst('file:\/\/', '');
 
-          if (inline &&
-              fileName != null &&
-              fileName.startsWith('package\:') == false) {
-            fail('''$fileName#L$lineNo
-```
-${printMessage.join('\n\n')}
-```
-''', file: fileName, line: lineNo);
-          } else {
-            fail('''$fileName#L$lineNo
-```
-${printMessage.join('\n\n')}
-```
-''');
+            if (fileName.startsWith(workingPath)) {
+              fileName = fileName.substring(workingPath.length + 1);
+            }
           }
         }
+
+        testName = testMetaData.test.name;
       }
-    });
+
+      return DangerDartErrorCase(
+        fileName: fileName,
+        lineNo: lineNo,
+        message: printMessage.join('\n\n'),
+        testName: testName,
+      );
+    }).toList();
+
+    (reporter ?? DefaultTestReporter()).reportToDanger(failureList);
   }
 }
