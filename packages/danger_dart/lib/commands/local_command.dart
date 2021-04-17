@@ -43,27 +43,19 @@ class LocalCommand extends Command {
           DebugTree(useColors: useColors, logLevels: ['I', 'W', 'E']));
     }
 
-    String dangerFilePath;
-    if (File(args['dangerfile']).existsSync()) {
-      dangerFilePath = args['dangerfile'];
-    } else if (File(join(current, args['dangerfile'])).existsSync()) {
-      dangerFilePath = join(current, args['dangerfile']);
-    } else {
-      throw 'dangerfile not found';
-    }
-
+    final dangerFilePath = dangerUtil.getScriptFilePath();
     final metaData = await dangerUtil.getDangerJSMetaData(args);
     final dangerProcessCommand = <String>[
       'dart',
       'run',
       ...isDebug
           ? [
-              '--observe',
+              '--observe=8181',
               '--pause-isolates-on-start',
               '--no-pause-isolates-on-exit'
             ]
           : [],
-      '${Platform.script.toFilePath()}',
+      '${dangerUtil.getScriptFilePath()}',
       'process',
       '--dangerfile',
       dangerFilePath,
