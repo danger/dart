@@ -2,10 +2,18 @@ import 'package:danger_core/danger_core.dart';
 import 'package:danger_core/src/models/danger_dsl.dart';
 import 'package:danger_core/src/models/violation.dart';
 import 'package:danger_core/src/utils/danger_isolate_sender.dart';
+import 'package:danger_core/src/utils/danger_isolate_sender_impl.dart';
+import 'package:danger_core/src/utils/danger_isolate_sender_mock.dart';
 
 class Danger {
   static void setup(dynamic data) {
-    _sender = DangerIsolateSender(data);
+    _sender = DangerIsolateSenderImpl(data);
+  }
+
+  static DangerIsolateSenderMock setupWithMock() {
+    final sender = DangerIsolateSenderMock();
+    _sender = sender;
+    return sender;
   }
 }
 

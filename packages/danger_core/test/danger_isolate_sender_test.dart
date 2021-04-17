@@ -3,7 +3,7 @@ import 'dart:isolate';
 import 'package:danger_core/danger_core.dart';
 import 'package:danger_core/src/models/danger_core_constants.dart';
 import 'package:danger_core/src/models/violation.dart';
-import 'package:danger_core/src/utils/danger_isolate_sender.dart';
+import 'package:danger_core/src/utils/danger_isolate_sender_impl.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
@@ -11,7 +11,7 @@ class _MockDangerJSONDSL extends Mock implements DangerJSONDSL {}
 
 void main() {
   group('DangerIsolateSender', () {
-    DangerIsolateSender isolateSender;
+    DangerIsolateSenderImpl isolateSender;
     ReceivePort receivePort;
     _MockDangerJSONDSL mockDangerJSONDSL;
     dynamic lastMessage;
@@ -20,7 +20,7 @@ void main() {
     setUp(() {
       receivePort = ReceivePort();
       mockDangerJSONDSL = _MockDangerJSONDSL();
-      isolateSender = DangerIsolateSender({
+      isolateSender = DangerIsolateSenderImpl({
         DANGER_SEND_PORT_MESSAGE_KEY: receivePort.sendPort,
         DANGER_DSL_MESSAGE_KEY: '{}',
       }, converter: (message) {

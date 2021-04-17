@@ -11,3 +11,5 @@ dev_dependencies:
   path: ^1.8.0
   danger_core:
     path: packages/danger_core
+  danger_plugin_dart_test:
+    path: packages/danger_plugin_dart_test
