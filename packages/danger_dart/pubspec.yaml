@@ -1,6 +1,6 @@
 name: danger_dart
 description: A simple command-line application.
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/danger/danger.dart
 
 executables:

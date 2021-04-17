@@ -1,3 +1,7 @@
+## 0.0.3
+
+- Close receive port before exit
+
 ## 0.0.2
 
 - Fix Danger Process finished before writing all results
