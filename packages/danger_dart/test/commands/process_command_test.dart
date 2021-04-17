@@ -2,7 +2,6 @@ import 'dart:io';
 import 'dart:isolate';
 
 import 'package:danger_core/danger_core.dart';
-import 'package:danger_dart/commands/ci_command.dart';
 import 'package:danger_dart/commands/process_command.dart';
 import 'package:danger_dart/danger_util.dart';
 import 'package:mockito/mockito.dart';
@@ -10,7 +9,7 @@ import 'package:test/test.dart';
 import 'package:path/path.dart' show join, current;
 import 'package:danger_core/src/models/danger_core_constants.dart';
 
-import 'test_command_runner.dart';
+import '../base/test_command_runner.dart';
 
 class _MockDangerUtil extends Mock implements DangerUtil {}
 
@@ -36,11 +35,7 @@ void main() {
 
       when(_mockDangerUtil.getDangerJSMetaData(any, shell: anyNamed('shell')))
           .thenAnswer((realInvocation) async {
-        return DangerJSMetadata(
-            executable: '/usr/local/danger-js',
-            majorVersion: 10,
-            minorVersion: 0,
-            patchVersion: 0);
+        return DangerJSMetadata(executable: '/usr/local/danger-js');
       });
 
       when(_mockDangerUtil.spawnUri(captureAny, captureAny))

@@ -13,15 +13,7 @@ final logger = FimberLog('DangerUtil');
 class DangerJSMetadata {
   final String executable;
 
-  final int majorVersion;
-  final int minorVersion;
-  final int patchVersion;
-
-  DangerJSMetadata(
-      {@required this.executable,
-      @required this.majorVersion,
-      @required this.minorVersion,
-      @required this.patchVersion});
+  DangerJSMetadata({@required this.executable});
 }
 
 class DangerUtil {
@@ -75,31 +67,16 @@ class DangerUtil {
       }
     }
 
-    logger.d('Found danger-js at $dangerJSExecutable, checking version.');
-
     final _shell = shell ?? Shell(verbose: false);
-    final dangerJSResult =
-        await _shell.runExecutableArguments(dangerJSExecutable, ['--version']);
+    final dangerJSHelpResult =
+        await _shell.runExecutableArguments(dangerJSExecutable, ['--help']);
 
-    final dangerJSVersionStdout = dangerJSResult.stdout.toString().trim();
-    logger.i('Got version $dangerJSVersionStdout');
-
-    final versionNoRegex = RegExp(r'^([0-9]+\.[0-9]+\.[0-9]+)$');
-    if (!versionNoRegex.hasMatch(dangerJSVersionStdout)) {
-      throw 'danger-js not found';
-    }
-    final versionSplit = dangerJSVersionStdout.split('.');
-    final majorVersion = int.parse(versionSplit[0]);
-
-    if (majorVersion != 10) {
-      throw 'Your danger\'s version is not 10, You need to uninstall danger ruby, or using --danger-js-path instead';
+    final helpResult = dangerJSHelpResult.stdout.toString().trim();
+    if (!helpResult.contains(r'danger.systems/js')) {
+      throw 'Your danger is not JS version, You need to uninstall danger ruby, or using --danger-js-path instead';
     }
 
-    return DangerJSMetadata(
-        executable: dangerJSExecutable,
-        majorVersion: majorVersion,
-        minorVersion: int.parse(versionSplit[1]),
-        patchVersion: int.parse(versionSplit[2]));
+    return DangerJSMetadata(executable: dangerJSExecutable);
   }
 
   Future<void> spawnUri(Uri uri, dynamic message) async {
