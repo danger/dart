@@ -1,7 +1,8 @@
 name: danger_dart
 description: A simple command-line application.
-# version: 1.0.0
-# homepage: https://www.example.com
+version: 0.0.1
+homepage: https://github.com/danger/danger.dart
+
 executables:
   danger_dart:
 
@@ -14,6 +15,7 @@ dependencies:
   process_run: ^0.12.0+1
   fimber: ^0.6.1
   path: ^1.8.0
+  # danger_core: ">= 0.0.1 < 2.0.0"
   danger_core:
     path: ../danger_core
 

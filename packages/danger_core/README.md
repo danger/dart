@@ -12,3 +12,18 @@ dev_dependencies:
 ```
 
 For more information, please refer to https://github.com/danger/danger.dart
+
+### Publishing Note
+
+Before publishing, need to replace.
+
+```dart
+import 'package:json_annotation/json_annotation.dart'
+    if (dart.library.isolate) 'package:danger_core/src/mock_json_annotation.dart';
+```
+
+with
+
+```dart
+import 'package:danger_core/src/mock_json_annotation.dart';
+```
