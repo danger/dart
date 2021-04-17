@@ -65,6 +65,7 @@ abstract class DangerWrapperCommand extends Command {
       ...(url.isNotEmpty ? [url] : []),
       '--dangerfile',
       args['dangerfile'],
+      '--passURLForDSL',
       '--process',
       "'$dangerProcessCommand'"
     ].join(' ');
