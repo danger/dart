@@ -71,6 +71,7 @@ class ProcessCommand extends Command {
       await _dangerUtil.spawnUri(filePath, isolateReceiver.toMessage());
 
       _stdout.write(jsonEncode(isolateReceiver.dangerResults));
+      await _stdout.flush();
       if (shouldExitOnEnd) {
         exit(0);
       }

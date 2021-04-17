@@ -54,6 +54,8 @@ void main() {
         final str = fixtureFile.readAsStringSync();
         return Stream<String>.value(str);
       });
+
+      when(_mockStdout.flush()).thenAnswer((realInvocation) async {});
     });
 
     test('Should pass dangerfile', () async {
@@ -98,9 +100,11 @@ void main() {
       expect(dsl.bitbucketCloud, isNotNull);
     });
 
-    test('Should write stdout after running dangerfile', () async {
+    test('Should write and flush stdout after running dangerfile', () async {
       await _commandRunner
           .run(['process', '--dangerfile', 'hello.dart', '--verbose']);
+
+      verify(_mockStdout.flush()).called(1);
 
       final result = verify(_mockStdout.write(captureAny)).captured;
       final str = result[0];
