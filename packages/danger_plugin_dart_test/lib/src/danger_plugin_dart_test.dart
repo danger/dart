@@ -3,11 +3,13 @@ import 'dart:io';
 import 'package:danger_core/danger_core.dart';
 import 'package:danger_plugin_dart_test/src/models/dart_test_result.dart';
 
-import 'package:path/path.dart' show join, current;
+import 'package:path/path.dart' show current;
 
 class DangerPluginDartTest {
   static Future<void> processFile(File file,
-      {String workingDirectoryPath, bool inline = true, int limitMessageCharsPerLine = 1000}) async {
+      {String workingDirectoryPath,
+      bool inline = true,
+      int limitMessageCharsPerLine}) async {
     final workingPath = workingDirectoryPath ?? current;
 
     final line = file.readAsLinesSync();
@@ -20,7 +22,16 @@ class DangerPluginDartTest {
       if (message == null || message.isEmpty) {
         return;
       }
-      final msg = message.length > limitMessageCharsPerLine ? message.substring(0, limitMessageCharsPerLine) + '...' : message;
+
+      var msg;
+      if (limitMessageCharsPerLine == null) {
+        msg = message;
+      } else if (message.length > limitMessageCharsPerLine) {
+        msg = message.substring(0, limitMessageCharsPerLine) + '...';
+      } else {
+        msg = message;
+      }
+
       if (printMessageByID[testId] == null) {
         printMessageByID[testId] = [msg];
       } else {
@@ -47,7 +58,9 @@ class DangerPluginDartTest {
     });
 
     results.forEach((result) {
-      if (result.testId != null && result.result != null && result.result != Result.SUCCESS) {
+      if (result.testId != null &&
+          result.result != null &&
+          result.result != Result.SUCCESS) {
         final testMetaData = testMetaDataByID[result.testId];
         final printMessage = printMessageByID[result.testId] ?? [];
 
@@ -72,7 +85,9 @@ class DangerPluginDartTest {
             }
           }
 
-          if (inline && fileName != null && fileName.startsWith('package\:') == false) {
+          if (inline &&
+              fileName != null &&
+              fileName.startsWith('package\:') == false) {
             fail('''$fileName#L$lineNo
 ```
 ${printMessage.join('\n\n')}

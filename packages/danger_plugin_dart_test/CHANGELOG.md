@@ -1,3 +1,7 @@
+## 0.0.4
+
+- Make `limitMessageCharsPerLine` default at null.
+
 ## 0.0.3
 
 - Add parameter `limitMessageCharsPerLine` and default at 1000.
