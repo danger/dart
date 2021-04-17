@@ -18,7 +18,7 @@ void main() {
       final fixtureFile =
           File(join(current, 'test', 'fixtures', 'success_results.json'));
 
-      DangerPluginDartTest.readFile(fixtureFile,
+      DangerPluginDartTest.processFile(fixtureFile,
           workingDirectoryPath:
               '/Users/core/Documents/project/danger.dart/packages/danger_core');
 
@@ -32,7 +32,7 @@ void main() {
       final fixtureFile =
           File(join(current, 'test', 'fixtures', 'fail_results.json'));
 
-      DangerPluginDartTest.readFile(fixtureFile,
+      DangerPluginDartTest.processFile(fixtureFile,
           inline: true,
           workingDirectoryPath:
               '/Users/core/Documents/project/danger.dart/packages/danger_core');
@@ -42,10 +42,7 @@ void main() {
       final result = _mockDanger.failList.first;
       expect(result.file, equals('test/danger_isolate_sender_test.dart'));
       expect(result.line, equals(65));
-      expect(
-          result.message,
-          equals(
-              '''TestCase [DangerIsolateSender should add multiple violations correctly] on [test/danger_isolate_sender_test.dart] was failed
+      expect(result.message, equals('''test/danger_isolate_sender_test.dart#L65
 ```
 Expected: <801>
   Actual: <80>
@@ -65,7 +62,7 @@ test/parser/bitbucket_cloud_dsl_test.dart 21:7  main.<fn>.<fn>
       final fixtureFile =
           File(join(current, 'test', 'fixtures', 'fail_results.json'));
 
-      DangerPluginDartTest.readFile(fixtureFile,
+      DangerPluginDartTest.processFile(fixtureFile,
           inline: false,
           workingDirectoryPath:
               '/Users/core/Documents/project/danger.dart/packages/danger_core');
@@ -75,10 +72,7 @@ test/parser/bitbucket_cloud_dsl_test.dart 21:7  main.<fn>.<fn>
       final result = _mockDanger.failList.first;
       expect(result.file, isNull);
       expect(result.line, isNull);
-      expect(
-          result.message,
-          equals(
-              '''TestCase [DangerIsolateSender should add multiple violations correctly] on [test/danger_isolate_sender_test.dart] line [65] was failed
+      expect(result.message, equals('''test/danger_isolate_sender_test.dart#L65
 ```
 Expected: <801>
   Actual: <80>

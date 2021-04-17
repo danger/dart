@@ -21,7 +21,7 @@ void main(List<String> args, dynamic data) {
   final dangerPluginDartTestReportFile =
       File(join(current, 'danger_plugin_dart_test_report.json'));
 
-  DangerPluginDartTest.readFile(dangerCoreReportFile);
-  DangerPluginDartTest.readFile(dangerDartReportFile);
-  DangerPluginDartTest.readFile(dangerPluginDartTestReportFile);
+  DangerPluginDartTest.processFile(dangerCoreReportFile);
+  DangerPluginDartTest.processFile(dangerDartReportFile);
+  DangerPluginDartTest.processFile(dangerPluginDartTestReportFile);
 }

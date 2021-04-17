@@ -6,7 +6,7 @@ import 'package:danger_plugin_dart_test/src/models/dart_test_result.dart';
 import 'package:path/path.dart' show join, current;
 
 class DangerPluginDartTest {
-  static Future<void> readFile(File file,
+  static Future<void> processFile(File file,
       {String workingDirectoryPath, bool inline = true}) async {
     final workingPath = workingDirectoryPath ?? current;
 
@@ -15,7 +15,6 @@ class DangerPluginDartTest {
 
     var fileName = '';
     var lineNo = 0;
-    var testCaseName = '';
 
     results.forEach((result) {
       if (result.test?.url != null) {
@@ -27,20 +26,18 @@ class DangerPluginDartTest {
         }
 
         lineNo = result.test.line;
-        testCaseName = result.test.name;
       }
 
       if (result.isFailure == true) {
         if (inline) {
-          fail('''TestCase [$testCaseName] on [$fileName] was failed
+          fail('''$fileName#L$lineNo
 ```
 ${result.error}
 ${result.stackTrace}
 ```
 ''', file: fileName, line: lineNo);
         } else {
-          fail(
-              '''TestCase [$testCaseName] on [$fileName] line [$lineNo] was failed
+          fail('''$fileName#L$lineNo
 ```
 ${result.error}
 ${result.stackTrace}
