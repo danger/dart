@@ -1,3 +1,7 @@
+## 0.0.5
+
+- Use passURLForDSL for local command
+
 ## 0.0.4
 
 - Use passURLForDSL instead
