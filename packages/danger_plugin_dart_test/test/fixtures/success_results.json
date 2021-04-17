@@ -1,0 +1,57 @@
+{"protocolVersion":"0.1.1","runnerVersion":"1.16.5","pid":14872,"type":"start","time":0}
+{"suite":{"id":0,"platform":"vm","path":"test/danger_isolate_receiver_test.dart"},"type":"suite","time":0}
+{"test":{"id":1,"name":"loading test/danger_isolate_receiver_test.dart","suiteID":0,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":4}
+{"suite":{"id":2,"platform":"vm","path":"test/danger_cross_isolate_test.dart"},"type":"suite","time":16}
+{"test":{"id":3,"name":"loading test/danger_cross_isolate_test.dart","suiteID":2,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":16}
+{"suite":{"id":4,"platform":"vm","path":"test/danger_isolate_sender_test.dart"},"type":"suite","time":16}
+{"test":{"id":5,"name":"loading test/danger_isolate_sender_test.dart","suiteID":4,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":17}
+{"suite":{"id":6,"platform":"vm","path":"test/parser/bitbucket_cloud_dsl_test.dart"},"type":"suite","time":19}
+{"test":{"id":7,"name":"loading test/parser/bitbucket_cloud_dsl_test.dart","suiteID":6,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":19}
+{"count":4,"type":"allSuites","time":19}
+{"testID":7,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":3336}
+{"group":{"id":8,"suiteID":6,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":3343}
+{"group":{"id":9,"suiteID":6,"parentID":8,"name":"bitbucket_cloud_dsl","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":9,"column":3,"url":"file:///Users/core/Documents/project/danger.dart/packages/danger_core/test/parser/bitbucket_cloud_dsl_test.dart"},"type":"group","time":3343}
+{"test":{"id":10,"name":"bitbucket_cloud_dsl should be able to parse correctly","suiteID":6,"groupIDs":[8,9],"metadata":{"skip":false,"skipReason":null},"line":10,"column":5,"url":"file:///Users/core/Documents/project/danger.dart/packages/danger_core/test/parser/bitbucket_cloud_dsl_test.dart"},"type":"testStart","time":3344}
+{"testID":1,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":3351}
+{"group":{"id":11,"suiteID":0,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":5,"line":null,"column":null,"url":null},"type":"group","time":3352}
+{"group":{"id":12,"suiteID":0,"parentID":11,"name":"DangerIsolateReceiver","metadata":{"skip":false,"skipReason":null},"testCount":5,"line":7,"column":3,"url":"file:///Users/core/Documents/project/danger.dart/packages/danger_core/test/danger_isolate_receiver_test.dart"},"type":"group","time":3352}
+{"test":{"id":13,"name":"DangerIsolateReceiver toMessage() should return correctly","suiteID":0,"groupIDs":[11,12],"metadata":{"skip":false,"skipReason":null},"line":16,"column":5,"url":"file:///Users/core/Documents/project/danger.dart/packages/danger_core/test/danger_isolate_receiver_test.dart"},"type":"testStart","time":3353}
+{"testID":3,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":3359}
+{"group":{"id":14,"suiteID":2,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":5,"line":null,"column":null,"url":null},"type":"group","time":3360}
+{"group":{"id":15,"suiteID":2,"parentID":14,"name":"Cross isolate","metadata":{"skip":false,"skipReason":null},"testCount":5,"line":9,"column":3,"url":"file:///Users/core/Documents/project/danger.dart/packages/danger_core/test/danger_cross_isolate_test.dart"},"type":"group","time":3360}
+{"test":{"id":16,"name":"Cross isolate should pass message correctly","suiteID":2,"groupIDs":[14,15],"metadata":{"skip":false,"skipReason":null},"line":21,"column":5,"url":"file:///Users/core/Documents/project/danger.dart/packages/danger_core/test/danger_cross_isolate_test.dart"},"type":"testStart","time":3360}
+{"testID":5,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":3368}
+{"group":{"id":17,"suiteID":4,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":6,"line":null,"column":null,"url":null},"type":"group","time":3369}
+{"group":{"id":18,"suiteID":4,"parentID":17,"name":"DangerIsolateSender","metadata":{"skip":false,"skipReason":null},"testCount":6,"line":13,"column":3,"url":"file:///Users/core/Documents/project/danger.dart/packages/danger_core/test/danger_isolate_sender_test.dart"},"type":"group","time":3369}
+{"test":{"id":19,"name":"DangerIsolateSender should initialize correctly","suiteID":4,"groupIDs":[17,18],"metadata":{"skip":false,"skipReason":null},"line":32,"column":5,"url":"file:///Users/core/Documents/project/danger.dart/packages/danger_core/test/danger_isolate_sender_test.dart"},"type":"testStart","time":3369}
+{"testID":13,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":3392}
+{"test":{"id":20,"name":"DangerIsolateReceiver should add message to dangerResults","suiteID":0,"groupIDs":[11,12],"metadata":{"skip":false,"skipReason":null},"line":23,"column":5,"url":"file:///Users/core/Documents/project/danger.dart/packages/danger_core/test/danger_isolate_receiver_test.dart"},"type":"testStart","time":3394}
+{"testID":20,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":3401}
+{"test":{"id":21,"name":"DangerIsolateReceiver should add warn to dangerResults","suiteID":0,"groupIDs":[11,12],"metadata":{"skip":false,"skipReason":null},"line":35,"column":5,"url":"file:///Users/core/Documents/project/danger.dart/packages/danger_core/test/danger_isolate_receiver_test.dart"},"type":"testStart","time":3401}
+{"testID":19,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":3402}
+{"test":{"id":22,"name":"DangerIsolateSender should add message violation correctly","suiteID":4,"groupIDs":[17,18],"metadata":{"skip":false,"skipReason":null},"line":38,"column":5,"url":"file:///Users/core/Documents/project/danger.dart/packages/danger_core/test/danger_isolate_sender_test.dart"},"type":"testStart","time":3402}
+{"testID":21,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":3403}
+{"test":{"id":23,"name":"DangerIsolateReceiver should add fail to dangerResults","suiteID":0,"groupIDs":[11,12],"metadata":{"skip":false,"skipReason":null},"line":47,"column":5,"url":"file:///Users/core/Documents/project/danger.dart/packages/danger_core/test/danger_isolate_receiver_test.dart"},"type":"testStart","time":3403}
+{"testID":23,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":3405}
+{"test":{"id":24,"name":"DangerIsolateReceiver should add markdown to dangerResults","suiteID":0,"groupIDs":[11,12],"metadata":{"skip":false,"skipReason":null},"line":59,"column":5,"url":"file:///Users/core/Documents/project/danger.dart/packages/danger_core/test/danger_isolate_receiver_test.dart"},"type":"testStart","time":3405}
+{"testID":24,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":3408}
+{"testID":22,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":3416}
+{"test":{"id":25,"name":"DangerIsolateSender should add warn violation correctly","suiteID":4,"groupIDs":[17,18],"metadata":{"skip":false,"skipReason":null},"line":45,"column":5,"url":"file:///Users/core/Documents/project/danger.dart/packages/danger_core/test/danger_isolate_sender_test.dart"},"type":"testStart","time":3416}
+{"testID":25,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":3418}
+{"test":{"id":26,"name":"DangerIsolateSender should add fail violation correctly","suiteID":4,"groupIDs":[17,18],"metadata":{"skip":false,"skipReason":null},"line":51,"column":5,"url":"file:///Users/core/Documents/project/danger.dart/packages/danger_core/test/danger_isolate_sender_test.dart"},"type":"testStart","time":3418}
+{"testID":26,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":3420}
+{"test":{"id":27,"name":"DangerIsolateSender should add markdown violation correctly","suiteID":4,"groupIDs":[17,18],"metadata":{"skip":false,"skipReason":null},"line":58,"column":5,"url":"file:///Users/core/Documents/project/danger.dart/packages/danger_core/test/danger_isolate_sender_test.dart"},"type":"testStart","time":3421}
+{"testID":27,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":3422}
+{"test":{"id":28,"name":"DangerIsolateSender should add multiple violations correctly","suiteID":4,"groupIDs":[17,18],"metadata":{"skip":false,"skipReason":null},"line":65,"column":5,"url":"file:///Users/core/Documents/project/danger.dart/packages/danger_core/test/danger_isolate_sender_test.dart"},"type":"testStart","time":3423}
+{"testID":28,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":3427}
+{"testID":10,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":3430}
+{"testID":16,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":3452}
+{"test":{"id":29,"name":"Cross isolate should pass warning correctly","suiteID":2,"groupIDs":[14,15],"metadata":{"skip":false,"skipReason":null},"line":31,"column":5,"url":"file:///Users/core/Documents/project/danger.dart/packages/danger_core/test/danger_cross_isolate_test.dart"},"type":"testStart","time":3452}
+{"testID":29,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":3497}
+{"test":{"id":30,"name":"Cross isolate should pass failure correctly","suiteID":2,"groupIDs":[14,15],"metadata":{"skip":false,"skipReason":null},"line":41,"column":5,"url":"file:///Users/core/Documents/project/danger.dart/packages/danger_core/test/danger_cross_isolate_test.dart"},"type":"testStart","time":3498}
+{"testID":30,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":3545}
+{"test":{"id":31,"name":"Cross isolate should pass markdown correctly","suiteID":2,"groupIDs":[14,15],"metadata":{"skip":false,"skipReason":null},"line":50,"column":5,"url":"file:///Users/core/Documents/project/danger.dart/packages/danger_core/test/danger_cross_isolate_test.dart"},"type":"testStart","time":3545}
+{"testID":31,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":3592}
+{"test":{"id":32,"name":"Cross isolate mix result","suiteID":2,"groupIDs":[14,15],"metadata":{"skip":false,"skipReason":null},"line":60,"column":5,"url":"file:///Users/core/Documents/project/danger.dart/packages/danger_core/test/danger_cross_isolate_test.dart"},"type":"testStart","time":3592}
+{"testID":32,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":3642}
+{"success":true,"type":"done","time":3645}

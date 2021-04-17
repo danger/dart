@@ -342,6 +342,7 @@ const _$GitHubReviewStateEnumMap = {
   GitHubReviewState.requestChanges: 'REQUEST_CHANGES',
   GitHubReviewState.comment: 'COMMENT',
   GitHubReviewState.pending: 'PENDING',
+  GitHubReviewState.commented: 'COMMENTED',
 };
 
 GitHubReviewers _$GitHubReviewersFromJson(Map<String, dynamic> json) {
