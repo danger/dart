@@ -29,8 +29,7 @@ void main() {
       _mockDangerUtil = _MockDangerUtil();
       _mockStdin = _MockStdin();
       _mockStdout = _MockStdout();
-      _processCommand = ProcessCommand(_mockDangerUtil, _mockStdin, _mockStdout,
-          shouldExitOnEnd: false);
+      _processCommand = ProcessCommand(_mockDangerUtil, _mockStdin, _mockStdout);
       _commandRunner = TestCommandRunner.create(_processCommand);
 
       when(_mockDangerUtil.getDangerJSMetaData(any, shell: anyNamed('shell')))
@@ -51,9 +50,10 @@ void main() {
         final fixtureFile =
             File(join(current, 'test', 'fixtures', 'bbc-dsl-input.json'));
 
-        final str = fixtureFile.readAsStringSync();
-        return Stream<String>.value(str);
+        return Stream<String>.value('danger://dsl/${fixtureFile.path}');
       });
+
+      when(_mockStdout.flush()).thenAnswer((realInvocation) async {});
     });
 
     test('Should pass dangerfile', () async {
@@ -98,12 +98,16 @@ void main() {
       expect(dsl.bitbucketCloud, isNotNull);
     });
 
-    test('Should write stdout after running dangerfile', () async {
+    test('Should write and flush stdout after running dangerfile', () async {
       await _commandRunner
           .run(['process', '--dangerfile', 'hello.dart', '--verbose']);
 
+      verify(_mockStdout.flush()).called(1);
+
       final result = verify(_mockStdout.write(captureAny)).captured;
-      final str = result[0];
+      final urlResult = result[0];
+      final fileResult = File(urlResult.toString().substring('danger-results:/'.length));
+      final str = fileResult.readAsStringSync();
       expect(
           str,
           equals(
