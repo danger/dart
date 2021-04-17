@@ -66,6 +66,7 @@ class LocalCommand extends Command {
       name,
       '--dangerfile',
       args['dangerfile'],
+      '--passURLForDSL',
       '--process',
       '"$dangerProcessCommand"',
       ...(argResults['base'] != null ? ['--base', argResults['base']] : []),
