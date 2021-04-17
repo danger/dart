@@ -63,37 +63,29 @@ class DartTestResultClass {
 
   String toRawJson() => json.encode(toJson());
 
-  factory DartTestResultClass.fromJson(Map<String, dynamic> json) =>
-      DartTestResultClass(
+  factory DartTestResultClass.fromJson(Map<String, dynamic> json) => DartTestResultClass(
         time: json["time"],
         type: json["type"],
         // ignore:
         pid: json["pid"] == null ? null : json["pid"],
-        protocolVersion:
-            json["protocolVersion"] == null ? null : json["protocolVersion"],
-        runnerVersion:
-            json["runnerVersion"] == null ? null : json["runnerVersion"],
+        protocolVersion: json["protocolVersion"] == null ? null : json["protocolVersion"],
+        runnerVersion: json["runnerVersion"] == null ? null : json["runnerVersion"],
         test: json["test"] == null ? null : TestClass.fromJson(json["test"]),
         count: json["count"] == null ? null : json["count"],
-        suite:
-            json["suite"] == null ? null : SuiteClass.fromJson(json["suite"]),
+        suite: json["suite"] == null ? null : SuiteClass.fromJson(json["suite"]),
         observatory: json["observatory"] == null ? null : json["observatory"],
-        remoteDebugger:
-            json["remoteDebugger"] == null ? null : json["remoteDebugger"],
+        remoteDebugger: json["remoteDebugger"] == null ? null : json["remoteDebugger"],
         suiteId: json["suiteID"] == null ? null : json["suiteID"],
-        group:
-            json["group"] == null ? null : GroupClass.fromJson(json["group"]),
+        group: json["group"] == null ? null : GroupClass.fromJson(json["group"]),
         message: json["message"] == null ? null : json["message"],
-        messageType: json["messageType"] == null
-            ? null
-            : messageTypeValues.map[json["messageType"]],
+        messageType:
+            json["messageType"] == null ? null : messageTypeValues.map[json["messageType"]],
         testId: json["testID"] == null ? null : json["testID"],
         error: json["error"] == null ? null : json["error"],
         isFailure: json["isFailure"] == null ? null : json["isFailure"],
         stackTrace: json["stackTrace"] == null ? null : json["stackTrace"],
         hidden: json["hidden"] == null ? null : json["hidden"],
-        result:
-            json["result"] == null ? null : resultValues.map[json["result"]],
+        result: json["result"] == null ? null : resultValues.map[json["result"]],
         skipped: json["skipped"] == null ? null : json["skipped"],
         success: json["success"] == null ? null : json["success"],
       );
@@ -112,8 +104,7 @@ class DartTestResultClass {
         "suiteID": suiteId == null ? null : suiteId,
         "group": group,
         "message": message == null ? null : message,
-        "messageType":
-            messageType == null ? null : messageTypeValues.reverse[messageType],
+        "messageType": messageType == null ? null : messageTypeValues.reverse[messageType],
         "testID": testId == null ? null : testId,
         "error": error == null ? null : error,
         "isFailure": isFailure == null ? null : isFailure,
@@ -148,8 +139,7 @@ class GroupClass {
   int column;
   String url;
 
-  factory GroupClass.fromRawJson(String str) =>
-      GroupClass.fromJson(json.decode(str));
+  factory GroupClass.fromRawJson(String str) => GroupClass.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
@@ -158,9 +148,7 @@ class GroupClass {
         parentId: json["parentID"] == null ? null : json["parentID"],
         testCount: json["testCount"] == null ? null : json["testCount"],
         id: json["id"],
-        metadata: json["metadata"] == null
-            ? null
-            : MetadataClass.fromJson(json["metadata"]),
+        metadata: json["metadata"] == null ? null : MetadataClass.fromJson(json["metadata"]),
         suiteId: json["suiteID"],
         line: json["line"] == null ? null : json["line"],
         column: json["column"] == null ? null : json["column"],
@@ -189,8 +177,7 @@ class MetadataClass {
   bool skip;
   String skipReason;
 
-  factory MetadataClass.fromRawJson(String str) =>
-      MetadataClass.fromJson(json.decode(str));
+  factory MetadataClass.fromRawJson(String str) => MetadataClass.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
@@ -207,16 +194,12 @@ class MetadataClass {
 
 enum MessageType { PRINT, SKIP }
 
-final messageTypeValues =
-    EnumValues({"print": MessageType.PRINT, "skip": MessageType.SKIP});
+final messageTypeValues = EnumValues({"print": MessageType.PRINT, "skip": MessageType.SKIP});
 
 enum Result { SUCCESS, FAILURE, ERROR }
 
-final resultValues = EnumValues({
-  "error": Result.ERROR,
-  "failure": Result.FAILURE,
-  "success": Result.SUCCESS
-});
+final resultValues =
+    EnumValues({"error": Result.ERROR, "failure": Result.FAILURE, "success": Result.SUCCESS});
 
 class SuiteClass {
   SuiteClass({
@@ -229,8 +212,7 @@ class SuiteClass {
   String path;
   String platform;
 
-  factory SuiteClass.fromRawJson(String str) =>
-      SuiteClass.fromJson(json.decode(str));
+  factory SuiteClass.fromRawJson(String str) => SuiteClass.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
@@ -257,6 +239,9 @@ class TestClass {
     this.line,
     this.column,
     this.url,
+    this.rootLine,
+    this.rootColumn,
+    this.rootUrl,
   });
 
   List<int> groupIDs;
@@ -267,9 +252,11 @@ class TestClass {
   int line;
   int column;
   String url;
+  String rootUrl;
+  int rootLine;
+  int rootColumn;
 
-  factory TestClass.fromRawJson(String str) =>
-      TestClass.fromJson(json.decode(str));
+  factory TestClass.fromRawJson(String str) => TestClass.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
 
@@ -277,13 +264,14 @@ class TestClass {
         groupIDs: List<int>.from(json["groupIDs"].map((x) => x)),
         name: json["name"],
         id: json["id"],
-        metadata: json["metadata"] == null
-            ? null
-            : MetadataClass.fromJson(json["metadata"]),
+        metadata: json["metadata"] == null ? null : MetadataClass.fromJson(json["metadata"]),
         suiteId: json["suiteID"],
         line: json["line"] == null ? null : json["line"],
         column: json["column"] == null ? null : json["column"],
         url: json["url"] == null ? null : json["url"],
+        rootLine: json["root_line"] == null ? null : json["root_line"],
+        rootColumn: json["root_column"] == null ? null : json["root_column"],
+        rootUrl: json["root_url"] == null ? null : json["root_url"],
       );
 
   Map<String, dynamic> toJson() => {

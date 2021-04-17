@@ -20,10 +20,11 @@ class DangerPluginDartTest {
       if (message == null || message.isEmpty) {
         return;
       }
+      final msg = message.length > 1000 ? message.substring(0, 1000) + '...' : message;
       if (printMessageByID[testId] == null) {
-        printMessageByID[testId] = [message];
+        printMessageByID[testId] = [msg];
       } else {
-        printMessageByID[testId].add(message);
+        printMessageByID[testId].add(msg);
       }
     }
 
@@ -46,9 +47,7 @@ class DangerPluginDartTest {
     });
 
     results.forEach((result) {
-      if (result.testId != null &&
-          result.result != null &&
-          result.result != Result.SUCCESS) {
+      if (result.testId != null && result.result != null && result.result != Result.SUCCESS) {
         final testMetaData = testMetaDataByID[result.testId];
         final printMessage = printMessageByID[result.testId] ?? [];
 
@@ -57,26 +56,32 @@ class DangerPluginDartTest {
           int lineNo;
 
           if (testMetaData.test?.url != null) {
-            fileName = testMetaData.test.url;
-            fileName = fileName.replaceFirst('file:\/\/', '');
-
-            if (fileName.startsWith(workingPath)) {
-              fileName = fileName.substring(workingPath.length + 1);
+            if (!testMetaData.test.url.startsWith('package\:')) {
+              fileName = testMetaData.test.url;
+              lineNo = testMetaData.test.line;
+            } else if (testMetaData.test.rootUrl != null) {
+              fileName = testMetaData.test.rootUrl;
+              lineNo = testMetaData.test.rootLine;
             }
+            if (fileName != null) {
+              fileName = fileName.replaceFirst('file:\/\/', '');
 
-            lineNo = testMetaData.test.line;
+              if (fileName.startsWith(workingPath)) {
+                fileName = fileName.substring(workingPath.length + 1);
+              }
+            }
           }
 
-          if (inline) {
+          if (inline && fileName != null && fileName.startsWith('package\:') == false) {
             fail('''$fileName#L$lineNo
 ```
-${printMessage.join('\n')}
+${printMessage.join('\n\n')}
 ```
 ''', file: fileName, line: lineNo);
           } else {
             fail('''$fileName#L$lineNo
 ```
-${printMessage.join('\n')}
+${printMessage.join('\n\n')}
 ```
 ''');
           }
