@@ -38,7 +38,8 @@ class ProcessCommand extends Command {
   @override
   Future<void> run() async {
     final args = argResults;
-    final str = (await _stdin.transform(utf8.decoder).toList()).join('');
+
+    var inputStr = (await _stdin.transform(utf8.decoder).toList()).join('');
 
     final isVerbose = args.wasParsed('verbose');
     final useColors = (Platform.environment['TERM'] ?? '').contains('xterm');
@@ -49,9 +50,27 @@ class ProcessCommand extends Command {
           DebugTree(useColors: useColors, logLevels: ['I', 'W', 'E']));
     }
 
-    if (str.isEmpty) {
-      throw 'Data not found';
+    if (inputStr.isEmpty) {
+      _stdout.write('danger://send-dsl');
+      inputStr = (await _stdin.transform(utf8.decoder).toList()).join('');
     }
+
+    if (inputStr.isEmpty) {
+      throw 'STDIN Error get empty input';
+    }
+
+    if(!inputStr.startsWith(r'danger://dsl/')) {
+      throw 'STDIN Error expect input [danger://dsl/] but got [$inputStr]';
+    }
+
+    final inputFilePath = inputStr.substring('danger://dsl/'.length);
+    final inputFile = File(inputFilePath);
+
+    if(!inputFile.existsSync()) {
+      throw 'File not found [$inputFilePath]';
+    }
+
+    final str = inputFile.readAsStringSync();
 
     final dangerFile = args['dangerfile'] as String;
     if (dangerFile == null) {
@@ -71,7 +90,15 @@ class ProcessCommand extends Command {
       await _dangerUtil.spawnUri(filePath, isolateReceiver.toMessage());
 
       final resultStr = jsonEncode(isolateReceiver.dangerResults);
-      _stdout.write(resultStr);
+      final tempDir = Directory.systemTemp;
+      final tempFile = File(join(tempDir.path, 'danger-results.json'));
+      if(tempFile.existsSync()){
+        tempFile.deleteSync();
+      }
+      tempFile.createSync();
+      tempFile.writeAsStringSync(resultStr);
+      
+      _stdout.write('danger-results:/${tempFile.path}');
       await _stdout.flush();
     } catch (e) {
       if (e is Error) {
