@@ -18,7 +18,7 @@ class BitbucketCloudTestReporter extends DangerDartTestReporter {
       testResultsTable += '\n\nName \`${element.testName}\`\n';
 
       testResultsTable +=
-          '`\n\n#### Message\n\n\`\`\`\n${element.message}\n\`\`\`\n\n`';
+          '\n\n#### Message\n\n\`\`\`\n${element.message}\n\`\`\`\n\n';
 
       testResultsTable += '\n\n---\n\n';
     });

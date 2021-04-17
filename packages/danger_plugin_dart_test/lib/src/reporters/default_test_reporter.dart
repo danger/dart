@@ -8,7 +8,6 @@ class DefaultTestReporter extends DangerDartTestReporter {
 
   @override
   void reportToDanger(List<DangerDartErrorCase> errorCases) {
-    fail('Found ${errorCases.length} failure cases.');
     errorCases.forEach((element) {
       fail('''${element.fileName}#L${element.lineNo}
 Name: ${element.testName}
