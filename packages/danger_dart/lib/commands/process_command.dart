@@ -15,10 +15,8 @@ class ProcessCommand extends Command {
   final DangerUtil _dangerUtil;
   final Stdin _stdin;
   final Stdout _stdout;
-  final bool shouldExitOnEnd;
 
-  ProcessCommand(this._dangerUtil, this._stdin, this._stdout,
-      {this.shouldExitOnEnd = true}) {
+  ProcessCommand(this._dangerUtil, this._stdin, this._stdout) {
     argParser.addOption(
       'dangerfile',
       help: 'Location of dangerfile',
@@ -60,30 +58,29 @@ class ProcessCommand extends Command {
       throw 'Dangerfile not found';
     }
 
+    DangerIsolateReceiver isolateReceiver;
+
     try {
       final json = jsonDecode(str);
       //try parsing json
       final _ = DangerJSON.fromJson(json);
 
       final filePath = Uri.parse(join(current, dangerFile));
-      final isolateReceiver = DangerIsolateReceiver(json);
+      isolateReceiver = DangerIsolateReceiver(json);
 
       await _dangerUtil.spawnUri(filePath, isolateReceiver.toMessage());
 
-      _stdout.write(jsonEncode(isolateReceiver.dangerResults));
+      final resultStr = jsonEncode(isolateReceiver.dangerResults);
+      _stdout.write(resultStr);
       await _stdout.flush();
-      if (shouldExitOnEnd) {
-        exit(0);
-      }
     } catch (e) {
       if (e is Error) {
         _logger.e(e.toString(), ex: e, stacktrace: e.stackTrace);
       } else {
         _logger.e(e.toString(), ex: e);
       }
-      if (shouldExitOnEnd) {
-        exit(1);
-      }
+    } finally {
+      isolateReceiver?.receivePort?.close();
     }
   }
 }

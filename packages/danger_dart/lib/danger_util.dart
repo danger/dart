@@ -99,8 +99,11 @@ class DangerUtil {
         paused: true,
         onExit: exitPort.sendPort);
     currentIsolate.resume(currentIsolate.pauseCapability);
-
     return Future.any(
-        [isolateExitCompleter.future, isolateErrorCompleter.future]);
+        [isolateExitCompleter.future, isolateErrorCompleter.future]).then((value) {
+          exitPort.close();
+          errorPort.close();
+          currentIsolate.kill(priority: Isolate.immediate);
+        });
   }
 }

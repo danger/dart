@@ -29,8 +29,7 @@ void main() {
       _mockDangerUtil = _MockDangerUtil();
       _mockStdin = _MockStdin();
       _mockStdout = _MockStdout();
-      _processCommand = ProcessCommand(_mockDangerUtil, _mockStdin, _mockStdout,
-          shouldExitOnEnd: false);
+      _processCommand = ProcessCommand(_mockDangerUtil, _mockStdin, _mockStdout);
       _commandRunner = TestCommandRunner.create(_processCommand);
 
       when(_mockDangerUtil.getDangerJSMetaData(any, shell: anyNamed('shell')))
