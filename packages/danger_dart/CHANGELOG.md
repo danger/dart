@@ -1,3 +1,7 @@
+## 0.0.4
+
+- Use passURLForDSL instead
+
 ## 0.0.3
 
 - Close receive port before exit
