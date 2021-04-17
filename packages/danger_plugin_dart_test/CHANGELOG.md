@@ -1,3 +1,7 @@
+## 0.0.5
+
+- Revarmp architecture
+
 ## 0.0.4
 
 - Make `limitMessageCharsPerLine` default at null.
