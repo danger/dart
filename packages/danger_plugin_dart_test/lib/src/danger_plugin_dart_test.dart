@@ -7,7 +7,7 @@ import 'package:path/path.dart' show join, current;
 
 class DangerPluginDartTest {
   static Future<void> processFile(File file,
-      {String workingDirectoryPath, bool inline = true}) async {
+      {String workingDirectoryPath, bool inline = true, int limitMessageCharsPerLine = 1000}) async {
     final workingPath = workingDirectoryPath ?? current;
 
     final line = file.readAsLinesSync();
@@ -20,7 +20,7 @@ class DangerPluginDartTest {
       if (message == null || message.isEmpty) {
         return;
       }
-      final msg = message.length > 1000 ? message.substring(0, 1000) + '...' : message;
+      final msg = message.length > limitMessageCharsPerLine ? message.substring(0, limitMessageCharsPerLine) + '...' : message;
       if (printMessageByID[testId] == null) {
         printMessageByID[testId] = [msg];
       } else {
