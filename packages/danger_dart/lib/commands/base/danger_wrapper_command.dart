@@ -42,15 +42,7 @@ abstract class DangerWrapperCommand extends Command {
           DebugTree(useColors: useColors, logLevels: ['I', 'W', 'E']));
     }
 
-    String dangerFilePath;
-    if (File(args['dangerfile']).existsSync()) {
-      dangerFilePath = args['dangerfile'];
-    } else if (File(join(current, args['dangerfile'])).existsSync()) {
-      dangerFilePath = join(current, args['dangerfile']);
-    } else {
-      throw 'dangerfile not found';
-    }
-
+    final dangerFilePath = dangerUtil.getDangerFile(args);
     final metaData = await dangerUtil.getDangerJSMetaData(args);
     final dangerProcessCommand = <String>[
       'dart',
@@ -62,7 +54,7 @@ abstract class DangerWrapperCommand extends Command {
               '--no-pause-isolates-on-exit'
             ]
           : [],
-      '${Platform.script.toFilePath()}',
+      '${dangerUtil.getScriptFilePath()}',
       'process',
       '--dangerfile',
       dangerFilePath,

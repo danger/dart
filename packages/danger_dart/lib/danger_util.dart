@@ -4,6 +4,7 @@ import 'package:args/args.dart';
 import 'package:fimber/fimber.dart';
 import 'package:process_run/shell.dart';
 import 'package:process_run/which.dart';
+import 'package:path/path.dart' show current, join;
 
 final logger = FimberLog('DangerUtil');
 
@@ -23,6 +24,19 @@ class DangerJSMetadata {
 
 class DangerUtil {
   const DangerUtil();
+
+  String getScriptFilePath() {
+    return Platform.script.toFilePath();
+  }
+
+  String getDangerFile(ArgResults args) {
+    if (File(args['dangerfile']).existsSync()) {
+      return args['dangerfile'];
+    } else if (File(join(current, args['dangerfile'])).existsSync()) {
+      return join(current, args['dangerfile']);
+    }
+    throw 'dangerfile not found';
+  }
 
   Future<List<ProcessResult>> execShellCommand(String command,
       {Shell shell, @required bool isVerbose}) async {
