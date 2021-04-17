@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'dart:io';
+import 'dart:isolate';
 import 'package:meta/meta.dart';
 import 'package:args/args.dart';
 import 'package:fimber/fimber.dart';
@@ -98,5 +100,30 @@ class DangerUtil {
         majorVersion: majorVersion,
         minorVersion: int.parse(versionSplit[1]),
         patchVersion: int.parse(versionSplit[2]));
+  }
+
+  Future<void> spawnUri(Uri uri, dynamic message) async {
+    final exitPort = ReceivePort();
+    final errorPort = ReceivePort();
+
+    final isolateExitCompleter = Completer();
+    final isolateErrorCompleter = Completer();
+
+    exitPort.listen((message) {
+      isolateExitCompleter.complete();
+    });
+
+    errorPort.listen((message) {
+      isolateErrorCompleter.completeError(message);
+    });
+
+    final currentIsolate = await Isolate.spawnUri(uri, [], message,
+        automaticPackageResolution: true,
+        paused: true,
+        onExit: exitPort.sendPort);
+    currentIsolate.resume(currentIsolate.pauseCapability);
+
+    return Future.any(
+        [isolateExitCompleter.future, isolateErrorCompleter.future]);
   }
 }
