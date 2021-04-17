@@ -4,12 +4,12 @@ import 'package:args/command_runner.dart';
 import 'package:danger_dart/danger_util.dart';
 import 'package:fimber/fimber.dart';
 import 'package:path/path.dart' show current, join;
-import 'package:process_run/shell.dart';
 
 class LocalCommand extends Command {
+  final DangerUtil dangerUtil;
   final _logger = FimberLog('LocalCommand');
 
-  LocalCommand() {
+  LocalCommand(this.dangerUtil) {
     argParser.addOption('dangerfile',
         defaultsTo: 'dangerfile.dart', help: 'Location of dangerfile');
 
@@ -52,7 +52,7 @@ class LocalCommand extends Command {
       throw 'dangerfile not found';
     }
 
-    final metaData = await DangerUtil.getDangerJSMetaData(args);
+    final metaData = await dangerUtil.getDangerJSMetaData(args);
     final dangerProcessCommand = <String>[
       'dart',
       'run',
@@ -80,17 +80,12 @@ class LocalCommand extends Command {
       ...(argResults['staging'] ? ['--staging'] : []),
     ].join(' ');
 
-    final shell = Shell(
-        verbose: true,
-        environment: {'DEBUG': isVerbose ? '*' : ''},
-        runInShell: true,
-        includeParentEnvironment: true);
-    _logger.d('Prepare shell');
     try {
       _logger.d('Arguments [$dangerJSCommand]');
       _logger.d('Run shell');
 
-      final result = await shell.run(dangerJSCommand);
+      final result = await dangerUtil.execShellCommand(dangerJSCommand,
+          isVerbose: isVerbose);
 
       _logger.d('Run Completed');
       exitCode = result.last.exitCode;

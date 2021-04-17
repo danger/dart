@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:meta/meta.dart';
 import 'package:args/args.dart';
 import 'package:fimber/fimber.dart';
-import 'package:process_run/shell_run.dart';
+import 'package:process_run/shell.dart';
 import 'package:process_run/which.dart';
 
 final logger = FimberLog('DangerUtil');
@@ -22,7 +22,21 @@ class DangerJSMetadata {
 }
 
 class DangerUtil {
-  static Future<DangerJSMetadata> getDangerJSMetaData(ArgResults args) async {
+  const DangerUtil();
+
+  Future<List<ProcessResult>> execShellCommand(String command,
+      {Shell shell, @required bool isVerbose}) async {
+    final _shell = shell ??
+        Shell(
+            verbose: true,
+            environment: {'DEBUG': isVerbose ? '*' : ''},
+            runInShell: true,
+            includeParentEnvironment: true);
+    return await _shell.run(command);
+  }
+
+  Future<DangerJSMetadata> getDangerJSMetaData(ArgResults args,
+      {Shell shell}) async {
     var dangerJSExecutable = '';
 
     if (args['danger-js-path'] != null) {
@@ -47,9 +61,9 @@ class DangerUtil {
 
     logger.d('Found danger-js at $dangerJSExecutable, checking version.');
 
-    final shell = Shell(verbose: false);
+    final _shell = shell ?? Shell(verbose: false);
     final dangerJSResult =
-        await shell.runExecutableArguments(dangerJSExecutable, ['--version']);
+        await _shell.runExecutableArguments(dangerJSExecutable, ['--version']);
 
     final dangerJSVersionStdout = dangerJSResult.stdout.toString().trim();
     logger.i('Got version $dangerJSVersionStdout');
