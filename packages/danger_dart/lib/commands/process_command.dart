@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'dart:isolate';
 
 import 'package:args/command_runner.dart';
+import 'package:danger_dart/danger_util.dart';
 import 'package:fimber/fimber.dart';
 
 import 'package:danger_core/danger_core.dart';
@@ -12,7 +12,13 @@ import 'package:danger_core/src/utils/danger_isolate_receiver.dart';
 import 'package:path/path.dart' show current, join;
 
 class ProcessCommand extends Command {
-  ProcessCommand() {
+  final DangerUtil _dangerUtil;
+  final Stdin _stdin;
+  final Stdout _stdout;
+  final bool shouldExitOnEnd;
+
+  ProcessCommand(this._dangerUtil, this._stdin, this._stdout,
+      {this.shouldExitOnEnd = true}) {
     argParser.addOption(
       'dangerfile',
       help: 'Location of dangerfile',
@@ -34,7 +40,7 @@ class ProcessCommand extends Command {
   @override
   Future<void> run() async {
     final args = argResults;
-    final str = (await stdin.transform(utf8.decoder).toList()).join('');
+    final str = (await _stdin.transform(utf8.decoder).toList()).join('');
 
     final isVerbose = args.wasParsed('verbose');
     final useColors = (Platform.environment['TERM'] ?? '').contains('xterm');
@@ -59,46 +65,24 @@ class ProcessCommand extends Command {
       //try parsing json
       final _ = DangerJSON.fromJson(json);
 
-      final filePath = Uri.parse(join(current, 'dangerfile.dart'));
+      final filePath = Uri.parse(join(current, dangerFile));
       final isolateReceiver = DangerIsolateReceiver(json);
 
-      await spawnUri(filePath, isolateReceiver.toMessage());
+      await _dangerUtil.spawnUri(filePath, isolateReceiver.toMessage());
 
-      stdout.write(jsonEncode(isolateReceiver.dangerResults));
-
-      exit(0);
+      _stdout.write(jsonEncode(isolateReceiver.dangerResults));
+      if (shouldExitOnEnd) {
+        exit(0);
+      }
     } catch (e) {
       if (e is Error) {
         _logger.e(e.toString(), ex: e, stacktrace: e.stackTrace);
       } else {
         _logger.e(e.toString(), ex: e);
       }
-      exit(1);
+      if (shouldExitOnEnd) {
+        exit(1);
+      }
     }
-  }
-
-  Future<void> spawnUri(Uri uri, dynamic message) async {
-    final exitPort = ReceivePort();
-    final errorPort = ReceivePort();
-
-    final isolateExitCompleter = Completer();
-    final isolateErrorCompleter = Completer();
-
-    exitPort.listen((message) {
-      isolateExitCompleter.complete();
-    });
-
-    errorPort.listen((message) {
-      isolateErrorCompleter.completeError(message);
-    });
-
-    final currentIsolate = await Isolate.spawnUri(uri, [], message,
-        automaticPackageResolution: true,
-        paused: true,
-        onExit: exitPort.sendPort);
-    currentIsolate.resume(currentIsolate.pauseCapability);
-
-    return Future.any(
-        [isolateExitCompleter.future, isolateErrorCompleter.future]);
   }
 }

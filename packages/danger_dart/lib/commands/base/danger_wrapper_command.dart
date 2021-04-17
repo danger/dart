@@ -2,12 +2,12 @@ import 'dart:io';
 
 import 'package:args/command_runner.dart';
 import 'package:fimber/fimber.dart';
-import 'package:path/path.dart' show current, join;
-import 'package:process_run/shell.dart';
 import 'package:danger_dart/danger_util.dart';
 
 abstract class DangerWrapperCommand extends Command {
-  DangerWrapperCommand() {
+  final DangerUtil dangerUtil;
+
+  DangerWrapperCommand(this.dangerUtil) {
     argParser.addOption('dangerfile',
         defaultsTo: 'dangerfile.dart', help: 'Location of dangerfile');
 
@@ -41,16 +41,8 @@ abstract class DangerWrapperCommand extends Command {
           DebugTree(useColors: useColors, logLevels: ['I', 'W', 'E']));
     }
 
-    String dangerFilePath;
-    if (File(args['dangerfile']).existsSync()) {
-      dangerFilePath = args['dangerfile'];
-    } else if (File(join(current, args['dangerfile'])).existsSync()) {
-      dangerFilePath = join(current, args['dangerfile']);
-    } else {
-      throw 'dangerfile not found';
-    }
-
-    final metaData = await DangerUtil.getDangerJSMetaData(args);
+    final dangerFilePath = dangerUtil.getDangerFile(args);
+    final metaData = await dangerUtil.getDangerJSMetaData(args);
     final dangerProcessCommand = <String>[
       'dart',
       'run',
@@ -61,7 +53,7 @@ abstract class DangerWrapperCommand extends Command {
               '--no-pause-isolates-on-exit'
             ]
           : [],
-      '${Platform.script.toFilePath()}',
+      '${dangerUtil.getScriptFilePath()}',
       'process',
       '--dangerfile',
       dangerFilePath,
@@ -77,17 +69,12 @@ abstract class DangerWrapperCommand extends Command {
       "'$dangerProcessCommand'"
     ].join(' ');
 
-    final shell = Shell(
-        verbose: true,
-        environment: {'DEBUG': isVerbose ? '*' : ''},
-        runInShell: true,
-        includeParentEnvironment: true);
-    _logger.d('Prepare shell');
     try {
       _logger.d('Arguments [$dangerJSCommand]');
       _logger.d('Run shell');
 
-      final result = await shell.run(dangerJSCommand);
+      final result = await dangerUtil.execShellCommand(dangerJSCommand,
+          isVerbose: isVerbose);
 
       _logger.d('Run Completed');
       exitCode = result.last.exitCode;
