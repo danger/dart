@@ -79,7 +79,7 @@ class DangerUtil {
     return DangerJSMetadata(executable: dangerJSExecutable);
   }
 
-  Future<void> spawnUri(Uri uri, dynamic message) async {
+  Future<void> spawnFile(File dangerFile, dynamic message) async {
     final exitPort = ReceivePort();
     final errorPort = ReceivePort();
 
@@ -94,16 +94,44 @@ class DangerUtil {
       isolateErrorCompleter.completeError(message);
     });
 
-    final currentIsolate = await Isolate.spawnUri(uri, [], message,
+    final tempDangerFile = _createTempDangerFile(dangerFile);
+
+    final currentIsolate = await Isolate.spawnUri(
+        tempDangerFile.uri, [], message,
         automaticPackageResolution: true,
         paused: true,
         onExit: exitPort.sendPort);
     currentIsolate.resume(currentIsolate.pauseCapability);
     return Future.any(
-        [isolateExitCompleter.future, isolateErrorCompleter.future]).then((value) {
-          exitPort.close();
-          errorPort.close();
-          currentIsolate.kill(priority: Isolate.immediate);
-        });
+            [isolateExitCompleter.future, isolateErrorCompleter.future])
+        .whenComplete(() {
+      exitPort.close();
+      errorPort.close();
+      currentIsolate.kill(priority: Isolate.immediate);
+      if (tempDangerFile.existsSync()) {
+        tempDangerFile.deleteSync();
+      }
+    });
+  }
+
+  File _createTempDangerFile(File dangerFile) {
+    final tempFilePath = '${dangerFile.path}spawnUri.g.dart';
+    final tempFile = File(tempFilePath);
+    if (tempFile.existsSync()) {
+      tempFile.deleteSync();
+    }
+    tempFile.createSync();
+    tempFile.writeAsStringSync('''
+// @dart=2.7
+import 'package:danger_core/danger_core.dart';
+import './${dangerFile.path}' as danger_file;
+
+void main(List<String> args, dynamic data) {
+  Danger.setup(data);
+
+  danger_file.main();
+}
+''');
+    return tempFile;
   }
 }

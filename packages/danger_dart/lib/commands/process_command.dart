@@ -59,45 +59,49 @@ class ProcessCommand extends Command {
       throw 'STDIN Error get empty input';
     }
 
-    if(!inputStr.startsWith(r'danger://dsl/')) {
+    if (!inputStr.startsWith(r'danger://dsl/')) {
       throw 'STDIN Error expect input [danger://dsl/] but got [$inputStr]';
     }
 
     final inputFilePath = inputStr.substring('danger://dsl/'.length);
     final inputFile = File(inputFilePath);
 
-    if(!inputFile.existsSync()) {
+    if (!inputFile.existsSync()) {
       throw 'File not found [$inputFilePath]';
     }
 
     final str = inputFile.readAsStringSync();
 
-    final dangerFile = args['dangerfile'] as String;
-    if (dangerFile == null) {
+    final dangerFileName = args['dangerfile'] as String;
+    if (dangerFileName == null) {
       throw 'Dangerfile not found';
+    }
+
+    final dangerFile = File(join(current, dangerFileName));
+    if (dangerFile.existsSync() == false) {
+      throw 'Dangerfile at [${dangerFile.uri}] not found';
     }
 
     DangerIsolateReceiver isolateReceiver;
 
     try {
       final json = jsonDecode(str);
-      //try parsing json
       final _ = DangerJSON.fromJson(json);
 
-      final filePath = Uri.parse(join(current, dangerFile));
       isolateReceiver = DangerIsolateReceiver(json);
 
-      await _dangerUtil.spawnUri(filePath, isolateReceiver.toMessage());
+      await _dangerUtil.spawnFile(
+          dangerFile, isolateReceiver.toMessage());
 
       final resultStr = jsonEncode(isolateReceiver.dangerResults);
       final tempDir = Directory.systemTemp;
       final tempFile = File(join(tempDir.path, 'danger-results.json'));
-      if(tempFile.existsSync()){
+      if (tempFile.existsSync()) {
         tempFile.deleteSync();
       }
       tempFile.createSync();
       tempFile.writeAsStringSync(resultStr);
-      
+
       _stdout.write('danger-results:/${tempFile.path}');
       await _stdout.flush();
     } catch (e) {
