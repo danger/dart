@@ -54,9 +54,9 @@ For GithubAction, you need to set GITHUB_TOKEN as environment [example](https://
 1. Adding `--debug` flag to any command you want to run.
 2. Waiting for text `Observatory listening on http://127.0.0.1:8181/xxxxxxx=/ `
 3. Attach process on your editor.
-   - For `VSCode`, go to `View > Command Palette` and choose `>Debug: Attach to Dart Process`, and put `http://127.0.0.1:8181/xxxxxxx=/`.
+   - For `VSCode`, you need to open `dangerfile.dart` in new window, go to `View > Command Palette` and choose `>Debug: Attach to Dart Process`, and put `http://127.0.0.1:8181/xxxxxxx=/`.
    - For `AndroidStudio` and `Intellij` .....
-4. Debugger will start with pausing at `danger_dart.dart`, you can skip it, after that it will stop at your `dangerfile`
+4. Debugger will start with pausing at `dangerfile.g.dart`, you can skip it, but don't forget to set breakpoint in your `dangerfile.dart`
 
 ### Development
 
