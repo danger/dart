@@ -43,26 +43,17 @@ class LocalCommand extends Command {
           DebugTree(useColors: useColors, logLevels: ['I', 'W', 'E']));
     }
 
-    final dangerFilePath = dangerUtil.getScriptFilePath();
+    final dangerFilePath = dangerUtil.getDangerFile(args);
     final metaData = await dangerUtil.getDangerJSMetaData(args);
     final dangerProcessCommand = <String>[
       'dart',
       'run',
-      ...isDebug
-          ? [
-              '--observe=8181',
-              '--no-pause-isolates-on-exit'
-            ]
-          : [],
+      ...isDebug ? ['--observe=8181', '--no-pause-isolates-on-exit'] : [],
       '${dangerUtil.getScriptFilePath()}',
       'process',
       '--dangerfile',
       dangerFilePath,
-      ...isDebug
-          ? [
-              '--debug'
-            ]
-          : [],
+      ...isDebug ? ['--debug'] : [],
     ].join(' ');
 
     final dangerJSCommand = <String>[
