@@ -38,7 +38,7 @@ void main() {
         return DangerJSMetadata(executable: '/usr/local/danger-js');
       });
 
-      when(_mockDangerUtil.spawnFile(captureAny, captureAny))
+      when(_mockDangerUtil.spawnFile(captureAny, captureAny, captureAny))
           .thenAnswer((realInvocation) async {});
 
       when(_mockDangerUtil.getDangerFile(any))
@@ -62,7 +62,7 @@ void main() {
           .run(['process', '--dangerfile', 'bin/danger_dart.dart', '--verbose']);
 
       final result =
-          verify(_mockDangerUtil.spawnFile(captureAny, captureAny)).captured;
+          verify(_mockDangerUtil.spawnFile(captureAny, captureAny, captureAny)).captured;
       final url = result[0];
       expect(url.path.toString(), endsWith('/bin/danger_dart.dart'));
     });
@@ -73,7 +73,7 @@ void main() {
           .run(['process', '--dangerfile', 'bin/danger_dart.dart', '--verbose']);
 
       final result =
-          verify(_mockDangerUtil.spawnFile(captureAny, captureAny)).captured;
+          verify(_mockDangerUtil.spawnFile(captureAny, captureAny,captureAny)).captured;
       final message = result[1];
 
       final sendPort = message[DANGER_SEND_PORT_MESSAGE_KEY];
@@ -85,7 +85,7 @@ void main() {
           .run(['process', '--dangerfile', 'bin/danger_dart.dart', '--verbose']);
 
       final result =
-          verify(_mockDangerUtil.spawnFile(captureAny, captureAny)).captured;
+          verify(_mockDangerUtil.spawnFile(captureAny, captureAny, captureAny)).captured;
       final message = result[1];
 
       final dslJSON = message[DANGER_DSL_MESSAGE_KEY];

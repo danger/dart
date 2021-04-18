@@ -21,6 +21,7 @@ class ProcessCommand extends Command {
       'dangerfile',
       help: 'Location of dangerfile',
     );
+    argParser.addFlag('debug', defaultsTo: false, negatable: false);
     argParser.addFlag('verbose', defaultsTo: false, negatable: false);
   }
 
@@ -41,6 +42,7 @@ class ProcessCommand extends Command {
 
     var inputStr = (await _stdin.transform(utf8.decoder).toList()).join('');
 
+    final isDebug = args.wasParsed('debug');
     final isVerbose = args.wasParsed('verbose');
     final useColors = (Platform.environment['TERM'] ?? '').contains('xterm');
     if (isVerbose) {
@@ -91,7 +93,7 @@ class ProcessCommand extends Command {
       isolateReceiver = DangerIsolateReceiver(json);
 
       await _dangerUtil.spawnFile(
-          dangerFile, isolateReceiver.toMessage());
+          dangerFile, isolateReceiver.toMessage(), isDebug);
 
       final resultStr = jsonEncode(isolateReceiver.dangerResults);
       final tempDir = Directory.systemTemp;

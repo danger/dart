@@ -79,7 +79,7 @@ class DangerUtil {
     return DangerJSMetadata(executable: dangerJSExecutable);
   }
 
-  Future<void> spawnFile(File dangerFile, dynamic message) async {
+  Future<void> spawnFile(File dangerFile, dynamic message, bool isDebug) async {
     final exitPort = ReceivePort();
     final errorPort = ReceivePort();
 
@@ -94,7 +94,7 @@ class DangerUtil {
       isolateErrorCompleter.completeError(message);
     });
 
-    final tempDangerFile = _createTempDangerFile(dangerFile);
+    final tempDangerFile = _createTempDangerFile(dangerFile, isDebug);
 
     final currentIsolate = await Isolate.spawnUri(
         tempDangerFile.uri, [], message,
@@ -114,8 +114,8 @@ class DangerUtil {
     });
   }
 
-  File _createTempDangerFile(File dangerFile) {
-    final tempFilePath = '${dangerFile.path}spawnUri.g.dart';
+  File _createTempDangerFile(File dangerFile, bool isDebug) {
+    final tempFilePath = '${dangerFile.path}.g.dart';
     final tempFile = File(tempFilePath);
     if (tempFile.existsSync()) {
       tempFile.deleteSync();
@@ -123,11 +123,14 @@ class DangerUtil {
     tempFile.createSync();
     tempFile.writeAsStringSync('''
 // @dart=2.7
+import 'dart:developer';
+
 import 'package:danger_core/danger_core.dart';
 import './${dangerFile.path}' as danger_file;
 
 void main(List<String> args, dynamic data) {
   Danger.setup(data);
+${isDebug ? '  debugger();' : ''}
 
   danger_file.main();
 }

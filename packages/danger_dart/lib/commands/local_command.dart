@@ -51,7 +51,6 @@ class LocalCommand extends Command {
       ...isDebug
           ? [
               '--observe=8181',
-              '--pause-isolates-on-start',
               '--no-pause-isolates-on-exit'
             ]
           : [],
@@ -59,6 +58,11 @@ class LocalCommand extends Command {
       'process',
       '--dangerfile',
       dangerFilePath,
+      ...isDebug
+          ? [
+              '--debug'
+            ]
+          : [],
     ].join(' ');
 
     final dangerJSCommand = <String>[
