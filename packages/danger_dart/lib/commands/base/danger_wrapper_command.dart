@@ -49,14 +49,18 @@ abstract class DangerWrapperCommand extends Command {
       ...isDebug
           ? [
               '--observe=8181',
-              '--pause-isolates-on-start',
-              '--no-pause-isolates-on-exit'
+              '--no-pause-isolates-on-exit',
             ]
           : [],
       '${dangerUtil.getScriptFilePath()}',
       'process',
       '--dangerfile',
       dangerFilePath,
+      ...isDebug
+          ? [
+              '--debug'
+            ]
+          : [],
     ].join(' ');
 
     final dangerJSCommand = <String>[
