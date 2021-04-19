@@ -29,9 +29,7 @@ import 'dart:io';
 import 'package:danger_core/danger_core.dart';
 import 'package:danger_plugin_dart_test/danger_plugin_dart_test.dart';
 
-void main(List<String> args, dynamic data) {
-  Danger.setup(data);
-
+void main() {
   final testResultFile = File('your_test_results.json');
   DangerPluginDartTest.processFile(testResultFile);
 }

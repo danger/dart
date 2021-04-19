@@ -5,9 +5,7 @@ import 'package:path/path.dart' show join, current;
 import 'package:danger_core/danger_core.dart';
 import 'package:danger_plugin_dart_test/danger_plugin_dart_test.dart';
 
-void main(List<String> args, dynamic data) {
-  Danger.setup(data);
-
+void main() {
   if (danger.github == null) {
     message('Welcome to danger local');
   }

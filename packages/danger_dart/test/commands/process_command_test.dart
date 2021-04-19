@@ -29,7 +29,8 @@ void main() {
       _mockDangerUtil = _MockDangerUtil();
       _mockStdin = _MockStdin();
       _mockStdout = _MockStdout();
-      _processCommand = ProcessCommand(_mockDangerUtil, _mockStdin, _mockStdout);
+      _processCommand =
+          ProcessCommand(_mockDangerUtil, _mockStdin, _mockStdout);
       _commandRunner = TestCommandRunner.create(_processCommand);
 
       when(_mockDangerUtil.getDangerJSMetaData(any, shell: anyNamed('shell')))
@@ -37,7 +38,7 @@ void main() {
         return DangerJSMetadata(executable: '/usr/local/danger-js');
       });
 
-      when(_mockDangerUtil.spawnUri(captureAny, captureAny))
+      when(_mockDangerUtil.spawnFile(captureAny, captureAny, captureAny))
           .thenAnswer((realInvocation) async {});
 
       when(_mockDangerUtil.getDangerFile(any))
@@ -58,21 +59,21 @@ void main() {
 
     test('Should pass dangerfile', () async {
       await _commandRunner
-          .run(['process', '--dangerfile', 'hello.dart', '--verbose']);
+          .run(['process', '--dangerfile', 'bin/danger_dart.dart', '--verbose']);
 
       final result =
-          verify(_mockDangerUtil.spawnUri(captureAny, captureAny)).captured;
+          verify(_mockDangerUtil.spawnFile(captureAny, captureAny, captureAny)).captured;
       final url = result[0];
-      expect(url.toString(), endsWith('/hello.dart'));
+      expect(url.path.toString(), endsWith('/bin/danger_dart.dart'));
     });
 
     test('Should pass sendPort in message key DANGER_SEND_PORT_MESSAGE_KEY',
         () async {
       await _commandRunner
-          .run(['process', '--dangerfile', 'hello.dart', '--verbose']);
+          .run(['process', '--dangerfile', 'bin/danger_dart.dart', '--verbose']);
 
       final result =
-          verify(_mockDangerUtil.spawnUri(captureAny, captureAny)).captured;
+          verify(_mockDangerUtil.spawnFile(captureAny, captureAny,captureAny)).captured;
       final message = result[1];
 
       final sendPort = message[DANGER_SEND_PORT_MESSAGE_KEY];
@@ -81,10 +82,10 @@ void main() {
 
     test('Should pass DSL in message key DANGER_DSL_MESSAGE_KEY', () async {
       await _commandRunner
-          .run(['process', '--dangerfile', 'hello.dart', '--verbose']);
+          .run(['process', '--dangerfile', 'bin/danger_dart.dart', '--verbose']);
 
       final result =
-          verify(_mockDangerUtil.spawnUri(captureAny, captureAny)).captured;
+          verify(_mockDangerUtil.spawnFile(captureAny, captureAny, captureAny)).captured;
       final message = result[1];
 
       final dslJSON = message[DANGER_DSL_MESSAGE_KEY];
@@ -100,13 +101,14 @@ void main() {
 
     test('Should write and flush stdout after running dangerfile', () async {
       await _commandRunner
-          .run(['process', '--dangerfile', 'hello.dart', '--verbose']);
+          .run(['process', '--dangerfile', 'bin/danger_dart.dart', '--verbose']);
 
       verify(_mockStdout.flush()).called(1);
 
       final result = verify(_mockStdout.write(captureAny)).captured;
       final urlResult = result[0];
-      final fileResult = File(urlResult.toString().substring('danger-results:/'.length));
+      final fileResult =
+          File(urlResult.toString().substring('danger-results:/'.length));
       final str = fileResult.readAsStringSync();
       expect(
           str,

@@ -2,9 +2,7 @@
 import 'package:danger_core/danger_core.dart';
 import 'package:danger_plugin_example/danger_plugin_example.dart';
 
-
-void main(List<String> args, dynamic data) {
-  Danger.setup(data);
+void main() {
   dangerRandomGenerateCode();
 
   message('Hello World');

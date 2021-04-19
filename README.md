@@ -25,9 +25,7 @@ dev_dependencies:
 // @dart=2.10
 import 'package:danger_core/danger_core.dart';
 
-void main(List<String> args, dynamic data) {
-  Danger.setup(data);
-
+void main() {
   if (danger.github.pr.title.contains('WIP')) {
     warn('PR is considered WIP');
   }

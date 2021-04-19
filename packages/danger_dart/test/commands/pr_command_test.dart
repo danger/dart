@@ -89,8 +89,9 @@ void main() {
           result.first.toString().split('--process').last.trim();
 
       expect(processCommand, contains('--observe=8181'));
-      expect(processCommand, contains('--pause-isolates-on-start'));
       expect(processCommand, contains('--no-pause-isolates-on-exit'));
+      
+      expect(processCommand, contains('--debug'));
     });
   });
 }
