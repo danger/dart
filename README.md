@@ -1,6 +1,6 @@
 # Danger.dart
 
-We support Github and Bitbucket Cloud.
+Supports GitHub and Bitbucket Cloud.
 
 **Still under development**
 
