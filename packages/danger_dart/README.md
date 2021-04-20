@@ -10,4 +10,4 @@ Use pub global to activate this command.
 $pub global activate danger_dart
 ```
 
-For more information, please refer to https://github.com/danger/danger.dart
+For more information, please refer to https://github.com/danger/dart

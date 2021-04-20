@@ -34,7 +34,7 @@ void main() {
 
 ### Notes
 
-For GithubAction, you need to set GITHUB_TOKEN as environment [example](https://github.com/danger/danger.dart/blob/master/.github/workflows/pr_flow.yaml)
+For GithubAction, you need to set GITHUB_TOKEN as environment [example](https://github.com/danger/dart/blob/master/.github/workflows/pr_flow.yaml)
 
 ```yaml
 - name: Run danger ci
@@ -51,7 +51,7 @@ For GithubAction, you need to set GITHUB_TOKEN as environment [example](https://
 
 ### Debugging `dangerfile.dart`
 
-Check the [Debugging doc](https://github.com/danger/danger.dart/blob/master/docs/DEBUGGING.md).
+Check the [Debugging doc](https://github.com/danger/dart/blob/master/docs/DEBUGGING.md).
 
 ### Development
 
@@ -84,4 +84,4 @@ dependencies:
   danger_core:
 ```
 
-For more information, see the example https://github.com/danger/danger.dart/tree/master/packages/danger_plugin_dart_test
+For more information, see the example https://github.com/danger/dart/tree/master/packages/danger_plugin_dart_test
