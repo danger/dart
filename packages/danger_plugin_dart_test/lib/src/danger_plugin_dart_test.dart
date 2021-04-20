@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:danger_core/danger_core.dart';
 import 'package:danger_plugin_dart_test/src/danger_dart_test_reporter.dart';
 import 'package:danger_plugin_dart_test/src/models/danger_dart_error_case.dart';
 import 'package:danger_plugin_dart_test/src/models/dart_test_result.dart';
@@ -13,6 +14,11 @@ class DangerPluginDartTest {
       {String workingDirectoryPath,
       int limitMessageCharsPerLine,
       DangerDartTestReporter reporter}) async {
+    if (!file.existsSync()) {
+      fail('Test report not found, path [${file.path}]');
+      return;
+    }
+
     final workingPath = workingDirectoryPath ?? current;
 
     final line = file.readAsLinesSync();
@@ -76,7 +82,8 @@ class DangerPluginDartTest {
       String testName;
 
       if (testMetaData != null) {
-        if (testMetaData.url != null && !testMetaData.url.startsWith('package\:')) {
+        if (testMetaData.url != null &&
+            !testMetaData.url.startsWith('package\:')) {
           fileName = testMetaData.url;
           lineNo = testMetaData.line;
         } else if (testMetaData.rootUrl != null) {
@@ -98,7 +105,7 @@ class DangerPluginDartTest {
           }
         }
 
-        testName = testMetaData.name;        
+        testName = testMetaData.name;
       }
 
       return DangerDartErrorCase(
@@ -109,6 +116,8 @@ class DangerPluginDartTest {
       );
     }).toList();
 
-    (reporter ?? DefaultTestReporter()).reportToDanger(failureList);
+    if (failureList.isNotEmpty) {
+      (reporter ?? DefaultTestReporter()).reportToDanger(failureList);
+    }
   }
 }
