@@ -1,3 +1,7 @@
+## 0.0.6
+
+- Handle failure cases
+
 ## 0.0.5
 
 - Revarmp architecture
