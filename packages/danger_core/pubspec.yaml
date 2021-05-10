@@ -1,7 +1,7 @@
 name: danger_core
 description: A starting point for Dart libraries or applications.
 version: 0.0.1
-homepage: https://github.com/danger/danger.dart
+homepage: https://github.com/danger/dart
 
 environment:
   sdk: ">=2.7.0 <3.0.0"

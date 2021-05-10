@@ -11,7 +11,7 @@ dev_dependencies:
   danger_core:
 ```
 
-For more information, please refer to https://github.com/danger/danger.dart
+For more information, please refer to https://github.com/danger/dart
 
 ### Publishing Note
 

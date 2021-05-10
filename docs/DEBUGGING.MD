@@ -27,7 +27,7 @@
 
 4. VSCode will ask for `VM Service URI`
 
-![Image of VSCode Step 1]((https://github.com/danger/danger.dart/blob/master/docs/images/vscode_1.png)
+![Image of VSCode Step 1](/docs/images/vscode_1.png)
 
 5. It will start at `yourdangerfile.dart.g.dart`, you can skip it
 
@@ -35,22 +35,22 @@
 
 1. Go to `Run` > `Edit Configurations...`
 
-![Image of Intellij Step 1]((https://github.com/danger/danger.dart/blob/master/docs/images/intellij_1.png)
+![Image of Intellij Step 1](/docs/images/intellij_1.png)
 
 2. Press `+` button and select `Dart Remote Debug`
 
-![Image of Intellij Step 2]((https://github.com/danger/danger.dart/blob/master/docs/images/intellij_2.png)
+![Image of Intellij Step 2](/docs/images/intellij_2.png)
 
 3. Put 'Debug Danger' into name field, and press `OK`
 
-![Image of Intellij Step 3]((https://github.com/danger/danger.dart/blob/master/docs/images/intellij_3.png)
+![Image of Intellij Step 3](/docs/images/intellij_3.png)
 
 4. On the main window, select `Debug Danger` and press `Debug`
 
-![Image of Intellij Step 4]((https://github.com/danger/danger.dart/blob/master/docs/images/intellij_4.png)
+![Image of Intellij Step 4](/docs/images/intellij_4.png)
 
 5. It will ask for `VM Service URI`
 
-![Image of Intellij Step 5]((https://github.com/danger/danger.dart/blob/master/docs/images/intellij_5.png)
+![Image of Intellij Step 5](/docs/images/intellij_5.png)
 
 6. It will start at `yourdangerfile.dart.g.dart`, you can skip it
