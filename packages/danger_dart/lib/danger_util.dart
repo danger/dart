@@ -7,6 +7,8 @@ import 'package:fimber/fimber.dart';
 import 'package:process_run/shell.dart';
 import 'package:process_run/which.dart';
 import 'package:path/path.dart' show current, join;
+import 'package:danger_core/src/models/danger_results.dart';
+import 'package:danger_core/src/models/violation.dart';
 
 final logger = FimberLog('DangerUtil');
 
@@ -136,5 +138,34 @@ ${isDebug ? '  debugger();' : ''}
 }
 ''');
     return tempFile;
+  }
+
+  void sortDangerResult(DangerResults results) {
+    results.fails.sort(_sortViolation);
+    results.warnings.sort(_sortViolation);
+    results.messages.sort(_sortViolation);
+    results.markdowns.sort(_sortViolation);
+  }
+
+  int _sortViolation(Violation left, Violation right) {
+    if (left.file == null && right.file == null) {
+      // Both null
+      return 0;
+    } else if (left.file == null) {
+      // Left null
+      return -1;
+    } else if (right.file == null) {
+      // Right null
+      return 1;
+    }
+
+    // Not null
+    if (left.file == right.file) {
+      // Same file compare with line instead
+      return left.line.compareTo(right.line);
+    } else {
+      // Not same file compare with filename
+      return left.file.compareTo(right.file);
+    }
   }
 }

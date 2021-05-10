@@ -1,11 +1,9 @@
-import 'dart:io';
-
 import 'package:args/args.dart';
 import 'package:args/src/arg_results.dart';
-import 'package:danger_core/danger_core.dart';
 import 'package:danger_dart/danger_util.dart';
-import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
+import 'package:danger_core/src/models/danger_results.dart';
+import 'package:danger_core/src/models/violation.dart';
 
 import 'package:path/path.dart' show current, join;
 
@@ -83,6 +81,77 @@ void main() {
           () => dangerUtil.getDangerFile(
               _createArgsResult({'dangerfile': 'not_a_dangerfile.dart'})),
           throwsA(equals('dangerfile not found')));
+    });
+  });
+
+  group('sortDangerResult', () {
+    DangerResults _result;
+
+    setUp(() {
+      _result = DangerResults(fails: [
+        Violation(message: 'fail on test 1 line 10', file: 'test1', line: 10),
+        Violation(message: 'fail on test 2 line 5', file: 'test2', line: 5),
+        Violation(message: 'fail on test 1 line 15', file: 'test1', line: 15),
+        Violation(message: 'summary message'),
+      ], messages: [
+        Violation(
+            message: 'message on test 1 line 20', file: 'test1', line: 20),
+        Violation(message: 'message on test 2 line 5', file: 'test2', line: 5),
+        Violation(
+            message: 'message on test 1 line 15', file: 'test1', line: 15),
+        Violation(message: 'summary message'),
+      ], warnings: [
+        Violation(
+            message: 'warning on test 1 line 20', file: 'test1', line: 20),
+        Violation(
+            message: 'warning on test 2 line 10', file: 'test2', line: 10),
+        Violation(message: 'summary message'),
+        Violation(
+            message: 'warning on test 2 line 15', file: 'test2', line: 15),
+      ], markdowns: [
+        Violation(
+            message: 'markdown on test 1 line 20', file: 'test1', line: 20),
+        Violation(message: 'summary message 2'),
+        Violation(message: 'summary message'),
+        Violation(
+            message: 'markdown on test 2 line 15', file: 'test2', line: 15),
+      ]);
+    });
+
+    test('should sort failures correctly', () {
+      dangerUtil.sortDangerResult(_result);
+
+      expect(_result.fails[0].message, 'summary message');
+      expect(_result.fails[1].message, 'fail on test 1 line 10');
+      expect(_result.fails[2].message, 'fail on test 1 line 15');
+      expect(_result.fails[3].message, 'fail on test 2 line 5');
+    });
+
+    test('should sort messages correctly', () {
+      dangerUtil.sortDangerResult(_result);
+
+      expect(_result.messages[0].message, 'summary message');
+      expect(_result.messages[1].message, 'message on test 1 line 15');
+      expect(_result.messages[2].message, 'message on test 1 line 20');
+      expect(_result.messages[3].message, 'message on test 2 line 5');
+    });
+
+    test('should sort warning correctly', () {
+      dangerUtil.sortDangerResult(_result);
+
+      expect(_result.warnings[0].message, 'summary message');
+      expect(_result.warnings[1].message, 'warning on test 1 line 20');
+      expect(_result.warnings[2].message, 'warning on test 2 line 10');
+      expect(_result.warnings[3].message, 'warning on test 2 line 15');
+    });
+
+    test('should sort markdown correctly', () {
+      dangerUtil.sortDangerResult(_result);
+
+      expect(_result.markdowns[0].message, 'summary message 2');
+      expect(_result.markdowns[1].message, 'summary message');
+      expect(_result.markdowns[2].message, 'markdown on test 1 line 20');
+      expect(_result.markdowns[3].message, 'markdown on test 2 line 15');
     });
   });
 }

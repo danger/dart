@@ -95,6 +95,8 @@ class ProcessCommand extends Command {
       await _dangerUtil.spawnFile(
           dangerFile, isolateReceiver.toMessage(), isDebug);
 
+      _dangerUtil.sortDangerResult(isolateReceiver.dangerResults);
+
       final resultStr = jsonEncode(isolateReceiver.dangerResults);
       final tempDir = Directory.systemTemp;
       final tempFile = File(join(tempDir.path, 'danger-results.json'));
