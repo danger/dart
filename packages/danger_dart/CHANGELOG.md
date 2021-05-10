@@ -1,3 +1,7 @@
+## 0.0.6
+
+- Order results to support Bitbucket Comment
+
 ## 0.0.5
 
 - Use passURLForDSL for local command
