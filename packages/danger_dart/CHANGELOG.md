@@ -1,3 +1,11 @@
+## 0.0.7
+
+- Order results to support Bitbucket Comment
+
+## 0.0.6
+
+- Breaking Changes: Remove boilerplate on dangerfile.dart
+
 ## 0.0.5
 
 - Use passURLForDSL for local command
