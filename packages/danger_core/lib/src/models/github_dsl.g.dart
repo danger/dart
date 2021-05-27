@@ -339,6 +339,8 @@ Map<String, dynamic> _$GitHubReviewToJson(GitHubReview instance) =>
 
 const _$GitHubReviewStateEnumMap = {
   GitHubReviewState.approved: 'APPROVED',
+  GitHubReviewState.changesRequested: 'CHANGES_REQUESTED',
+  GitHubReviewState.dimissed: 'DISMISSED',
   GitHubReviewState.requestChanges: 'REQUEST_CHANGES',
   GitHubReviewState.comment: 'COMMENT',
   GitHubReviewState.pending: 'PENDING',
