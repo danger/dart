@@ -44,6 +44,10 @@ enum GitHubPRAuthorAssociation {
 enum GitHubReviewState {
   @JsonValue('APPROVED')
   approved,
+  @JsonValue('CHANGES_REQUESTED')
+  changesRequested,
+  @JsonValue('DISMISSED')
+  dimissed,
   @JsonValue('REQUEST_CHANGES')
   requestChanges,
   @JsonValue('COMMENT')
