@@ -1,3 +1,7 @@
+## 0.0.5
+
+- Expose settings on DangerJSONDSL
+
 ## 0.0.4
 
 - Expose settings on DangerJSONDSL
