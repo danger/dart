@@ -1,3 +1,6 @@
+## 0.0.3
+- Add DangetSettingsGithub to expose Github Access Token
+
 ## 0.0.2
 - Fix Unhandled Github PR Review State
 
