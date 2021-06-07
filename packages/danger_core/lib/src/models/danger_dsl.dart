@@ -32,10 +32,12 @@ class DangerJSONDSL {
 
   final GitHubDSL github;
 
+  final DangerJSONSettings settings;
+
   factory DangerJSONDSL.fromJson(Map<String, dynamic> json) =>
       _$DangerJSONDSLFromJson(json);
 
-  DangerJSONDSL({this.bitbucketCloud, this.git, this.github});
+  DangerJSONDSL({this.bitbucketCloud, this.git, this.github, this.settings});
   Map<String, dynamic> toJson() => _$DangerJSONDSLToJson(this);
 }
 
