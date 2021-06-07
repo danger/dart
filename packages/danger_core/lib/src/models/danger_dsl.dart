@@ -1,6 +1,5 @@
 import 'package:danger_core/src/models/bitbucket_cloud.dart';
 import 'package:danger_core/src/models/git_dsl.dart';
-import 'package:danger_core/src/models/cli_args.dart';
 import 'package:danger_core/src/models/github_dsl.dart';
 import 'package:danger_core/src/models/settings_github.dart';
 
@@ -43,7 +42,7 @@ class DangerJSONDSL {
 
 @JsonSerializable()
 class DangerJSONSettings {
-  final CliArgs cliArgs;
+  final Map<String, dynamic> cliArgs;
   final DangetSettingsGithub github;
 
   factory DangerJSONSettings.fromJson(Map<String, dynamic> json) =>

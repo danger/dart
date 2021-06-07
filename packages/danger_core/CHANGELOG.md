@@ -1,3 +1,6 @@
+## 0.0.6
+- Make cliArgs dynamic
+
 ## 0.0.5
 
 - Expose settings on DangerJSONDSL

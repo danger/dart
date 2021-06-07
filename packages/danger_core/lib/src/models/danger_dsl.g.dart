@@ -47,9 +47,7 @@ Map<String, dynamic> _$DangerJSONDSLToJson(DangerJSONDSL instance) =>
 
 DangerJSONSettings _$DangerJSONSettingsFromJson(Map<String, dynamic> json) {
   return DangerJSONSettings(
-    cliArgs: json['cliArgs'] == null
-        ? null
-        : CliArgs.fromJson(json['cliArgs'] as Map<String, dynamic>),
+    cliArgs: json['cliArgs'] as Map<String, dynamic>,
     github: json['github'] == null
         ? null
         : DangetSettingsGithub.fromJson(json['github'] as Map<String, dynamic>),
@@ -58,6 +56,6 @@ DangerJSONSettings _$DangerJSONSettingsFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$DangerJSONSettingsToJson(DangerJSONSettings instance) =>
     <String, dynamic>{
-      'cliArgs': instance.cliArgs?.toJson(),
+      'cliArgs': instance.cliArgs,
       'github': instance.github?.toJson(),
     };
