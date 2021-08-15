@@ -31,6 +31,9 @@ DangerJSONDSL _$DangerJSONDSLFromJson(Map<String, dynamic> json) {
     github: json['github'] == null
         ? null
         : GitHubDSL.fromJson(json['github'] as Map<String, dynamic>),
+    settings: json['settings'] == null
+        ? null
+        : DangerJSONSettings.fromJson(json['settings'] as Map<String, dynamic>),
   );
 }
 
@@ -39,17 +42,20 @@ Map<String, dynamic> _$DangerJSONDSLToJson(DangerJSONDSL instance) =>
       'git': instance.git?.toJson(),
       'bitbucket_cloud': instance.bitbucketCloud?.toJson(),
       'github': instance.github?.toJson(),
+      'settings': instance.settings?.toJson(),
     };
 
 DangerJSONSettings _$DangerJSONSettingsFromJson(Map<String, dynamic> json) {
   return DangerJSONSettings(
-    cliArgs: json['cliArgs'] == null
+    cliArgs: json['cliArgs'] as Map<String, dynamic>,
+    github: json['github'] == null
         ? null
-        : CliArgs.fromJson(json['cliArgs'] as Map<String, dynamic>),
+        : DangetSettingsGithub.fromJson(json['github'] as Map<String, dynamic>),
   );
 }
 
 Map<String, dynamic> _$DangerJSONSettingsToJson(DangerJSONSettings instance) =>
     <String, dynamic>{
-      'cliArgs': instance.cliArgs?.toJson(),
+      'cliArgs': instance.cliArgs,
+      'github': instance.github?.toJson(),
     };
