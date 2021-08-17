@@ -1,5 +1,7 @@
 # Danger Dart
 
+[![Pub version](https://img.shields.io/pub/v/danger_dart.svg)](https://pub.dev/packages/danger_dart)
+
 This is Danger Dart runner
 
 ### Installation

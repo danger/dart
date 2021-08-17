@@ -14,12 +14,12 @@ void main() {
     warn('PR is considered WIP');
   }
 
-  final dangerCoreReportFile = File(join(current, 'danger_core_report.json'));
-  final dangerDartReportFile = File(join(current, 'danger_dart_report.json'));
-  final dangerPluginDartTestReportFile =
-      File(join(current, 'danger_plugin_dart_test_report.json'));
-
-  DangerPluginDartTest.processFile(dangerCoreReportFile);
-  DangerPluginDartTest.processFile(dangerDartReportFile);
-  DangerPluginDartTest.processFile(dangerPluginDartTestReportFile);
+  DangerPluginDartTest.processFile(
+      File(join(current, 'danger_core_report.json')));
+  DangerPluginDartTest.processFile(
+      File(join(current, 'danger_dart_report.json')));
+  DangerPluginDartTest.processFile(
+      File(join(current, 'danger_plugin_dart_test_report.json')));
+  DangerPluginDartTest.processFile(
+      File(join(current, 'danger_plugin_golden_reporter.json')));
 }

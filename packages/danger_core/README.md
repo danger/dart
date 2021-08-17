@@ -1,5 +1,7 @@
 # Danger Core
 
+[![Pub version](https://img.shields.io/pub/v/danger_core.svg)](https://pub.dev/packages/danger_core)
+
 This is Core of Danger Dart
 
 ### Installation

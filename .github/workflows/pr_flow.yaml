@@ -51,6 +51,15 @@ jobs:
         continue-on-error: true
         working-directory: packages/danger_plugin_dart_test/
 
+      - name: Install danger_plugin_golden_reporter dependencies
+        run: dart pub get
+        working-directory: packages/danger_plugin_golden_reporter/
+
+      - name: Test danger_plugin_golden_reporter
+        run: dart test --reporter json > ../../danger_plugin_golden_reporter.json
+        continue-on-error: true
+        working-directory: packages/danger_plugin_golden_reporter/
+
       - name: Install app dependencies
         run: dart pub get
 
