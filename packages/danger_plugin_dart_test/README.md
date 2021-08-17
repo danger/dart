@@ -1,5 +1,7 @@
 # Danger Plugin: Dart Test
 
+[![Pub version](https://img.shields.io/pub/v/danger_plugin_dart_test.svg)](https://pub.dev/packages/danger_plugin_dart_test)
+
 This plugin will parse the test results, and notify the failure cases.
 
 ## Usage

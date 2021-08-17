@@ -1,5 +1,7 @@
 # Danger Plugin: Golden Reporter
 
+[![Pub version](https://img.shields.io/pub/v/danger_plugin_golden_reporter.svg)](https://pub.dev/packages/danger_plugin_golden_reporter)
+
 This plugin will report created and modified golden results.
 
 ## Usage
