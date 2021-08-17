@@ -4,7 +4,7 @@ import 'package:danger_core/src/utils/danger_isolate_sender.dart';
 
 class DangerIsolateSenderMock extends DangerIsolateSender {
   @override
-  DangerJSONDSL get dangerJSONDSL => null;
+  DangerJSONDSL dangerJSONDSL;
 
   final failList = <Violation>[];
   final markdownList = <Violation>[];
