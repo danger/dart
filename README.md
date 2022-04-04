@@ -12,6 +12,12 @@ Supports GitHub and Bitbucket Cloud.
 $ npm install -g danger
 ```
 
+- Activate Danger Dart
+
+```bash
+$ pub global activate danger_dart
+```
+
 - Adding `danger_core` to `dev_dependencies`
 
 ```yaml
@@ -32,6 +38,12 @@ void main() {
 }
 ```
 
+### Commands
+
+- `danger_dart ci` - Use this on CI
+- `danger_dart pr https://github.com/Moya/Harvey/pull/23` - Use this to build your Dangerfile
+- `danger_dart local` - Use this to run danger against your local changes from master
+
 ### Notes
 
 For GithubAction, you need to set GITHUB_TOKEN as environment [example](https://github.com/danger/dart/blob/master/.github/workflows/pr_flow.yaml)
@@ -42,12 +54,6 @@ For GithubAction, you need to set GITHUB_TOKEN as environment [example](https://
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
-
-### Commands
-
-- `danger_dart ci` - Use this on CI
-- `danger_dart pr https://github.com/Moya/Harvey/pull/23` - Use this to build your Dangerfile
-- `danger_dart local` - Use this to run danger against your local changes from master
 
 ### Debugging `dangerfile.dart`
 
