@@ -17,10 +17,10 @@ class DangerResults {
   final DangerResultMetaData meta;
 
   DangerResults(
-      {this.fails,
-      this.warnings,
-      this.messages,
-      this.markdowns,
+      {required this.fails,
+      required this.warnings,
+      required this.messages,
+      required this.markdowns,
       this.meta = const DangerResultMetaData()});
 
   factory DangerResults.fromJson(Map<String, dynamic> json) =>

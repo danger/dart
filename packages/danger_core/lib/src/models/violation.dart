@@ -23,20 +23,20 @@ class Violation {
 
   /// Optional path to the file
   @JsonKey(includeIfNull: false)
-  final String file;
+  final String? file;
 
   /// Optional line in the file
   @JsonKey(includeIfNull: false)
-  final int line;
+  final int? line;
 
   /// Optional icon for table (Only valid for messages)
   @JsonKey(includeIfNull: false)
-  final String icon;
+  final String? icon;
 
   factory Violation.fromJson(Map<String, dynamic> json) =>
       _$ViolationFromJson(json);
 
-  Violation({this.message, this.file, this.line, this.icon});
+  Violation({required this.message, this.file, this.line, this.icon});
   Map<String, dynamic> toJson() => _$ViolationToJson(this);
 }
 
@@ -45,7 +45,7 @@ class WrappedViolation {
   final ViolationType type;
   final Violation violation;
 
-  WrappedViolation({this.type, this.violation});
+  WrappedViolation({required this.type,required  this.violation});
 
   factory WrappedViolation.fromJson(Map<String, dynamic> json) =>
       _$WrappedViolationFromJson(json);

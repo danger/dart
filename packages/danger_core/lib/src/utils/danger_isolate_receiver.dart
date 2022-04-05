@@ -18,7 +18,7 @@ class DangerIsolateReceiver {
 
   void _initialize() {
     receivePort.listen((message) {
-      if (message is Map) {
+      if (message is Map<String, dynamic>) {
         try {
           final wrappedViolation = WrappedViolation.fromJson(message);
           switch (wrappedViolation.type) {

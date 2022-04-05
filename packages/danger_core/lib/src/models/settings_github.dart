@@ -6,11 +6,11 @@ part 'settings_github.g.dart';
 @JsonSerializable()
 class DangetSettingsGithub {
   final String accessToken;
-  final Map<String, dynamic> additionalHeaders;
+  final Map<String, dynamic>? additionalHeaders;
 
   factory DangetSettingsGithub.fromJson(Map<String, dynamic> json) =>
       _$DangetSettingsGithubFromJson(json);
 
-  DangetSettingsGithub({this.additionalHeaders, this.accessToken});
+  DangetSettingsGithub({this.additionalHeaders, required this.accessToken});
   Map<String, dynamic> toJson() => _$DangetSettingsGithubToJson(this);
 }

@@ -8,42 +8,60 @@ import 'package:json_annotation/json_annotation.dart'
 
 part 'danger_dsl.g.dart';
 
+class DangerJSONDSL {
+  /// The data only version of Git DSL
+  GitJSONDSL get git => rawJSONDSL.git;
+
+  /// The data only version of BitBucket Cloud DSL
+  BitBucketCloudJSONDSL get bitbucketCloud => rawJSONDSL.bitbucketCloud!;
+
+  /// The data only version of GitHub
+  GitHubDSL get github => rawJSONDSL.github!;
+
+  DangerJSONSettings get settings => rawJSONDSL.settings!;
+
+  final DangerRawJSONDSL rawJSONDSL;
+
+  DangerJSONDSL(this.rawJSONDSL);
+}
+
 @JsonSerializable()
 class DangerJSON {
-  final DangerJSONDSL danger;
+  final DangerRawJSONDSL danger;
 
   factory DangerJSON.fromJson(Map<String, dynamic> json) =>
       _$DangerJSONFromJson(json);
 
-  DangerJSON({this.danger});
+  DangerJSON({required this.danger});
 
   Map<String, dynamic> toJson() => _$DangerJSONToJson(this);
 }
 
 @JsonSerializable()
-class DangerJSONDSL {
+class DangerRawJSONDSL {
   /// The data only version of Git DSL
   final GitJSONDSL git;
 
   /// The data only version of BitBucket Cloud DSL
   @JsonKey(name: 'bitbucket_cloud')
-  final BitBucketCloudJSONDSL bitbucketCloud;
+  final BitBucketCloudJSONDSL? bitbucketCloud;
 
-  final GitHubDSL github;
+  final GitHubDSL? github;
 
-  final DangerJSONSettings settings;
+  final DangerJSONSettings? settings;
 
-  factory DangerJSONDSL.fromJson(Map<String, dynamic> json) =>
-      _$DangerJSONDSLFromJson(json);
+  factory DangerRawJSONDSL.fromJson(Map<String, dynamic> json) =>
+      _$DangerRawJSONDSLFromJson(json);
 
-  DangerJSONDSL({this.bitbucketCloud, this.git, this.github, this.settings});
-  Map<String, dynamic> toJson() => _$DangerJSONDSLToJson(this);
+  DangerRawJSONDSL(
+      {required this.git, this.bitbucketCloud, this.github, this.settings});
+  Map<String, dynamic> toJson() => _$DangerRawJSONDSLToJson(this);
 }
 
 @JsonSerializable()
 class DangerJSONSettings {
-  final Map<String, dynamic> cliArgs;
-  final DangetSettingsGithub github;
+  final Map<String, dynamic>? cliArgs;
+  final DangetSettingsGithub? github;
 
   factory DangerJSONSettings.fromJson(Map<String, dynamic> json) =>
       _$DangerJSONSettingsFromJson(json);

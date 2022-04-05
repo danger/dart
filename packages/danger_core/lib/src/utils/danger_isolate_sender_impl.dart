@@ -5,21 +5,21 @@ import 'package:danger_core/src/models/danger_core_constants.dart';
 import 'package:danger_core/src/models/violation.dart';
 import 'package:danger_core/src/utils/danger_isolate_sender.dart';
 
-typedef DangerJSONDSLMessageConverter = DangerJSONDSL Function(dynamic message);
+typedef DangerJSONDSLMessageConverter = DangerRawJSONDSL Function(
+    dynamic message);
 
 final _defaultDangerJSONDSLMessageConverter =
-    (dynamic message) => DangerJSONDSL.fromJson(message);
+    (dynamic message) => DangerRawJSONDSL.fromJson(message);
 
 class DangerIsolateSenderImpl extends DangerIsolateSender {
   final SendPort sendPort;
-  
 
-  final DangerJSONDSLMessageConverter converter;
-
-  DangerIsolateSenderImpl(dynamic message, {this.converter})
+  DangerIsolateSenderImpl(dynamic message,
+      {DangerJSONDSLMessageConverter? converter})
       : sendPort = message[DANGER_SEND_PORT_MESSAGE_KEY],
-        dangerJSONDSL = (converter ?? _defaultDangerJSONDSLMessageConverter)(
-            message[DANGER_DSL_MESSAGE_KEY]);
+        dangerJSONDSL = DangerJSONDSL(
+            (converter ?? _defaultDangerJSONDSLMessageConverter)(
+                message[DANGER_DSL_MESSAGE_KEY]));
 
   @override
   final DangerJSONDSL dangerJSONDSL;
