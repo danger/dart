@@ -1,5 +1,5 @@
 name: danger_core
-description: A starting point for Dart libraries or applications.
+description: Core of Danger Dart, tool to help you reviewing the code.
 version: 1.0.0
 homepage: https://github.com/danger/dart
 
@@ -16,3 +16,4 @@ dev_dependencies:
   build_runner: ^2.1.8
   mockito: ^5.1.0
   isolate: ^2.1.1
+  path: ^1.8.0
