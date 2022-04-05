@@ -57,7 +57,7 @@ class GitLabMergeRequest {
   final bool allowMaintainerToPush;
 
   @JsonKey(name: 'approvals_before_merge')
-  final int approvalsBeforeMerge;
+  final int? approvalsBeforeMerge;
 
   final GitLabUser? assignee;
 
@@ -158,7 +158,7 @@ class GitLabMergeRequest {
   GitLabMergeRequest(
       {required this.allowCollaboration,
       required this.allowMaintainerToPush,
-      required this.approvalsBeforeMerge,
+      this.approvalsBeforeMerge,
       this.assignee,
       required this.author,
       required this.changesCount,

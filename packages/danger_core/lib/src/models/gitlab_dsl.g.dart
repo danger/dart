@@ -47,7 +47,7 @@ GitLabMergeRequest _$GitLabMergeRequestFromJson(Map<String, dynamic> json) =>
     GitLabMergeRequest(
       allowCollaboration: json['allow_collaboration'] as bool,
       allowMaintainerToPush: json['allow_maintainer_to_push'] as bool,
-      approvalsBeforeMerge: json['approvals_before_merge'] as int,
+      approvalsBeforeMerge: json['approvals_before_merge'] as int?,
       assignee: json['assignee'] == null
           ? null
           : GitLabUser.fromJson(json['assignee'] as Map<String, dynamic>),

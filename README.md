@@ -37,6 +37,15 @@ void main() {
 }
 ```
 
+### Preparing Environment Variables
+
+For GitHub, you need `DANGER_GITHUB_API_TOKEN` in your environment variable, can be created [here](https://github.com/settings/tokens/new).
+
+For Bitbucket Cloud, please refer to https://danger.systems/js/usage/bitbucket_cloud.html
+
+For GitLab, please refer to https://danger.systems/js/usage/gitlab.html
+
+
 ### Commands
 
 - `danger_dart ci` - Use this on CI
@@ -56,7 +65,7 @@ For GithubAction, you need to set GITHUB_TOKEN as environment [example](https://
 
 ### Debugging `dangerfile.dart`
 
-Check the [Debugging doc](https://github.com/danger/dart/blob/master/docs/DEBUGGING.md).
+Check the [Debugging doc](https://github.com/danger/dart/blob/master/docs/DEBUGGING.MD).
 
 ### Development
 
