@@ -96,8 +96,6 @@ class BitBucketCloudPRDSL {
   /// Avaliable keys:
   /// "decline", "commits", "self", "comments", "merge", "html", "activity", "diff", "approve", "statuses"
   final Map<String, BitBucketCloudLink> links;
-  factory BitBucketCloudPRDSL.fromJson(Map<String, dynamic> json) =>
-      _$BitBucketCloudPRDSLFromJson(json);
 
   BitBucketCloudPRDSL(
       {required this.id,
@@ -113,6 +111,8 @@ class BitBucketCloudPRDSL {
       required this.participants,
       required this.links});
 
+  factory BitBucketCloudPRDSL.fromJson(Map<String, dynamic> json) =>
+      _$BitBucketCloudPRDSLFromJson(json);
   Map<String, dynamic> toJson() => _$BitBucketCloudPRDSLToJson(this);
 }
 

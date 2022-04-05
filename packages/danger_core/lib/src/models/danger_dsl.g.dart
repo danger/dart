@@ -29,6 +29,9 @@ DangerRawJSONDSL _$DangerRawJSONDSLFromJson(Map<String, dynamic> json) =>
           ? null
           : DangerJSONSettings.fromJson(
               json['settings'] as Map<String, dynamic>),
+      gitlab: json['gitlab'] == null
+          ? null
+          : GitLabDSL.fromJson(json['gitlab'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$DangerRawJSONDSLToJson(DangerRawJSONDSL instance) =>
@@ -36,6 +39,7 @@ Map<String, dynamic> _$DangerRawJSONDSLToJson(DangerRawJSONDSL instance) =>
       'git': instance.git.toJson(),
       'bitbucket_cloud': instance.bitbucketCloud?.toJson(),
       'github': instance.github?.toJson(),
+      'gitlab': instance.gitlab?.toJson(),
       'settings': instance.settings?.toJson(),
     };
 

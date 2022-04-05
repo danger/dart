@@ -1,6 +1,7 @@
 import 'package:danger_core/src/models/bitbucket_cloud.dart';
 import 'package:danger_core/src/models/git_dsl.dart';
 import 'package:danger_core/src/models/github_dsl.dart';
+import 'package:danger_core/src/models/gitlab_dsl.dart';
 import 'package:danger_core/src/models/settings_github.dart';
 
 import 'package:json_annotation/json_annotation.dart'
@@ -17,6 +18,9 @@ class DangerJSONDSL {
 
   /// The data only version of GitHub
   GitHubDSL get github => rawJSONDSL.github!;
+
+  /// The data only version of GitLab
+  GitLabDSL get gitLab => rawJSONDSL.gitlab!;
 
   DangerJSONSettings get settings => rawJSONDSL.settings!;
 
@@ -48,13 +52,19 @@ class DangerRawJSONDSL {
 
   final GitHubDSL? github;
 
+  final GitLabDSL? gitlab;
+
   final DangerJSONSettings? settings;
 
   factory DangerRawJSONDSL.fromJson(Map<String, dynamic> json) =>
       _$DangerRawJSONDSLFromJson(json);
 
   DangerRawJSONDSL(
-      {required this.git, this.bitbucketCloud, this.github, this.settings});
+      {required this.git,
+      this.bitbucketCloud,
+      this.github,
+      this.settings,
+      this.gitlab});
   Map<String, dynamic> toJson() => _$DangerRawJSONDSLToJson(this);
 }
 
