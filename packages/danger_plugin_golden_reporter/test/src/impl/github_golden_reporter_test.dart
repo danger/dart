@@ -2,32 +2,20 @@ import 'package:danger_core/danger_core.dart';
 import 'package:danger_plugin_golden_reporter/src/impl/github_golden_reporter.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
-
-import 'package:danger_core/danger_core.dart';
 import 'package:danger_core/src/utils/danger_isolate_sender_mock.dart';
 
-class MockDangerJSONDSL extends Mock implements DangerJSONDSL {}
-
-class MockGitJSONDSL extends Mock implements GitJSONDSL {}
-
-class MockGitHubDSL extends Mock implements GitHubDSL {}
-
-class MockGitHubAPIPR extends Mock implements GitHubAPIPR {}
-
-class MockGitHubPRDSL extends Mock implements GitHubPRDSL {}
-
-class MockGitHubMergeRef extends Mock implements GitHubMergeRef {}
+import '../../mock_utils.mocks.dart';
 
 void main() {
-  DangerIsolateSenderMock dangerIsolateSenderMock;
-  MockDangerJSONDSL mockDangerJSONDSL;
-  MockGitJSONDSL mockGitJSONDSL;
-  MockGitHubDSL mockGitHubDSL;
-  MockGitHubAPIPR mockGitHubAPIPR;
-  MockGitHubPRDSL gitHubPRDSL;
+  late DangerIsolateSenderMock dangerIsolateSenderMock;
+  late MockDangerJSONDSL mockDangerJSONDSL;
+  late MockGitJSONDSL mockGitJSONDSL;
+  late MockGitHubDSL mockGitHubDSL;
+  late MockGitHubAPIPR mockGitHubAPIPR;
+  late MockGitHubPRDSL gitHubPRDSL;
 
-  MockGitHubMergeRef head;
-  MockGitHubMergeRef base;
+  late MockGitHubMergeRef head;
+  late MockGitHubMergeRef base;
 
   final reporter = GithubGoldenReporter();
 

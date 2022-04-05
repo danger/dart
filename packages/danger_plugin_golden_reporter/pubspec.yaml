@@ -4,12 +4,13 @@ version: 0.0.1
 homepage: https://github.com/danger/dart
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   danger_core:
     path: ../danger_core
 
 dev_dependencies:
-  test: ^1.14.4
-  mockito:
+  test: ^1.20.2
+  mockito: ^5.1.0
+  build_runner: ^2.1.8
