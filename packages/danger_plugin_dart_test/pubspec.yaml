@@ -1,5 +1,5 @@
 name: danger_plugin_dart_test
-description: A starting point for Dart libraries or applications.
+description: A Danger Dart plugin to process test result.
 version: 1.0.0
 homepage: https://github.com/danger/dart
 
@@ -8,7 +8,7 @@ environment:
 
 dependencies:
   path: ">= 1.8.0 < 2.0.0"
-  # danger_core: ">= 0.0.1 < 2.0.0"
+  # danger_core: ">= 1.0.0 < 2.0.0"
   danger_core:
     path: ../danger_core
 
