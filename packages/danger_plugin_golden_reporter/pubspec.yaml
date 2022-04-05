@@ -1,6 +1,6 @@
 name: danger_plugin_golden_reporter
 description: A starting point for Dart libraries or applications.
-version: 0.0.1
+version: 1.0.0
 homepage: https://github.com/danger/dart
 
 environment:

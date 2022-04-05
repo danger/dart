@@ -1,3 +1,8 @@
+## 1.0.0
+
+- Supports Null Safety
+- Supports GitLab
+
 ## 0.0.6
 - Make cliArgs dynamic
 
