@@ -7,19 +7,28 @@ import 'package:danger_core/src/utils/danger_isolate_sender_impl.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
-class _MockDangerJSONDSL extends Mock implements DangerJSONDSL {}
+class _MockGitJSONDSL extends Mock implements GitJSONDSL {}
+
+class _MockDangerRawJSONDSL extends Mock implements DangerRawJSONDSL {
+  final _mockGit = _MockGitJSONDSL();
+
+  @override
+  GitJSONDSL get git => _mockGit;
+}
 
 void main() {
   group('DangerIsolateSender', () {
-    DangerIsolateSenderImpl isolateSender;
-    ReceivePort receivePort;
-    _MockDangerJSONDSL mockDangerJSONDSL;
+    late DangerIsolateSenderImpl isolateSender;
+    late ReceivePort receivePort;
+    late _MockDangerRawJSONDSL mockDangerJSONDSL;
+
     dynamic lastMessage;
     final onlyMessageViolation = Violation(message: 'hello');
 
     setUp(() {
       receivePort = ReceivePort();
-      mockDangerJSONDSL = _MockDangerJSONDSL();
+      mockDangerJSONDSL = _MockDangerRawJSONDSL();
+
       isolateSender = DangerIsolateSenderImpl({
         DANGER_SEND_PORT_MESSAGE_KEY: receivePort.sendPort,
         DANGER_DSL_MESSAGE_KEY: '{}',
@@ -32,7 +41,8 @@ void main() {
     test('should initialize correctly', () {
       expect(isolateSender.sendPort, equals(receivePort.sendPort));
       expect(lastMessage, equals('{}'));
-      expect(isolateSender.dangerJSONDSL, equals(mockDangerJSONDSL));
+      expect(isolateSender.dangerJSONDSL.rawJSONDSL, equals(mockDangerJSONDSL));
+      expect(isolateSender.dangerJSONDSL.git, equals(mockDangerJSONDSL.git));
     });
 
     test('should add message violation correctly', () async {

@@ -5,7 +5,7 @@ import 'package:test/test.dart';
 
 void main() {
   group('DangerIsolateReceiver', () {
-    DangerIsolateReceiver receiver;
+    late DangerIsolateReceiver receiver;
     final onlyMessageViolation = Violation(message: 'hello');
     final json = {'danger': 'JSON'};
 

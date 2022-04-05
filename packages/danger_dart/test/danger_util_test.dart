@@ -15,7 +15,7 @@ ArgResults _createArgsResult(Map<String, dynamic> args) {
 }
 
 void main() {
-  DangerUtil dangerUtil;
+  late DangerUtil dangerUtil;
 
   setUp(() {
     dangerUtil = DangerUtil();
@@ -85,7 +85,7 @@ void main() {
   });
 
   group('sortDangerResult', () {
-    DangerResults _result;
+    late DangerResults _result;
 
     setUp(() {
       _result = DangerResults(fails: [

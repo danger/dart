@@ -17,28 +17,28 @@ class Danger {
   }
 }
 
-DangerIsolateSender _sender;
+late DangerIsolateSender _sender;
 DangerJSONDSL get danger => _sender.dangerJSONDSL;
 
-void message(String message, {String file, int line, String icon}) {
+void message(String message, {String? file, int? line, String? icon}) {
   final violation =
       Violation(message: message, file: file, line: line, icon: icon);
   _sender.message(violation);
 }
 
-void warn(String message, {String file, int line, String icon}) {
+void warn(String message, {String? file, int? line, String? icon}) {
   final violation =
       Violation(message: message, file: file, line: line, icon: icon);
   _sender.warn(violation);
 }
 
-void fail(String message, {String file, int line, String icon}) {
+void fail(String message, {String? file, int? line, String? icon}) {
   final violation =
       Violation(message: message, file: file, line: line, icon: icon);
   _sender.fail(violation);
 }
 
-void markdown(String message, {String file, int line, String icon}) {
+void markdown(String message, {String? file, int? line, String? icon}) {
   final violation =
       Violation(message: message, file: file, line: line, icon: icon);
   _sender.markdown(violation);

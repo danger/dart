@@ -6,12 +6,12 @@ part of 'settings_github.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-DangetSettingsGithub _$DangetSettingsGithubFromJson(Map<String, dynamic> json) {
-  return DangetSettingsGithub(
-    additionalHeaders: json['additionalHeaders'] as Map<String, dynamic>,
-    accessToken: json['accessToken'] as String,
-  );
-}
+DangetSettingsGithub _$DangetSettingsGithubFromJson(
+        Map<String, dynamic> json) =>
+    DangetSettingsGithub(
+      additionalHeaders: json['additionalHeaders'] as Map<String, dynamic>?,
+      accessToken: json['accessToken'] as String,
+    );
 
 Map<String, dynamic> _$DangetSettingsGithubToJson(
         DangetSettingsGithub instance) =>

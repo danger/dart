@@ -7,12 +7,15 @@ import 'package:test/test.dart';
 
 void main() {
   group('Cross isolate', () {
-    DangerIsolateReceiver receiver;
+    late DangerIsolateReceiver receiver;
     setUp(() {
       receiver = DangerIsolateReceiver({
         'danger': {
           'git': {
-            'modified_files': ['README.md']
+            'modified_files': ['README.md'],
+            'created_files': [],
+            'deleted_files': [],
+            'commits': []
           }
         }
       });

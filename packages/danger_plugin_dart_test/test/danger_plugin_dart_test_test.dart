@@ -16,7 +16,7 @@ class _MockDangerDartTestReporter extends DangerDartTestReporter {
 
 void main() {
   group('danger_plugin_dart_test', () {
-    _MockDangerDartTestReporter reporter;
+    late _MockDangerDartTestReporter reporter;
 
     setUp(() {
       reporter = _MockDangerDartTestReporter();
@@ -49,8 +49,7 @@ void main() {
       expect(
           result.fileName, equals('test/parser/bitbucket_cloud_dsl_test.dart'));
       expect(result.lineNo, equals(10));
-      expect(result.message,
-          equals('''Expected: <801>
+      expect(result.message, equals('''Expected: <801>
   Actual: <80>
 
 
@@ -74,8 +73,10 @@ test/parser/bitbucket_cloud_dsl_test.dart 21:7  main.<fn>.<fn>
       expect(
           result.fileName, equals('test/parser/bitbucket_cloud_dsl_test.dart'));
       expect(result.lineNo, equals(10));
-      expect(result.message,
-          startsWith('''Failed to load "/Users/core/Documents/work/hello/test/utils/period_time_test.dart":
+      expect(
+          result.message,
+          startsWith(
+              '''Failed to load "/Users/core/Documents/work/hello/test/utils/period_time_test.dart":
 Compilation failed
 Test: /Users/core/Documents/work/hello/test/utils/period_time_test.dart
 Shell: /Users/core/fvm/versions/2.0.4/bin/cache/artifacts/engine/darwin-x64/flutter_tester
@@ -98,8 +99,10 @@ Shell: /Users/core/fvm/versions/2.0.4/bin/cache/artifacts/engine/darwin-x64/flut
       expect(
           result.fileName, equals('test/parser/bitbucket_cloud_dsl_test.dart'));
       expect(result.lineNo, equals(10));
-      expect(result.message,
-          startsWith('''══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+      expect(
+          result.message,
+          startsWith(
+              '''══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
 The following assertion was thrown while running async test code:
 Golden "goldens/test/default.iphone11.png": Pixel test failed, 12.38% diff detected.
 Failure feedback can be found at

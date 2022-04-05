@@ -17,7 +17,6 @@ dev_dependencies:
 In `dangerfile.dart`, you need to import this, and call `DangerPluginGoldenReporter.report` with given golden result path.
 
 ```dart
-// @dart=2.10
 import 'dart:io';
 
 import 'package:danger_core/danger_core.dart';

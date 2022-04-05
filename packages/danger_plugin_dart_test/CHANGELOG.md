@@ -1,3 +1,7 @@
+## 1.0.0
+
+- Supports Null Safety
+
 ## 0.0.6
 
 - Handle failure cases

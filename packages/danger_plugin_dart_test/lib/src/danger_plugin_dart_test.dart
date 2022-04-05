@@ -11,9 +11,9 @@ import 'package:path/path.dart' show current;
 class DangerPluginDartTest {
   /// Reporter could be `DefaultTestReporter`, `DefaultInlineTestReporter`, `BitbucketCloudTestReporter`, or any class extends `DangerDartTestReporter`
   static Future<void> processFile(File file,
-      {String workingDirectoryPath,
-      int limitMessageCharsPerLine,
-      DangerDartTestReporter reporter}) async {
+      {String? workingDirectoryPath,
+      int? limitMessageCharsPerLine,
+      DangerDartTestReporter? reporter}) async {
     if (!file.existsSync()) {
       fail('Test report not found, path [${file.path}]');
       return;
@@ -22,18 +22,20 @@ class DangerPluginDartTest {
     final workingPath = workingDirectoryPath ?? current;
 
     final line = file.readAsLinesSync();
-    final results = line.map((e) => DartTestResultClass.fromRawJson(e));
+    final results = line
+        .map((e) => DartTestEvent.fromJsonString(e))
+        .whereType<DartTestEvent>();
 
-    final testSuiteMetaDataByID = <int, SuiteClass>{};
-    final testMetaDataByID = <int, TestClass>{};
+    final testSuiteMetaDataByID = <int, DartTestEntitySuite>{};
+    final testMetaDataByID = <int, DartTestEntityTest>{};
     final printMessageByID = <int, List<String>>{};
 
     void addMessageToPrintMessage(String message, int testId) {
-      if (message == null || message.isEmpty) {
+      if (message.isEmpty) {
         return;
       }
 
-      var msg;
+      String msg;
       if (limitMessageCharsPerLine == null) {
         msg = message;
       } else if (message.length > limitMessageCharsPerLine) {
@@ -45,76 +47,78 @@ class DangerPluginDartTest {
       if (printMessageByID[testId] == null) {
         printMessageByID[testId] = [msg];
       } else {
-        printMessageByID[testId].add(msg);
+        printMessageByID[testId]!.add(msg);
       }
     }
 
-    results.forEach((result) {
-      if (result.test?.id != null) {
+    for (var result in results) {
+      if (result is DartTestTestStartEvent) {
         testMetaDataByID[result.test.id] = result.test;
-      } else if (result.suite?.id != null) {
+      } else if (result is DartTestSuiteEvent) {
         testSuiteMetaDataByID[result.suite.id] = result.suite;
-      }
-
-      final thisTestID = result.testId;
-      if (thisTestID != null) {
-        if (result.messageType == MessageType.PRINT) {
-          addMessageToPrintMessage(result.message, thisTestID);
+      } else if (result is DartTestMessageEvent) {
+        if (result.messageType == 'print') {
+          addMessageToPrintMessage(result.message, result.testID);
         }
-
-        if (result.error != null) {
-          addMessageToPrintMessage(result.error, thisTestID);
-          addMessageToPrintMessage(result.stackTrace, thisTestID);
-        }
+      } else if (result is DartTestErrorEvent) {
+        addMessageToPrintMessage(result.error, result.testID);
+        addMessageToPrintMessage(result.stackTrace, result.testID);
       }
-    });
+    }
+
+    // EnumValues({"error": Result.ERROR, "failure": Result.FAILURE, "success": Result.SUCCESS});
 
     final failureList = results
-        .where((result) => (result.testId != null &&
-            result.result != null &&
-            result.result != Result.SUCCESS))
+        .whereType<DartTestTestDoneEvent>()
+        .where((result) => (result.result != 'success'))
         .map((result) {
-      final testMetaData = testMetaDataByID[result.testId];
-      final printMessage = printMessageByID[result.testId] ?? [];
+          final testMetaData = testMetaDataByID[result.testID];
+          final printMessage = printMessageByID[result.testID] ?? [];
 
-      String fileName;
-      int lineNo;
-      String testName;
+          String? fileName;
+          int? lineNo;
+          String? testName;
 
-      if (testMetaData != null) {
-        if (testMetaData.url != null &&
-            !testMetaData.url.startsWith('package\:')) {
-          fileName = testMetaData.url;
-          lineNo = testMetaData.line;
-        } else if (testMetaData.rootUrl != null) {
-          fileName = testMetaData.rootUrl;
-          lineNo = testMetaData.rootLine;
-        } else if (testMetaData.suiteId != null) {
-          final suiteMetaData = testSuiteMetaDataByID[testMetaData.suiteId];
-          if (suiteMetaData != null) {
-            fileName = suiteMetaData.path;
-            lineNo = 0;
+          if (testMetaData != null) {
+            final url = testMetaData.url;
+            if (url != null && !url.startsWith('package:')) {
+              fileName = url;
+              lineNo = testMetaData.line ?? 0;
+            } else if (testMetaData.rootUrl != null) {
+              fileName = testMetaData.rootUrl!;
+              lineNo = testMetaData.rootLine ?? 0;
+            } else {
+              final suiteMetaData = testSuiteMetaDataByID[testMetaData.suiteID];
+              if (suiteMetaData != null && suiteMetaData.path != null) {
+                fileName = suiteMetaData.path!;
+                lineNo = 0;
+              }
+            }
+
+            if (fileName != null) {
+              fileName = fileName.replaceFirst('file://', '');
+
+              if (fileName.startsWith(workingPath)) {
+                fileName = fileName.substring(workingPath.length + 1);
+              }
+            }
+
+            testName = testMetaData.name;
           }
-        }
 
-        if (fileName != null) {
-          fileName = fileName.replaceFirst('file:\/\/', '');
-
-          if (fileName.startsWith(workingPath)) {
-            fileName = fileName.substring(workingPath.length + 1);
+          if (fileName == null || lineNo == null || testName == null) {
+            return null;
           }
-        }
 
-        testName = testMetaData.name;
-      }
-
-      return DangerDartErrorCase(
-        fileName: fileName,
-        lineNo: lineNo,
-        message: printMessage.join('\n\n'),
-        testName: testName,
-      );
-    }).toList();
+          return DangerDartErrorCase(
+            fileName: fileName,
+            lineNo: lineNo,
+            message: printMessage.join('\n\n'),
+            testName: testName,
+          );
+        })
+        .whereType<DangerDartErrorCase>()
+        .toList();
 
     if (failureList.isNotEmpty) {
       (reporter ?? DefaultTestReporter()).reportToDanger(failureList);

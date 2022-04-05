@@ -1,32 +1,33 @@
 import 'package:danger_core/danger_core.dart';
 import 'package:danger_core/src/utils/danger_isolate_sender_mock.dart';
 import 'package:danger_plugin_golden_reporter/danger_plugin_golden_reporter.dart';
-import 'package:danger_plugin_golden_reporter/src/golden_reporter.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
-class MockDangerJSONDSL extends Mock implements DangerJSONDSL {}
-
-class MockGitJSONDSL extends Mock implements GitJSONDSL {}
-
-class MockReporter extends Mock implements GoldenReporter {}
+import 'mock_utils.mocks.dart';
 
 void main() {
-  DangerIsolateSenderMock dangerIsolateSenderMock;
-  MockDangerJSONDSL mockDangerJSONDSL;
-  MockGitJSONDSL mockGitJSONDSL;
-  MockReporter mockReporter;
+  late DangerIsolateSenderMock dangerIsolateSenderMock;
+  late MockDangerJSONDSL mockDangerJSONDSL;
+  late MockGitJSONDSL mockGitJSONDSL;
+  late MockGoldenReporter mockReporter;
 
   setUp(() {
-    mockReporter = MockReporter();
+    mockReporter = MockGoldenReporter();
     mockDangerJSONDSL = MockDangerJSONDSL();
     mockGitJSONDSL = MockGitJSONDSL();
+
     dangerIsolateSenderMock = Danger.setupWithMock();
     dangerIsolateSenderMock.dangerJSONDSL = mockDangerJSONDSL;
 
     when(mockDangerJSONDSL.git).thenReturn(mockGitJSONDSL);
     when(mockGitJSONDSL.createdFiles).thenReturn([]);
     when(mockGitJSONDSL.modifiedFiles).thenReturn([]);
+
+    when(mockReporter.reportForCreatedFile(any))
+        .thenReturn("reportForCreatedFile");
+    when(mockReporter.reportForModifiedFile(any))
+        .thenReturn("reportForModifiedFile");
   });
 
   group('path', () {

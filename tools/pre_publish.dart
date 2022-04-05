@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:convert';
 import 'dart:io';
 import 'package:path/path.dart' show join;
@@ -23,7 +25,7 @@ void removeJSONAnnotaionFromFile(File file) async {
       .toList();
 
   final sink = file.openWrite(mode: FileMode.write);
-
+  sink.writeln("import 'package:danger_core/src/mock_json_annotation.dart';");
   sink.writeAll(content, '\n');
   await sink.close();
 }

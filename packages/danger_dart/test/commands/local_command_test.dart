@@ -6,17 +6,16 @@ import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import '../base/test_command_runner.dart';
-
-class _MockDangerUtil extends Mock implements DangerUtil {}
+import '../mock_util.mocks.dart';
 
 void main() {
   group('LocalCommand', () {
-    _MockDangerUtil _mockDangerUtil;
-    LocalCommand _localCommand;
-    TestCommandRunner _commandRunner;
+    late MockDangerUtil _mockDangerUtil;
+    late LocalCommand _localCommand;
+    late TestCommandRunner _commandRunner;
 
     setUp(() {
-      _mockDangerUtil = _MockDangerUtil();
+      _mockDangerUtil = MockDangerUtil();
       _localCommand = LocalCommand(_mockDangerUtil);
       _commandRunner = TestCommandRunner.create(_localCommand);
 

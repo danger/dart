@@ -32,7 +32,11 @@ class BitBucketCloudJSONDSL {
   final List<BitBucketCloudPRActivity> activities;
 
   BitBucketCloudJSONDSL(
-      {this.metadata, this.pr, this.commits, this.comments, this.activities});
+      {required this.metadata,
+      required this.pr,
+      required this.commits,
+      required this.comments,
+      required this.activities});
 
   factory BitBucketCloudJSONDSL.fromJson(Map<String, dynamic> json) =>
       _$BitBucketCloudJSONDSLFromJson(json);
@@ -47,7 +51,7 @@ class RepoMetaData {
   factory RepoMetaData.fromJson(Map<String, dynamic> json) =>
       _$RepoMetaDataFromJson(json);
 
-  RepoMetaData({this.repoSlug, this.pullRequestID});
+  RepoMetaData({required this.repoSlug, required this.pullRequestID});
   Map<String, dynamic> toJson() => _$RepoMetaDataToJson(this);
 }
 
@@ -92,23 +96,23 @@ class BitBucketCloudPRDSL {
   /// Avaliable keys:
   /// "decline", "commits", "self", "comments", "merge", "html", "activity", "diff", "approve", "statuses"
   final Map<String, BitBucketCloudLink> links;
-  factory BitBucketCloudPRDSL.fromJson(Map<String, dynamic> json) =>
-      _$BitBucketCloudPRDSLFromJson(json);
 
   BitBucketCloudPRDSL(
-      {this.id,
-      this.title,
-      this.description,
-      this.state,
-      this.createdOn,
-      this.updatedOn,
-      this.source,
-      this.destination,
-      this.author,
-      this.reviewers,
-      this.participants,
-      this.links});
+      {required this.id,
+      required this.title,
+      required this.description,
+      required this.state,
+      required this.createdOn,
+      required this.updatedOn,
+      required this.source,
+      required this.destination,
+      required this.author,
+      required this.reviewers,
+      required this.participants,
+      required this.links});
 
+  factory BitBucketCloudPRDSL.fromJson(Map<String, dynamic> json) =>
+      _$BitBucketCloudPRDSLFromJson(json);
   Map<String, dynamic> toJson() => _$BitBucketCloudPRDSLToJson(this);
 }
 
@@ -138,12 +142,12 @@ class BitBucketCloudCommit {
       _$BitBucketCloudCommitFromJson(json);
 
   BitBucketCloudCommit(
-      {this.hash,
-      this.author,
-      this.date,
-      this.message,
-      this.parents,
-      this.links});
+      {required this.hash,
+      required this.author,
+      required this.date,
+      required this.message,
+      required this.parents,
+      required this.links});
   Map<String, dynamic> toJson() => _$BitBucketCloudCommitToJson(this);
 }
 
@@ -168,20 +172,20 @@ class BitBucketCloudPRComment {
   final String type;
   final int id;
 
-  final BitBucketCloudPRCommentInline inline;
+  final BitBucketCloudPRCommentInline? inline;
 
   factory BitBucketCloudPRComment.fromJson(Map<String, dynamic> json) =>
       _$BitBucketCloudPRCommentFromJson(json);
 
   BitBucketCloudPRComment(
-      {this.deleted,
-      this.links,
-      this.content,
-      this.createdOn,
-      this.user,
-      this.updatedOn,
-      this.type,
-      this.id,
+      {required this.deleted,
+      required this.links,
+      required this.content,
+      required this.createdOn,
+      required this.user,
+      required this.updatedOn,
+      required this.type,
+      required this.id,
       this.inline});
 
   Map<String, dynamic> toJson() => _$BitBucketCloudPRCommentToJson(this);
@@ -189,7 +193,7 @@ class BitBucketCloudPRComment {
 
 @JsonSerializable()
 class BitBucketCloudPRActivity {
-  final BitBucketCloudPRComment comment;
+  final BitBucketCloudPRComment? comment;
 
   factory BitBucketCloudPRActivity.fromJson(Map<String, dynamic> json) =>
       _$BitBucketCloudPRActivityFromJson(json);
@@ -204,12 +208,12 @@ class BitBucketCloudCommitAuthor {
   /// Format: `Foo Bar <foo@bar.com>`
   final String raw;
 
-  final BitBucketCloudUser user;
+  final BitBucketCloudUser? user;
 
   factory BitBucketCloudCommitAuthor.fromJson(Map<String, dynamic> json) =>
       _$BitBucketCloudCommitAuthorFromJson(json);
 
-  BitBucketCloudCommitAuthor({this.raw, this.user});
+  BitBucketCloudCommitAuthor({required this.raw, this.user});
 
   Map<String, dynamic> toJson() => _$BitBucketCloudCommitAuthorToJson(this);
 }
@@ -222,7 +226,7 @@ class BitBucketCloudPRParticipant {
   factory BitBucketCloudPRParticipant.fromJson(Map<String, dynamic> json) =>
       _$BitBucketCloudPRParticipantFromJson(json);
 
-  BitBucketCloudPRParticipant({this.user, this.approved});
+  BitBucketCloudPRParticipant({required this.user, required this.approved});
 
   Map<String, dynamic> toJson() => _$BitBucketCloudPRParticipantToJson(this);
 }
@@ -237,17 +241,20 @@ class BitBucketCloudUser {
   final String displayName;
 
   /// The nick name of the commit author
-  final String nickname;
+  final String? nickname;
 
   /// The acount id of the commit author (could be null on bot user)
   @JsonKey(name: 'account_id')
-  final String accountId;
+  final String? accountId;
 
   factory BitBucketCloudUser.fromJson(Map<String, dynamic> json) =>
       _$BitBucketCloudUserFromJson(json);
 
   BitBucketCloudUser(
-      {this.uuid, this.displayName, this.nickname, this.accountId});
+      {required this.uuid,
+      required this.displayName,
+      this.nickname,
+      this.accountId});
 
   Map<String, dynamic> toJson() => _$BitBucketCloudUserToJson(this);
 }
@@ -261,7 +268,8 @@ class BitBucketCloudMergeRef {
   factory BitBucketCloudMergeRef.fromJson(Map<String, dynamic> json) =>
       _$BitBucketCloudMergeRefFromJson(json);
 
-  BitBucketCloudMergeRef({this.commit, this.branch, this.repository});
+  BitBucketCloudMergeRef(
+      {required this.commit, required this.branch, required this.repository});
   Map<String, dynamic> toJson() => _$BitBucketCloudMergeRefToJson(this);
 }
 
@@ -272,7 +280,7 @@ class BitBucketCloudMergeRefBranch {
   factory BitBucketCloudMergeRefBranch.fromJson(Map<String, dynamic> json) =>
       _$BitBucketCloudMergeRefBranchFromJson(json);
 
-  BitBucketCloudMergeRefBranch({this.name});
+  BitBucketCloudMergeRefBranch({required this.name});
   Map<String, dynamic> toJson() => _$BitBucketCloudMergeRefBranchToJson(this);
 }
 
@@ -283,7 +291,7 @@ class BitBucketCloudMergeRefCommit {
   factory BitBucketCloudMergeRefCommit.fromJson(Map<String, dynamic> json) =>
       _$BitBucketCloudMergeRefCommitFromJson(json);
 
-  BitBucketCloudMergeRefCommit({this.hash});
+  BitBucketCloudMergeRefCommit({required this.hash});
   Map<String, dynamic> toJson() => _$BitBucketCloudMergeRefCommitToJson(this);
 }
 
@@ -308,7 +316,7 @@ class BitBucketCloudLink {
   factory BitBucketCloudLink.fromJson(Map<String, dynamic> json) =>
       _$BitBucketCloudLinkFromJson(json);
 
-  BitBucketCloudLink({this.href});
+  BitBucketCloudLink({required this.href});
   Map<String, dynamic> toJson() => _$BitBucketCloudLinkToJson(this);
 }
 
@@ -324,16 +332,20 @@ class BitBucketCloudContent {
   factory BitBucketCloudContent.fromJson(Map<String, dynamic> json) =>
       _$BitBucketCloudContentFromJson(json);
 
-  BitBucketCloudContent({this.raw, this.markup, this.html, this.type});
+  BitBucketCloudContent(
+      {required this.raw,
+      required this.markup,
+      required this.html,
+      required this.type});
 
   Map<String, dynamic> toJson() => _$BitBucketCloudContentToJson(this);
 }
 
 @JsonSerializable()
 class BitBucketCloudPRCommentInline {
-  final int to;
-  final int from;
-  final String path;
+  final int? to;
+  final int? from;
+  final String? path;
 
   factory BitBucketCloudPRCommentInline.fromJson(Map<String, dynamic> json) =>
       _$BitBucketCloudPRCommentInlineFromJson(json);
@@ -349,6 +361,6 @@ class BitBucketCloudPRCommitParent {
   factory BitBucketCloudPRCommitParent.fromJson(Map<String, dynamic> json) =>
       _$BitBucketCloudPRCommitParentFromJson(json);
 
-  BitBucketCloudPRCommitParent({this.hash});
+  BitBucketCloudPRCommitParent({required this.hash});
   Map<String, dynamic> toJson() => _$BitBucketCloudPRCommitParentToJson(this);
 }

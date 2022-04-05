@@ -77,15 +77,15 @@ class GitHubDSL {
 
   /// The people/teams requested to review this PR
   @JsonKey(name: 'requested_reviewers')
-  final GitHubReviewers requested_reviewers;
+  final GitHubReviewers requestedReviewers;
 
   GitHubDSL(
-      {this.issue,
-      this.pr,
-      this.thisPR,
-      this.commits,
-      this.reviews,
-      this.requested_reviewers});
+      {required this.issue,
+      required this.pr,
+      required this.thisPR,
+      required this.commits,
+      required this.reviews,
+      required this.requestedReviewers});
 
   factory GitHubDSL.fromJson(Map<String, dynamic> json) =>
       _$GitHubDSLFromJson(json);
@@ -107,7 +107,7 @@ class GitHubPRDSL {
   final String title;
 
   /// The markdown body message of the PR
-  final String body;
+  final String? body;
 
   /// ISO6801 Date string for when PR was created
   @JsonKey(name: 'created_at')
@@ -119,11 +119,11 @@ class GitHubPRDSL {
 
   /// optional ISO6801 Date string for when PR was closed
   @JsonKey(name: 'closed_at')
-  final String closedAt;
+  final String? closedAt;
 
   /// Optional ISO6801 Date string for when PR was merged.
   @JsonKey(name: 'merged_at')
-  final String mergedAt;
+  final String? mergedAt;
 
   /// Merge reference for the _other_ repo.
   final GitHubMergeRef head;
@@ -135,13 +135,13 @@ class GitHubPRDSL {
   final GitHubUser user;
 
   /// The User who is assigned the PR
-  final GitHubUser assignee;
+  final GitHubUser? assignee;
 
   /// The Users who are assigned to the PR
-  final List<GitHubUser> assignees;
+  final List<GitHubUser>? assignees;
 
   /// Has the PR been merged yet?
-  final bool merged;
+  final bool? merged;
 
   /// The number of comments on the PR
   final int comments;
@@ -154,14 +154,14 @@ class GitHubPRDSL {
   final int commits;
 
   /// The number of additional lines in the PR
-  final int additions;
+  final int? additions;
 
   /// The number of deleted lines in the PR
-  final int deletions;
+  final int? deletions;
 
   /// The number of changed files in the PR
   @JsonKey(name: 'changed_files')
-  final int changedFiles;
+  final int? changedFiles;
 
   /// The link back to this PR as user-facing
   @JsonKey(name: 'html_url')
@@ -169,31 +169,31 @@ class GitHubPRDSL {
 
   /// How does the PR author relate to this repo/org?
   @JsonKey(name: 'author_association')
-  final GitHubPRAuthorAssociation authorAssociation;
+  final GitHubPRAuthorAssociation? authorAssociation;
 
   GitHubPRDSL(
-      {this.number,
-      this.state,
-      this.locked,
-      this.title,
+      {required this.number,
+      required this.state,
+      required this.locked,
+      required this.title,
       this.body,
-      this.createdAt,
-      this.updatedAt,
+      required this.createdAt,
+      required this.updatedAt,
       this.closedAt,
       this.mergedAt,
-      this.head,
-      this.base,
-      this.user,
+      required this.head,
+      required this.base,
+      required this.user,
       this.assignee,
       this.assignees,
       this.merged,
-      this.comments,
-      this.reviewComments,
-      this.commits,
+      required this.comments,
+      required this.reviewComments,
+      required this.commits,
       this.additions,
       this.deletions,
       this.changedFiles,
-      this.htmlUrl,
+      required this.htmlUrl,
       this.authorAssociation});
 
   factory GitHubPRDSL.fromJson(Map<String, dynamic> json) =>
@@ -206,7 +206,7 @@ class GitHubIssue {
   /// The labels associated with this issue
   final List<GitHubIssueLabel> labels;
 
-  GitHubIssue({this.labels});
+  GitHubIssue({required this.labels});
 
   factory GitHubIssue.fromJson(Map<String, dynamic> json) =>
       _$GitHubIssueFromJson(json);
@@ -227,7 +227,11 @@ class GitHubIssueLabel {
   /// The color associated with this label
   final String color;
 
-  GitHubIssueLabel({this.id, this.url, this.name, this.color});
+  GitHubIssueLabel(
+      {required this.id,
+      required this.url,
+      required this.name,
+      required this.color});
 
   factory GitHubIssueLabel.fromJson(Map<String, dynamic> json) =>
       _$GitHubIssueLabelFromJson(json);
@@ -247,12 +251,18 @@ class GitHubUser {
 
   ///The url for a users's image
   @JsonKey(name: 'avatar_url')
-  final String avatarUrl;
+  final String? avatarUrl;
 
   ///The href for a users's page
+  @JsonKey(name: 'html_url')
   final String href;
 
-  GitHubUser({this.id, this.login, this.type, this.avatarUrl, this.href});
+  GitHubUser(
+      {required this.id,
+      required this.login,
+      required this.type,
+      this.avatarUrl,
+      required this.href});
 
   factory GitHubUser.fromJson(Map<String, dynamic> json) =>
       _$GitHubUserFromJson(json);
@@ -278,32 +288,24 @@ class GitHubRepo {
   final bool private;
 
   /// The textual description of the repo
-  final String description;
+  final String? description;
 
   /// Is the repo a fork?
   final bool fork;
-
-  /// Is someone assigned to this PR?
-  final GitHubUser assignee;
-
-  /// Are there people assigned to this PR?
-  final List<GitHubUser> assignees;
 
   /// The root web URL for the repo, e.g. https://github.com/artsy/emission
   @JsonKey(name: 'html_url')
   final String htmlUrl;
 
   GitHubRepo(
-      {this.id,
-      this.name,
-      this.fullName,
-      this.owner,
-      this.private,
+      {required this.id,
+      required this.name,
+      required this.fullName,
+      required this.owner,
+      required this.private,
       this.description,
-      this.fork,
-      this.assignee,
-      this.assignees,
-      this.htmlUrl});
+      required this.fork,
+      required this.htmlUrl});
 
   factory GitHubRepo.fromJson(Map<String, dynamic> json) =>
       _$GitHubRepoFromJson(json);
@@ -327,7 +329,12 @@ class GitHubMergeRef {
   /// The repo from whch the reference comes from
   final GitHubRepo repo;
 
-  GitHubMergeRef({this.label, this.ref, this.sha, this.user, this.repo});
+  GitHubMergeRef(
+      {required this.label,
+      required this.ref,
+      required this.sha,
+      required this.user,
+      required this.repo});
 
   factory GitHubMergeRef.fromJson(Map<String, dynamic> json) =>
       _$GitHubMergeRefFromJson(json);
@@ -345,7 +352,7 @@ class GitHubAPIPR {
   /// The PR number
   final int number;
 
-  GitHubAPIPR({this.owner, this.repo, this.number});
+  GitHubAPIPR({required this.owner, required this.repo, required this.number});
 
   factory GitHubAPIPR.fromJson(Map<String, dynamic> json) =>
       _$GitHubAPIPRFromJson(json);
@@ -364,18 +371,18 @@ class GitHubCommit {
   final String url;
 
   /// The GitHub user who wrote the code
-  final GitHubUser author;
+  final GitHubUser? author;
 
   /// The GitHub user who shipped the code
-  final GitHubUser committer;
+  final GitHubUser? committer;
 
   /// An array of parent commit shas
-  final List<dynamic> parents;
+  final List<dynamic>? parents;
 
   GitHubCommit(
-      {this.commit,
-      this.sha,
-      this.url,
+      {required this.commit,
+      required this.sha,
+      required this.url,
       this.author,
       this.committer,
       this.parents});
@@ -391,20 +398,21 @@ class GitHubReview {
   final GitHubUser user;
 
   /// If there is a review, this provides the ID for it
-  final int id;
+  final int? id;
 
   /// If there is a review, the body of the review
-  final String body;
+  final String? body;
 
   /// If there is a review, the commit ID this review was made on
   @JsonKey(name: 'commit_id')
-  final String commitId;
+  final String? commitId;
 
   /// The state of the review
   /// * APPROVED, REQUEST_CHANGES, COMMENT or PENDING
-  final GitHubReviewState state;
+  final GitHubReviewState? state;
 
-  GitHubReview({this.user, this.id, this.body, this.commitId, this.state});
+  GitHubReview(
+      {required this.user, this.id, this.body, this.commitId, this.state});
 
   factory GitHubReview.fromJson(Map<String, dynamic> json) =>
       _$GitHubReviewFromJson(json);
@@ -419,7 +427,7 @@ class GitHubReviewers {
   /// Teams that have been requested
   final List<dynamic> teams;
 
-  GitHubReviewers({this.users, this.teams});
+  GitHubReviewers({required this.users, required this.teams});
 
   factory GitHubReviewers.fromJson(Map<String, dynamic> json) =>
       _$GitHubReviewersFromJson(json);

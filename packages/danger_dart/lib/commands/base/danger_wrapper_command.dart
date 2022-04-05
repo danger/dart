@@ -20,7 +20,7 @@ abstract class DangerWrapperCommand extends Command {
 
   @override
   Future<void> run() async {
-    final args = argResults;
+    final args = argResults!;
     var url = '';
 
     if (name == 'pr') {
@@ -52,15 +52,11 @@ abstract class DangerWrapperCommand extends Command {
               '--no-pause-isolates-on-exit',
             ]
           : [],
-      '${dangerUtil.getScriptFilePath()}',
+      (dangerUtil.getScriptFilePath()),
       'process',
       '--dangerfile',
       dangerFilePath,
-      ...isDebug
-          ? [
-              '--debug'
-            ]
-          : [],
+      ...isDebug ? ['--debug'] : [],
     ].join(' ');
 
     final dangerJSCommand = <String>[

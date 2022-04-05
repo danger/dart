@@ -1,21 +1,21 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:isolate';
-import 'package:meta/meta.dart';
 import 'package:args/args.dart';
 import 'package:fimber/fimber.dart';
 import 'package:process_run/shell.dart';
-import 'package:process_run/which.dart';
 import 'package:path/path.dart' show current, join;
-import 'package:danger_core/src/models/danger_results.dart';
-import 'package:danger_core/src/models/violation.dart';
+// ignore: implementation_imports
+import 'package:danger_core/src/models/danger_results.dart' show DangerResults;
+// ignore: implementation_imports
+import 'package:danger_core/src/models/violation.dart' show Violation;
 
 final logger = FimberLog('DangerUtil');
 
 class DangerJSMetadata {
   final String executable;
 
-  DangerJSMetadata({@required this.executable});
+  DangerJSMetadata({required this.executable});
 }
 
 class DangerUtil {
@@ -35,7 +35,7 @@ class DangerUtil {
   }
 
   Future<List<ProcessResult>> execShellCommand(String command,
-      {Shell shell, @required bool isVerbose}) async {
+      {Shell? shell, required bool isVerbose}) async {
     final _shell = shell ??
         Shell(
             verbose: true,
@@ -46,7 +46,7 @@ class DangerUtil {
   }
 
   Future<DangerJSMetadata> getDangerJSMetaData(ArgResults args,
-      {Shell shell}) async {
+      {Shell? shell}) async {
     var dangerJSExecutable = '';
 
     if (args['danger-js-path'] != null) {
@@ -103,7 +103,9 @@ class DangerUtil {
         automaticPackageResolution: true,
         paused: true,
         onExit: exitPort.sendPort);
-    currentIsolate.resume(currentIsolate.pauseCapability);
+    if (currentIsolate.pauseCapability != null) {
+      currentIsolate.resume(currentIsolate.pauseCapability!);
+    }
     return Future.any(
             [isolateExitCompleter.future, isolateErrorCompleter.future])
         .whenComplete(() {
@@ -162,10 +164,10 @@ ${isDebug ? '  debugger();' : ''}
     // Not null
     if (left.file == right.file) {
       // Same file compare with line instead
-      return left.line.compareTo(right.line);
+      return left.line!.compareTo(right.line!);
     } else {
       // Not same file compare with filename
-      return left.file.compareTo(right.file);
+      return left.file!.compareTo(right.file!);
     }
   }
 }

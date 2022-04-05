@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:args/command_runner.dart';
 import 'package:danger_dart/danger_util.dart';
 import 'package:fimber/fimber.dart';
-import 'package:path/path.dart' show current, join;
 
 class LocalCommand extends Command {
   final DangerUtil dangerUtil;
@@ -32,7 +31,7 @@ class LocalCommand extends Command {
 
   @override
   Future<void> run() async {
-    final args = argResults;
+    final args = argResults!;
     final isDebug = args.wasParsed('debug');
     final isVerbose = args.wasParsed('verbose');
     final useColors = (Platform.environment['TERM'] ?? '').contains('xterm');
@@ -49,7 +48,7 @@ class LocalCommand extends Command {
       'dart',
       'run',
       ...isDebug ? ['--observe=8181', '--no-pause-isolates-on-exit'] : [],
-      '${dangerUtil.getScriptFilePath()}',
+      (dangerUtil.getScriptFilePath()),
       'process',
       '--dangerfile',
       dangerFilePath,
@@ -64,8 +63,8 @@ class LocalCommand extends Command {
       '--passURLForDSL',
       '--process',
       '"$dangerProcessCommand"',
-      ...(argResults['base'] != null ? ['--base', argResults['base']] : []),
-      ...(argResults['staging'] ? ['--staging'] : []),
+      ...(args['base'] != null ? ['--base', args['base']] : []),
+      ...(args['staging'] ? ['--staging'] : []),
     ].join(' ');
 
     try {

@@ -6,17 +6,16 @@ import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
 import '../base/test_command_runner.dart';
-
-class _MockDangerUtil extends Mock implements DangerUtil {}
+import '../mock_util.mocks.dart';
 
 void main() {
   group('PRCommand', () {
-    _MockDangerUtil _mockDangerUtil;
-    PRCommand _prCommand;
-    TestCommandRunner _commandRunner;
+    late MockDangerUtil _mockDangerUtil;
+    late PRCommand _prCommand;
+    late TestCommandRunner _commandRunner;
 
     setUp(() {
-      _mockDangerUtil = _MockDangerUtil();
+      _mockDangerUtil = MockDangerUtil();
       _prCommand = PRCommand(_mockDangerUtil);
       _commandRunner = TestCommandRunner.create(_prCommand);
 
@@ -90,7 +89,7 @@ void main() {
 
       expect(processCommand, contains('--observe=8181'));
       expect(processCommand, contains('--no-pause-isolates-on-exit'));
-      
+
       expect(processCommand, contains('--debug'));
     });
   });
