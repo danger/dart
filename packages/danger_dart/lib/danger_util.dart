@@ -5,8 +5,10 @@ import 'package:args/args.dart';
 import 'package:fimber/fimber.dart';
 import 'package:process_run/shell.dart';
 import 'package:path/path.dart' show current, join;
-import 'package:danger_core/src/models/danger_results.dart';
-import 'package:danger_core/src/models/violation.dart';
+// ignore: implementation_imports
+import 'package:danger_core/src/models/danger_results.dart' show DangerResults;
+// ignore: implementation_imports
+import 'package:danger_core/src/models/violation.dart' show Violation;
 
 final logger = FimberLog('DangerUtil');
 

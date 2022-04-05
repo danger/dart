@@ -77,7 +77,7 @@ class GitHubDSL {
 
   /// The people/teams requested to review this PR
   @JsonKey(name: 'requested_reviewers')
-  final GitHubReviewers requested_reviewers;
+  final GitHubReviewers requestedReviewers;
 
   GitHubDSL(
       {required this.issue,
@@ -85,7 +85,7 @@ class GitHubDSL {
       required this.thisPR,
       required this.commits,
       required this.reviews,
-      required this.requested_reviewers});
+      required this.requestedReviewers});
 
   factory GitHubDSL.fromJson(Map<String, dynamic> json) =>
       _$GitHubDSLFromJson(json);

@@ -7,8 +7,11 @@ import 'package:danger_dart/danger_util.dart';
 import 'package:fimber/fimber.dart';
 
 import 'package:danger_core/danger_core.dart';
-import 'package:danger_core/src/models/danger_dsl.dart';
-import 'package:danger_core/src/utils/danger_isolate_receiver.dart';
+// ignore: implementation_imports
+import 'package:danger_core/src/models/danger_dsl.dart' show DangerJSON;
+// ignore: implementation_imports
+import 'package:danger_core/src/utils/danger_isolate_receiver.dart'
+    show DangerIsolateReceiver;
 import 'package:path/path.dart' show current, join;
 
 class ProcessCommand extends Command {
@@ -74,7 +77,7 @@ class ProcessCommand extends Command {
 
     final str = inputFile.readAsStringSync();
 
-    final dangerFileName = args['dangerfile'] as String;
+    final dangerFileName = args['dangerfile'] as String?;
     if (dangerFileName == null) {
       throw 'Dangerfile not found';
     }

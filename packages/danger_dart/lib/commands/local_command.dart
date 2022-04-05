@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:args/command_runner.dart';
 import 'package:danger_dart/danger_util.dart';
 import 'package:fimber/fimber.dart';
-import 'package:path/path.dart' show current, join;
 
 class LocalCommand extends Command {
   final DangerUtil dangerUtil;
@@ -49,7 +48,7 @@ class LocalCommand extends Command {
       'dart',
       'run',
       ...isDebug ? ['--observe=8181', '--no-pause-isolates-on-exit'] : [],
-      '${dangerUtil.getScriptFilePath()}',
+      (dangerUtil.getScriptFilePath()),
       'process',
       '--dangerfile',
       dangerFilePath,

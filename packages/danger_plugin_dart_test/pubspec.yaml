@@ -13,4 +13,5 @@ dependencies:
     path: ../danger_core
 
 dev_dependencies:
-  test: ^1.14.4
+  lints: ^1.0.1
+  test: ^1.20.2

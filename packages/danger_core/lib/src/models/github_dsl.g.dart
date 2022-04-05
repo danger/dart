@@ -16,7 +16,7 @@ GitHubDSL _$GitHubDSLFromJson(Map<String, dynamic> json) => GitHubDSL(
       reviews: (json['reviews'] as List<dynamic>)
           .map((e) => GitHubReview.fromJson(e as Map<String, dynamic>))
           .toList(),
-      requested_reviewers: GitHubReviewers.fromJson(
+      requestedReviewers: GitHubReviewers.fromJson(
           json['requested_reviewers'] as Map<String, dynamic>),
     );
 
@@ -26,7 +26,7 @@ Map<String, dynamic> _$GitHubDSLToJson(GitHubDSL instance) => <String, dynamic>{
       'thisPR': instance.thisPR.toJson(),
       'commits': instance.commits.map((e) => e.toJson()).toList(),
       'reviews': instance.reviews.map((e) => e.toJson()).toList(),
-      'requested_reviewers': instance.requested_reviewers.toJson(),
+      'requested_reviewers': instance.requestedReviewers.toJson(),
     };
 
 GitHubPRDSL _$GitHubPRDSLFromJson(Map<String, dynamic> json) => GitHubPRDSL(

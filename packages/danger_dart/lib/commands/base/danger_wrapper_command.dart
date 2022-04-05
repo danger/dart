@@ -52,7 +52,7 @@ abstract class DangerWrapperCommand extends Command {
               '--no-pause-isolates-on-exit',
             ]
           : [],
-      '${dangerUtil.getScriptFilePath()}',
+      (dangerUtil.getScriptFilePath()),
       'process',
       '--dangerfile',
       dangerFilePath,

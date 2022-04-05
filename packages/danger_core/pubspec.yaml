@@ -9,8 +9,8 @@ environment:
 dependencies:
 
 dev_dependencies:
+  lints: ^1.0.1
   json_annotation: ^4.4.0
-  pedantic: ^1.9.0
   test: ^1.20.2
   json_serializable: ^6.1.5
   build_runner: ^2.1.8

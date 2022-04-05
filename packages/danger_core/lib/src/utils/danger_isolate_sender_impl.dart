@@ -8,8 +8,9 @@ import 'package:danger_core/src/utils/danger_isolate_sender.dart';
 typedef DangerJSONDSLMessageConverter = DangerRawJSONDSL Function(
     dynamic message);
 
-final _defaultDangerJSONDSLMessageConverter =
-    (dynamic message) => DangerRawJSONDSL.fromJson(message);
+DangerRawJSONDSL _defaultDangerJSONDSLMessageConverter(dynamic message) {
+  return DangerRawJSONDSL.fromJson(message);
+}
 
 class DangerIsolateSenderImpl extends DangerIsolateSender {
   final SendPort sendPort;

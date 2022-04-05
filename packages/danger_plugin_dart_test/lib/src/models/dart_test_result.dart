@@ -86,8 +86,7 @@ class DartTestStartEvent extends DartTestEvent {
   factory DartTestStartEvent.fromJson(Map<String, dynamic> json) =>
       DartTestStartEvent(
         protocolVersion: json["protocolVersion"],
-        runnerVersion:
-            json["runnerVersion"] == null ? null : json["runnerVersion"],
+        runnerVersion: json["runnerVersion"],
         pid: json["pid"],
         type: json["type"],
         time: json["time"],
@@ -175,9 +174,8 @@ class DartTestDebugEvent extends DartTestEvent {
   factory DartTestDebugEvent.fromJson(Map<String, dynamic> json) =>
       DartTestDebugEvent(
         suiteID: json["suiteID"],
-        observatory: json["observatory"] == null ? null : json["observatory"],
-        remoteDebugger:
-            json["remoteDebugger"] == null ? null : json["remoteDebugger"],
+        observatory: json["observatory"],
+        remoteDebugger: json["remoteDebugger"],
         type: json["type"],
         time: json["time"],
       );
@@ -379,7 +377,7 @@ class DartTestDoneEvent extends DartTestEvent {
 
   factory DartTestDoneEvent.fromJson(Map<String, dynamic> json) =>
       DartTestDoneEvent(
-        success: json["success"] == null ? null : json["success"],
+        success: json["success"],
         type: json["type"],
         time: json["time"],
       );
@@ -418,18 +416,18 @@ class DartTestEntityTest {
   // originated.
   //
   // Will only be present if `root_url` is different from `url`.
-  final int? root_line;
+  final int? rootLine;
 
   // The (1-based) line on in the original test suite from which the test
   // originated.
   //
   // Will only be present if `root_url` is different from `url`.
-  final int? root_column;
+  final int? rootColumn;
 
   // The URL for the original test suite in which the test was defined.
   //
   // Will only be present if different from `url`.
-  final String? root_url;
+  final String? rootUrl;
 
   // This field is deprecated and should not be used.
   final DartTestEntityMetadata metadata;
@@ -442,9 +440,9 @@ class DartTestEntityTest {
       this.line,
       this.column,
       this.url,
-      this.root_line,
-      this.root_column,
-      this.root_url,
+      this.rootLine,
+      this.rootColumn,
+      this.rootUrl,
       required this.metadata});
 
   factory DartTestEntityTest.fromJson(Map<String, dynamic> json) =>
@@ -454,12 +452,12 @@ class DartTestEntityTest {
         id: json["id"],
         metadata: DartTestEntityMetadata.fromJson(json["metadata"]),
         suiteID: json["suiteID"],
-        line: json["line"] == null ? null : json["line"],
-        column: json["column"] == null ? null : json["column"],
-        url: json["url"] == null ? null : json["url"],
-        root_line: json["root_line"] == null ? null : json["root_line"],
-        root_column: json["root_column"] == null ? null : json["root_column"],
-        root_url: json["root_url"] == null ? null : json["root_url"],
+        line: json["line"],
+        column: json["column"],
+        url: json["url"],
+        rootLine: json["root_line"],
+        rootColumn: json["root_column"],
+        rootUrl: json["root_url"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -468,9 +466,9 @@ class DartTestEntityTest {
         "id": id,
         "metadata": metadata.toJson(),
         "suiteID": suiteID,
-        "line": line == null ? null : line,
-        "column": column == null ? null : column,
-        "url": url == null ? null : url,
+        "line": line,
+        "column": column,
+        "url": url,
       };
 }
 
@@ -490,7 +488,7 @@ class DartTestEntitySuite {
       DartTestEntitySuite(
         id: json["id"],
         path: json["path"],
-        platform: json["platform"] == null ? null : json["platform"],
+        platform: json["platform"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -541,27 +539,27 @@ class DartTestEntityGroup {
 
   factory DartTestEntityGroup.fromJson(Map<String, dynamic> json) =>
       DartTestEntityGroup(
-        name: json["name"] == null ? null : json["name"],
-        parentID: json["parentID"] == null ? null : json["parentID"],
-        testCount: json["testCount"] == null ? null : json["testCount"],
+        name: json["name"],
+        parentID: json["parentID"],
+        testCount: json["testCount"],
         id: json["id"],
         metadata: DartTestEntityMetadata.fromJson(json["metadata"]),
         suiteID: json["suiteID"],
-        line: json["line"] == null ? null : json["line"],
-        column: json["column"] == null ? null : json["column"],
-        url: json["url"] == null ? null : json["url"],
+        line: json["line"],
+        column: json["column"],
+        url: json["url"],
       );
 
   Map<String, dynamic> toJson() => {
         "name": name,
-        "parentID": parentID == null ? null : parentID,
+        "parentID": parentID,
         "testCount": testCount,
         "id": id,
         "metadata": metadata.toJson(),
         "suiteID": parentID,
-        "line": line == null ? null : line,
-        "column": column == null ? null : column,
-        "url": url == null ? null : url,
+        "line": line,
+        "column": column,
+        "url": url,
       };
 }
 
@@ -576,11 +574,11 @@ class DartTestEntityMetadata {
   factory DartTestEntityMetadata.fromJson(Map<String, dynamic> json) =>
       DartTestEntityMetadata(
         skip: json["skip"],
-        skipReason: json["skipReason"] == null ? null : json["skipReason"],
+        skipReason: json["skipReason"],
       );
 
   Map<String, dynamic> toJson() => {
         "skip": skip,
-        "skipReason": skipReason == null ? null : skipReason,
+        "skipReason": skipReason,
       };
 }

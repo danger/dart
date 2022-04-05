@@ -163,8 +163,8 @@ class MockGitHubDSL extends _i1.Mock implements _i5.GitHubDSL {
       (super.noSuchMethod(Invocation.getter(#reviews),
           returnValue: <_i5.GitHubReview>[]) as List<_i5.GitHubReview>);
   @override
-  _i5.GitHubReviewers get requested_reviewers =>
-      (super.noSuchMethod(Invocation.getter(#requested_reviewers),
+  _i5.GitHubReviewers get requestedReviewers =>
+      (super.noSuchMethod(Invocation.getter(#requestedReviewers),
           returnValue: _FakeGitHubReviewers_9()) as _i5.GitHubReviewers);
   @override
   Map<String, dynamic> toJson() =>

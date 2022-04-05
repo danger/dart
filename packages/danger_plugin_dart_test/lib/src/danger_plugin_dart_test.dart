@@ -35,7 +35,7 @@ class DangerPluginDartTest {
         return;
       }
 
-      var msg;
+      String msg;
       if (limitMessageCharsPerLine == null) {
         msg = message;
       } else if (message.length > limitMessageCharsPerLine) {
@@ -51,7 +51,7 @@ class DangerPluginDartTest {
       }
     }
 
-    results.forEach((result) {
+    for (var result in results) {
       if (result is DartTestTestStartEvent) {
         testMetaDataByID[result.test.id] = result.test;
       } else if (result is DartTestSuiteEvent) {
@@ -64,7 +64,7 @@ class DangerPluginDartTest {
         addMessageToPrintMessage(result.error, result.testID);
         addMessageToPrintMessage(result.stackTrace, result.testID);
       }
-    });
+    }
 
     // EnumValues({"error": Result.ERROR, "failure": Result.FAILURE, "success": Result.SUCCESS});
 
@@ -81,12 +81,12 @@ class DangerPluginDartTest {
 
           if (testMetaData != null) {
             final url = testMetaData.url;
-            if (url != null && !url.startsWith('package\:')) {
+            if (url != null && !url.startsWith('package:')) {
               fileName = url;
               lineNo = testMetaData.line ?? 0;
-            } else if (testMetaData.root_url != null) {
-              fileName = testMetaData.root_url!;
-              lineNo = testMetaData.root_line ?? 0;
+            } else if (testMetaData.rootUrl != null) {
+              fileName = testMetaData.rootUrl!;
+              lineNo = testMetaData.rootLine ?? 0;
             } else {
               final suiteMetaData = testSuiteMetaDataByID[testMetaData.suiteID];
               if (suiteMetaData != null && suiteMetaData.path != null) {
@@ -96,7 +96,7 @@ class DangerPluginDartTest {
             }
 
             if (fileName != null) {
-              fileName = fileName.replaceFirst('file:\/\/', '');
+              fileName = fileName.replaceFirst('file://', '');
 
               if (fileName.startsWith(workingPath)) {
                 fileName = fileName.substring(workingPath.length + 1);
