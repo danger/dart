@@ -105,6 +105,18 @@ class MockDangerJSONDSL extends _i1.Mock implements _i2.DangerJSONDSL {
   _i2.DangerJSONSettings get settings =>
       (super.noSuchMethod(Invocation.getter(#settings),
           returnValue: _FakeDangerJSONSettings_5()) as _i2.DangerJSONSettings);
+  @override
+  bool get isGitHub =>
+      (super.noSuchMethod(Invocation.getter(#isGitHub), returnValue: false)
+          as bool);
+  @override
+  bool get isBitbucketCloud =>
+      (super.noSuchMethod(Invocation.getter(#isBitbucketCloud),
+          returnValue: false) as bool);
+  @override
+  bool get isGitLab =>
+      (super.noSuchMethod(Invocation.getter(#isGitLab), returnValue: false)
+          as bool);
 }
 
 /// A class which mocks [GitJSONDSL].

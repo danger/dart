@@ -27,6 +27,10 @@ class DangerJSONDSL {
   final DangerRawJSONDSL rawJSONDSL;
 
   DangerJSONDSL(this.rawJSONDSL);
+
+  bool get isGitHub => rawJSONDSL.github != null;
+  bool get isBitbucketCloud => rawJSONDSL.bitbucketCloud != null;
+  bool get isGitLab => rawJSONDSL.gitlab != null;
 }
 
 @JsonSerializable()

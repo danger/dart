@@ -25,7 +25,6 @@ dev_dependencies:
 In `dangerfile.dart`, you need to import this, and call `DangerPluginDartTest.processFile` with test result file.
 
 ```dart
-// @dart=2.10
 import 'dart:io';
 
 import 'package:danger_core/danger_core.dart';
