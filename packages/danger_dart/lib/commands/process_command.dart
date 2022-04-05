@@ -38,7 +38,7 @@ class ProcessCommand extends Command {
 
   @override
   Future<void> run() async {
-    final args = argResults;
+    final args = argResults!;
 
     var inputStr = (await _stdin.transform(utf8.decoder).toList()).join('');
 
@@ -84,7 +84,7 @@ class ProcessCommand extends Command {
       throw 'Dangerfile at [${dangerFile.uri}] not found';
     }
 
-    DangerIsolateReceiver isolateReceiver;
+    DangerIsolateReceiver? isolateReceiver;
 
     try {
       final json = jsonDecode(str);
@@ -115,7 +115,7 @@ class ProcessCommand extends Command {
         _logger.e(e.toString(), ex: e);
       }
     } finally {
-      isolateReceiver?.receivePort?.close();
+      isolateReceiver?.receivePort.close();
     }
   }
 }

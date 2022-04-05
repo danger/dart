@@ -32,7 +32,7 @@ class LocalCommand extends Command {
 
   @override
   Future<void> run() async {
-    final args = argResults;
+    final args = argResults!;
     final isDebug = args.wasParsed('debug');
     final isVerbose = args.wasParsed('verbose');
     final useColors = (Platform.environment['TERM'] ?? '').contains('xterm');
@@ -64,8 +64,8 @@ class LocalCommand extends Command {
       '--passURLForDSL',
       '--process',
       '"$dangerProcessCommand"',
-      ...(argResults['base'] != null ? ['--base', argResults['base']] : []),
-      ...(argResults['staging'] ? ['--staging'] : []),
+      ...(args['base'] != null ? ['--base', args['base']] : []),
+      ...(args['staging'] ? ['--staging'] : []),
     ].join(' ');
 
     try {
