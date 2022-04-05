@@ -1,5 +1,5 @@
 name: danger_dart
-description: A simple command-line application.
+description: Danger Dart, tool to help you reviewing the code.
 version: 1.0.0
 homepage: https://github.com/danger/dart
 
@@ -15,7 +15,7 @@ dependencies:
   process_run: ^0.12.3+2
   fimber: ^0.6.5
   path: ^1.8.1
-  # danger_core: ">= 0.0.1 < 2.0.0"
+  # danger_core: ">= 1.0.0 < 2.0.0"
   danger_core:
     path: ../danger_core
 
