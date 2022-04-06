@@ -2,7 +2,9 @@
 
 Supports GitHub, GitLab, and Bitbucket Cloud.
 
-**Still under development**
+### Getting Started
+
+https://medium.com/p/8c61e402cd4e
 
 ### Using Danger Dart
 
