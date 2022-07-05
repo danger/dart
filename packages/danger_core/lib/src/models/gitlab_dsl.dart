@@ -137,7 +137,7 @@ class GitLabMergeRequest {
   @JsonKey(name: 'target_project_id')
   final int targetProjectId;
 
-  final GitLabMergeRequestTimeStats timeStats;
+  final GitLabMergeRequestTimeStats? timeStats;
 
   final String title;
 

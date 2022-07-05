@@ -101,8 +101,10 @@ GitLabMergeRequest _$GitLabMergeRequestFromJson(Map<String, dynamic> json) =>
       subscribed: json['subscribed'] as bool,
       targetBranch: json['target_branch'] as String,
       targetProjectId: json['target_project_id'] as int,
-      timeStats: GitLabMergeRequestTimeStats.fromJson(
-          json['timeStats'] as Map<String, dynamic>),
+      timeStats: json['timeStats'] == null
+          ? null
+          : GitLabMergeRequestTimeStats.fromJson(
+              json['timeStats'] as Map<String, dynamic>),
       title: json['title'] as String,
       upvotes: json['upvotes'] as int,
       userMergeData:
@@ -150,7 +152,7 @@ Map<String, dynamic> _$GitLabMergeRequestToJson(GitLabMergeRequest instance) =>
       'subscribed': instance.subscribed,
       'target_branch': instance.targetBranch,
       'target_project_id': instance.targetProjectId,
-      'timeStats': instance.timeStats.toJson(),
+      'timeStats': instance.timeStats?.toJson(),
       'title': instance.title,
       'upvotes': instance.upvotes,
       'user': instance.userMergeData.toJson(),
