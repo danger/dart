@@ -1,3 +1,7 @@
+## 1.0.1
+
+- Fixed GitLabDSL
+
 ## 1.0.0
 
 - Supports Null Safety
