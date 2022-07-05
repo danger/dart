@@ -51,10 +51,10 @@ class GitLabUserMergeData {
 @JsonSerializable()
 class GitLabMergeRequest {
   @JsonKey(name: 'allow_collaboration')
-  final bool allowCollaboration;
+  final bool? allowCollaboration;
 
   @JsonKey(name: 'allow_maintainer_to_push')
-  final bool allowMaintainerToPush;
+  final bool? allowMaintainerToPush;
 
   @JsonKey(name: 'approvals_before_merge')
   final int? approvalsBeforeMerge;
@@ -83,7 +83,7 @@ class GitLabMergeRequest {
   final DateTime? firstDeployedToProductionAt;
 
   @JsonKey(name: 'force_remove_source_branch')
-  final bool forceRemoveSourceBranch;
+  final bool? forceRemoveSourceBranch;
 
   final int id;
 
@@ -111,7 +111,7 @@ class GitLabMergeRequest {
 
   final GitLabMilestone? milestone;
 
-  final GitLabPipeline pipeline;
+  final GitLabPipeline? pipeline;
 
   @JsonKey(name: 'project_id')
   final int projectId;
@@ -156,8 +156,8 @@ class GitLabMergeRequest {
   final bool workInProgress;
 
   GitLabMergeRequest(
-      {required this.allowCollaboration,
-      required this.allowMaintainerToPush,
+      {this.allowCollaboration,
+      this.allowMaintainerToPush,
       this.approvalsBeforeMerge,
       this.assignee,
       required this.author,
@@ -168,7 +168,7 @@ class GitLabMergeRequest {
       required this.diffRefs,
       required this.downvotes,
       this.firstDeployedToProductionAt,
-      required this.forceRemoveSourceBranch,
+      this.forceRemoveSourceBranch,
       required this.id,
       required this.iid,
       this.latestBuildFinishedAt,
@@ -179,7 +179,7 @@ class GitLabMergeRequest {
       this.mergedBy,
       required this.mergeOnPipelineSuccess,
       this.milestone,
-      required this.pipeline,
+      this.pipeline,
       required this.projectId,
       required this.sha,
       this.shouldRemoveSourceBranch,
@@ -189,7 +189,7 @@ class GitLabMergeRequest {
       required this.subscribed,
       required this.targetBranch,
       required this.targetProjectId,
-      this.timeStats,
+      required this.timeStats,
       required this.title,
       required this.upvotes,
       required this.userMergeData,
@@ -205,10 +205,10 @@ class GitLabMergeRequest {
 @JsonSerializable()
 class GitLabMergeRequestTimeStats {
   @JsonKey(name: 'human_time_estimate')
-  final int humanTimeEstimate;
+  final int? humanTimeEstimate;
 
   @JsonKey(name: 'human_time_spent')
-  final int humanTimeSpent;
+  final int? humanTimeSpent;
 
   @JsonKey(name: 'time_estimate')
   final int timeEstimate;
@@ -217,8 +217,8 @@ class GitLabMergeRequestTimeStats {
   final int totalTimeSpent;
 
   GitLabMergeRequestTimeStats(
-      {required this.humanTimeEstimate,
-      required this.humanTimeSpent,
+      {this.humanTimeEstimate,
+      this.humanTimeSpent,
       required this.timeEstimate,
       required this.totalTimeSpent});
 
@@ -261,7 +261,7 @@ class GitLabMilestone {
   final String description;
 
   @JsonKey(name: 'due_date')
-  final DateTime dueDate;
+  final DateTime? dueDate;
 
   final int id;
 
@@ -271,7 +271,7 @@ class GitLabMilestone {
   final int projectID;
 
   @JsonKey(name: 'start_date')
-  final DateTime startDate;
+  final DateTime? startDate;
 
   final GitLabMilestoneState state;
 
@@ -286,11 +286,11 @@ class GitLabMilestone {
   GitLabMilestone(
       {required this.createdAt,
       required this.description,
-      required this.dueDate,
+      this.dueDate,
       required this.id,
       required this.iid,
       required this.projectID,
-      required this.startDate,
+      this.startDate,
       required this.state,
       required this.title,
       required this.updatedAt,

@@ -45,8 +45,8 @@ Map<String, dynamic> _$GitLabUserMergeDataToJson(
 
 GitLabMergeRequest _$GitLabMergeRequestFromJson(Map<String, dynamic> json) =>
     GitLabMergeRequest(
-      allowCollaboration: json['allow_collaboration'] as bool,
-      allowMaintainerToPush: json['allow_maintainer_to_push'] as bool,
+      allowCollaboration: json['allow_collaboration'] as bool?,
+      allowMaintainerToPush: json['allow_maintainer_to_push'] as bool?,
       approvalsBeforeMerge: json['approvals_before_merge'] as int?,
       assignee: json['assignee'] == null
           ? null
@@ -67,7 +67,7 @@ GitLabMergeRequest _$GitLabMergeRequestFromJson(Map<String, dynamic> json) =>
               null
           ? null
           : DateTime.parse(json['first_deployed_to_production_at'] as String),
-      forceRemoveSourceBranch: json['force_remove_source_branch'] as bool,
+      forceRemoveSourceBranch: json['force_remove_source_branch'] as bool?,
       id: json['id'] as int,
       iid: json['iid'] as int,
       latestBuildFinishedAt: json['latest_build_finished_at'] == null
@@ -89,8 +89,9 @@ GitLabMergeRequest _$GitLabMergeRequestFromJson(Map<String, dynamic> json) =>
       milestone: json['milestone'] == null
           ? null
           : GitLabMilestone.fromJson(json['milestone'] as Map<String, dynamic>),
-      pipeline:
-          GitLabPipeline.fromJson(json['pipeline'] as Map<String, dynamic>),
+      pipeline: json['pipeline'] == null
+          ? null
+          : GitLabPipeline.fromJson(json['pipeline'] as Map<String, dynamic>),
       projectId: json['project_id'] as int,
       sha: json['sha'] as String,
       shouldRemoveSourceBranch: json['should_remove_source_branch'] as bool?,
@@ -141,7 +142,7 @@ Map<String, dynamic> _$GitLabMergeRequestToJson(GitLabMergeRequest instance) =>
       'merged_by': instance.mergedBy?.toJson(),
       'merge_when_pipeline_succeeds': instance.mergeOnPipelineSuccess,
       'milestone': instance.milestone?.toJson(),
-      'pipeline': instance.pipeline.toJson(),
+      'pipeline': instance.pipeline?.toJson(),
       'project_id': instance.projectId,
       'sha': instance.sha,
       'should_remove_source_branch': instance.shouldRemoveSourceBranch,
@@ -170,8 +171,8 @@ const _$GitLabMergeRequestStateEnumMap = {
 GitLabMergeRequestTimeStats _$GitLabMergeRequestTimeStatsFromJson(
         Map<String, dynamic> json) =>
     GitLabMergeRequestTimeStats(
-      humanTimeEstimate: json['human_time_estimate'] as int,
-      humanTimeSpent: json['human_time_spent'] as int,
+      humanTimeEstimate: json['human_time_estimate'] as int?,
+      humanTimeSpent: json['human_time_spent'] as int?,
       timeEstimate: json['time_estimate'] as int,
       totalTimeSpent: json['total_time_spent'] as int,
     );
@@ -201,11 +202,15 @@ GitLabMilestone _$GitLabMilestoneFromJson(Map<String, dynamic> json) =>
     GitLabMilestone(
       createdAt: DateTime.parse(json['created_at'] as String),
       description: json['description'] as String,
-      dueDate: DateTime.parse(json['due_date'] as String),
+      dueDate: json['due_date'] == null
+          ? null
+          : DateTime.parse(json['due_date'] as String),
       id: json['id'] as int,
       iid: json['iid'] as int,
       projectID: json['project_id'] as int,
-      startDate: DateTime.parse(json['start_date'] as String),
+      startDate: json['start_date'] == null
+          ? null
+          : DateTime.parse(json['start_date'] as String),
       state: $enumDecode(_$GitLabMilestoneStateEnumMap, json['state']),
       title: json['title'] as String,
       updatedAt: DateTime.parse(json['updated_at'] as String),
@@ -216,11 +221,11 @@ Map<String, dynamic> _$GitLabMilestoneToJson(GitLabMilestone instance) =>
     <String, dynamic>{
       'created_at': instance.createdAt.toIso8601String(),
       'description': instance.description,
-      'due_date': instance.dueDate.toIso8601String(),
+      'due_date': instance.dueDate?.toIso8601String(),
       'id': instance.id,
       'iid': instance.iid,
       'project_id': instance.projectID,
-      'start_date': instance.startDate.toIso8601String(),
+      'start_date': instance.startDate?.toIso8601String(),
       'state': _$GitLabMilestoneStateEnumMap[instance.state],
       'title': instance.title,
       'updated_at': instance.updatedAt.toIso8601String(),
