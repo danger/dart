@@ -90,5 +90,18 @@ void main() {
 
       expect(processCommand, contains('--debug'));
     });
+
+    test('Should pass failOnErrors to danger-js', () async {
+      await _commandRunner.run(['local', '--failOnErrors']);
+
+      final result = verify(_mockDangerUtil.execShellCommand(captureAny,
+              isVerbose: captureAnyNamed('isVerbose'),
+              shell: captureAnyNamed('shell')))
+          .captured;
+      final processCommand =
+          result.first.toString().split('--process').first.trim();
+
+      expect(processCommand, contains("--failOnErrors"));
+    });
   });
 }
