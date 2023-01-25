@@ -15,7 +15,10 @@ class LocalCommand extends Command {
     argParser.addOption('danger-js-path', help: 'Path to dangerJS');
     argParser.addOption('base',
         help: 'Use a different base branch', valueHelp: 'branch_name');
-
+    argParser.addFlag('failOnErrors',
+        defaultsTo: false,
+        negatable: false,
+        help: 'Fail if there are fails in the danger report');
     argParser.addFlag('staging',
         defaultsTo: false, negatable: false, help: 'Just use staged changes.');
     argParser.addFlag('debug', defaultsTo: false, negatable: false);
@@ -34,6 +37,8 @@ class LocalCommand extends Command {
     final args = argResults!;
     final isDebug = args.wasParsed('debug');
     final isVerbose = args.wasParsed('verbose');
+    final isFailOnErrors = args.wasParsed('failOnErrors');
+
     final useColors = (Platform.environment['TERM'] ?? '').contains('xterm');
     if (isVerbose) {
       Fimber.plantTree(DebugTree(useColors: useColors));
@@ -61,6 +66,7 @@ class LocalCommand extends Command {
       '--dangerfile',
       args['dangerfile'],
       '--passURLForDSL',
+      if (isFailOnErrors) '--failOnErrors',
       '--process',
       '"$dangerProcessCommand"',
       ...(args['base'] != null ? ['--base', args['base']] : []),

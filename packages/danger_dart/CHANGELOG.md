@@ -1,3 +1,7 @@
+## 1.0.1
+
+- Add argument `--failOnErrors` on every command
+
 ## 1.0.0
 
 - Supports Null Safety

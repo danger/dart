@@ -64,5 +64,18 @@ void main() {
           equals(
               "'dart run danger/danger_dart.dart process --dangerfile mock_danger_file.dart'"));
     });
+
+    test('Should pass failOnErrors to danger-js', () async {
+      await _commandRunner.run(['ci', '--failOnErrors']);
+
+      final result = verify(_mockDangerUtil.execShellCommand(captureAny,
+              isVerbose: captureAnyNamed('isVerbose'),
+              shell: captureAnyNamed('shell')))
+          .captured;
+      final processCommand =
+          result.first.toString().split('--process').first.trim();
+
+      expect(processCommand, contains("--failOnErrors"));
+    });
   });
 }
