@@ -64,6 +64,6 @@ jobs:
         run: dart pub get
 
       - name: Run danger ci
-        run: danger_dart ci
+        run: danger_dart ci --failOnErrors
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

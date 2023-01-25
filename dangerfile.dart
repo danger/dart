@@ -21,4 +21,6 @@ void main() {
   } else {
     message('Welcome to danger local');
   }
+
+  fail('Fail this build');
 }

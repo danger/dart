@@ -12,6 +12,10 @@ abstract class DangerWrapperCommand extends Command {
         defaultsTo: 'dangerfile.dart', help: 'Location of dangerfile');
 
     argParser.addOption('danger-js-path', help: 'Path to dangerJS');
+    argParser.addFlag('failOnErrors',
+        defaultsTo: false,
+        negatable: false,
+        help: 'Fail if there are fails in the danger report');
     argParser.addFlag('debug', defaultsTo: false, negatable: false);
     argParser.addFlag('verbose', defaultsTo: false, negatable: false);
   }
@@ -33,6 +37,8 @@ abstract class DangerWrapperCommand extends Command {
 
     final isDebug = args.wasParsed('debug');
     final isVerbose = args.wasParsed('verbose');
+    final isFailOnErrors = args.wasParsed('failOnErrors');
+
     final useColors = (Platform.environment['TERM'] ?? '').contains('xterm');
     if (isVerbose) {
       Fimber.plantTree(DebugTree(useColors: useColors));
@@ -63,6 +69,7 @@ abstract class DangerWrapperCommand extends Command {
       metaData.executable,
       name,
       ...(url.isNotEmpty ? [url] : []),
+      if (isFailOnErrors) '--failOnErrors',
       '--dangerfile',
       args['dangerfile'],
       '--passURLForDSL',
