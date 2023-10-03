@@ -38,22 +38,6 @@ jobs:
         run: dart pub get
         working-directory: packages/danger_dart/
 
-      - name: Install app (non nullsafety) dependencies
-        run: dart pub get
-        working-directory: example/pre_nullsafety/
-
-      - name: Run danger local (non nullsafety)
-        run: danger_dart local
-        working-directory: example/pre_nullsafety/
-
-      - name: Install app dependencies (nullsafety)
-        run: dart pub get
-        working-directory: example/target_nullsafety/
-
-      - name: Run danger local (nullsafety)
-        run: danger_dart local
-        working-directory: example/target_nullsafety/
-
       - name: Install plugin dependencies
         run: dart pub get
         working-directory: example/with_plugin/danger_plugin_example/
@@ -65,6 +49,14 @@ jobs:
       - name: Run danger local (with plugin)
         run: danger_dart local
         working-directory: example/with_plugin/
+
+      - name: Install app dependencies (Dart 2)
+        run: dart pub get
+        working-directory: example/dart2/
+
+      - name: Run danger local (Dart 2)
+        run: danger_dart local
+        working-directory: example/dart2/
 
       - name: Install app dependencies (Dart 3)
         run: dart pub get

@@ -126,7 +126,6 @@ class DangerUtil {
     }
     tempFile.createSync();
     tempFile.writeAsStringSync('''
-// @dart=2.7
 import 'dart:developer';
 
 import 'package:danger_core/danger_core.dart';
