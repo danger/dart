@@ -4,7 +4,10 @@ import 'package:path/path.dart' show join, current;
 import 'package:danger_core/danger_core.dart';
 import 'package:danger_plugin_dart_test/danger_plugin_dart_test.dart';
 
-void main() {
+void main() async {
+  final fullDiff = await DangerUtils.getFullDiff();
+  message('There are ${fullDiff.length} changed files');
+
   if (danger.isGitHub) {
     if (danger.github.pr.title.contains('WIP') == true) {
       warn('PR is considered WIP');
