@@ -14,6 +14,7 @@ class DangerUtils {
     return result.stdout.toString().trim();
   }
 
+  /// Get PR target branch based on git provider
   static String getTargetBranch() {
     var target = '';
 
@@ -34,9 +35,20 @@ class DangerUtils {
     return target;
   }
 
+  /// Get Git full diff.
+  /// The default targetBranch will be selected based on current environment.
+  ///
+  /// This function needs Git history on the machine.
+  ///
+  /// For GitHub Action:
+  /// ```yaml
+  /// - uses: actions/checkout@v4
+  ///   with:
+  ///     fetch-depth: 0
+  /// ```
   static Future<List<GitDiff>> getFullDiff(
-      {String source = "HEAD", String? target}) async {
-    var base = target ?? '';
+      {String sourceBranch = "HEAD", String? targetBranch}) async {
+    var base = targetBranch ?? '';
     if (base.isEmpty) {
       base = getTargetBranch();
     }
