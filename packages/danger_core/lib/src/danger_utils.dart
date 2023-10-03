@@ -10,7 +10,13 @@ class DangerUtils {
   static Future<String> spawn(String command,
       {List<String> arguments = const []}) async {
     final result = await Process.run(command, arguments, runInShell: true);
-
+    print("=======");
+    print('Exit code ${result.exitCode}');
+    print('stderr:');
+    print(result.stderr);
+    print('stdout:');
+    print(result.stdout);
+    print("=======");
     return result.stdout.toString().trim();
   }
 
@@ -22,9 +28,6 @@ class DangerUtils {
 
     final data =
         await DangerUtils.spawn('git', arguments: ['fetch', 'origin', base]);
-    print("=======");
-    print(data);
-    print("=======");
   }
 
   /// Get PR target branch based on git provider
@@ -60,10 +63,7 @@ class DangerUtils {
     }
 
     final data =
-        await DangerUtils.spawn('git', arguments: ['diff', 'HEAD', base]);
-    print("=======");
-    print(data);
-    print("=======");
+        await DangerUtils.spawn('git', arguments: ['diff', base, 'HEAD']);
     return GitDiffParser.parse(data);
   }
 }
