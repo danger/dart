@@ -6,9 +6,6 @@ description: A simple command-line application.
 environment:
   sdk: ">=2.12.0 <3.0.0"
 
-dependencies:
-  json_annotation: ^3.0.0
-
 dev_dependencies:
   lints: ^1.0.1
   path: ^1.8.0
