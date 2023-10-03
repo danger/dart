@@ -1,6 +1,6 @@
 name: danger_dart
 description: Danger Dart, tool to help you reviewing the code.
-version: 1.0.1
+version: 2.0.0
 homepage: https://github.com/danger/dart
 
 executables:
