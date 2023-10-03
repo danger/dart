@@ -9,7 +9,7 @@ class DangerUtils {
 
   static Future<String> spawn(String command,
       {List<String> arguments = const []}) async {
-    final result = await Process.run(command, arguments);
+    final result = await Process.run(command, arguments, runInShell: true);
 
     return result.stdout.toString().trim();
   }
@@ -55,6 +55,9 @@ class DangerUtils {
 
     final data =
         await DangerUtils.spawn('git', arguments: ['diff', 'HEAD', base]);
+    print("=======");
+    print(data);
+    print("=======");
     return GitDiffParser.parse(data);
   }
 }
