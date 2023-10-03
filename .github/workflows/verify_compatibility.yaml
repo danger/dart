@@ -66,3 +66,10 @@ jobs:
         run: danger_dart local
         working-directory: example/with_plugin/
 
+      - name: Install app dependencies (Dart 3)
+        run: dart pub get
+        working-directory: example/dart3/
+
+      - name: Run danger local (Dart 3)
+        run: danger_dart local
+        working-directory: example/dart3/
