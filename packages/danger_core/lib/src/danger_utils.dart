@@ -31,8 +31,13 @@ class DangerUtils {
       throw 'Cannot find base branch';
     }
 
+    print('BASE is [$base]');
+
     final data =
         await DangerUtils.spawn('git', arguments: ['diff', 'HEAD', base]);
+    print('DATA =====');
+    print(data);
+    print('DATA =====');
     return GitDiffParser.parse(data);
   }
 }
