@@ -5,7 +5,8 @@ import 'package:danger_core/danger_core.dart';
 import 'package:danger_plugin_dart_test/danger_plugin_dart_test.dart';
 
 void main() async {
-  final fullDiff = await DangerUtils.getFullDiff();
+  final fullDiff = await DangerUtils.getFullDiff(
+      target: 'origin/${DangerUtils.getTargetBranch()}');
   message('There are ${fullDiff.length} changed files');
 
   if (danger.isGitHub) {

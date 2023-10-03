@@ -14,30 +14,35 @@ class DangerUtils {
     return result.stdout.toString().trim();
   }
 
-  static Future<List<GitDiff>> getFullDiff() async {
-    var base = '';
+  static String getTargetBranch() {
+    var target = '';
 
     if (danger.isGitHub) {
-      base = danger.github.pr.base.ref;
+      target = danger.github.pr.base.ref;
     } else if (danger.isBitbucketCloud) {
-      base = danger.bitbucketCloud.pr.destination.branch.name;
+      target = danger.bitbucketCloud.pr.destination.branch.name;
     } else if (danger.isGitLab) {
-      base = danger.gitLab.mergeRequest.targetBranch;
+      target = danger.gitLab.mergeRequest.targetBranch;
     } else {
-      base = danger.settings.cliArgs?['base'] ?? '';
+      target = danger.settings.cliArgs?['base'] ?? '';
     }
 
-    if (base.isEmpty) {
+    if (target.isEmpty) {
       throw 'Cannot find base branch';
     }
 
-    print('BASE is [$base]');
+    return target;
+  }
+
+  static Future<List<GitDiff>> getFullDiff(
+      {String source = "HEAD", String? target}) async {
+    var base = target ?? '';
+    if (base.isEmpty) {
+      base = getTargetBranch();
+    }
 
     final data =
         await DangerUtils.spawn('git', arguments: ['diff', 'HEAD', base]);
-    print('DATA =====');
-    print(data);
-    print('DATA =====');
     return GitDiffParser.parse(data);
   }
 }
