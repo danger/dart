@@ -1,0 +1,23 @@
+diff --git a/.github/workflows/verify_compatibility.yaml b/.github/workflows/verify_compatibility.yaml
+index 507cacb..701dd94 100644
+--- a/.github/workflows/verify_compatibility.yaml
++++ b/.github/workflows/verify_compatibility.yaml
+@@ -50,18 +66,3 @@ jobs:
+         run: danger_dart local
+         working-directory: example/with_plugin/
+ 
+-      - name: Install app dependencies (Dart 2)
+-        run: dart pub get
+-        working-directory: example/dart2/
+-
+-      - name: Run danger local (Dart 2)
+-        run: danger_dart local
+-        working-directory: example/dart2/
+-
+-      - name: Install app dependencies (Dart 3)
+-        run: dart pub get
+-        working-directory: example/dart3/
+-
+-      - name: Run danger local (Dart 3)
+-        run: danger_dart local
+-        working-directory: example/dart3/

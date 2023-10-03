@@ -1,0 +1,27 @@
+diff --git a/example/dart3/pubspec.yaml b/example/pre_nullsafety/pubspec.yaml
+similarity index 64%
+rename from example/dart3/pubspec.yaml
+rename to example/pre_nullsafety/pubspec.yaml
+index 8aca558..9c93b1b 100644
+--- a/example/dart3/pubspec.yaml
++++ b/example/pre_nullsafety/pubspec.yaml
+@@ -1,13 +1,16 @@
+-name: danger_test_target_null_safety
++name: danger_test_pre_nullsafety
+ description: A simple command-line application.
+ # version: 1.0.0
+ # homepage: https://www.example.com
+ 
+ environment:
+-  sdk: ">=3.0.0 <4.0.0"
++  sdk: ">=2.7.0 <3.0.0"
++
++dependencies:
++  json_annotation: ^3.0.0
+ 
+ dev_dependencies:
+   lints: ^1.0.1
+-  path: ^1.8.3
++  path: ^1.8.0
+   danger_core:
+     path: ../../packages/danger_core

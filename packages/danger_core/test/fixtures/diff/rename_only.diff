@@ -1,0 +1,4 @@
+diff --git a/example/dart2/dangerfile.dart b/example/target_nullsafety/dangerfile.dart
+similarity index 100%
+rename from example/dart2/dangerfile.dart
+rename to example/target_nullsafety/dangerfile.dart
