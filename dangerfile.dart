@@ -6,7 +6,8 @@ import 'package:danger_plugin_dart_test/danger_plugin_dart_test.dart';
 
 void main() async {
   await DangerUtils.gitFetchBranch();
-  final fullDiff = await DangerUtils.getFullDiff();
+  final fullDiff = await DangerUtils.getFullDiff(
+      targetBranch: 'origin/${DangerUtils.getTargetBranch()}');
 
   message('There are ${fullDiff.length} changed files');
 

@@ -62,8 +62,7 @@ class DangerUtils {
       base = getTargetBranch();
     }
 
-    final data =
-        await DangerUtils.spawn('git', arguments: ['diff', base, 'HEAD']);
+    final data = await DangerUtils.spawn('git', arguments: ['diff', base]);
     return GitDiffParser.parse(data);
   }
 }
