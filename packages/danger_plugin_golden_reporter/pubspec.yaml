@@ -1,10 +1,10 @@
 name: danger_plugin_golden_reporter
 description: A Danger Dart plugin to display golden images on pull requests.
-version: 1.0.0
+version: 2.0.0
 homepage: https://github.com/danger/dart
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   # danger_core: ">= 1.0.0 < 2.0.0"
@@ -12,7 +12,7 @@ dependencies:
     path: ../danger_core
 
 dev_dependencies:
-  lints: ^1.0.1
+  lints: ^2.1.1
   test: ^1.20.2
   mockito: ^5.1.0
   build_runner: ^2.1.8
