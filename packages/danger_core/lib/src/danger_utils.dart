@@ -14,6 +14,19 @@ class DangerUtils {
     return result.stdout.toString().trim();
   }
 
+  static Future<void> gitFetchBranch({String? targetBranch}) async {
+    var base = targetBranch ?? '';
+    if (base.isEmpty) {
+      base = getTargetBranch();
+    }
+
+    final data =
+        await DangerUtils.spawn('git', arguments: ['fetch', 'origin', base]);
+    print("=======");
+    print(data);
+    print("=======");
+  }
+
   /// Get PR target branch based on git provider
   static String getTargetBranch() {
     var target = '';
@@ -39,13 +52,6 @@ class DangerUtils {
   /// The default targetBranch will be selected based on current environment.
   ///
   /// This function needs Git history on the machine.
-  ///
-  /// For GitHub Action:
-  /// ```yaml
-  /// - uses: actions/checkout@v4
-  ///   with:
-  ///     fetch-depth: 0
-  /// ```
   static Future<List<GitDiff>> getFullDiff(
       {String sourceBranch = "HEAD", String? targetBranch}) async {
     var base = targetBranch ?? '';
